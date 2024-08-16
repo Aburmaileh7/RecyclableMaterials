@@ -1,0 +1,14 @@
+﻿@using RecyclableMaterials.ViewModels
+@model RoleFormViewModel
+
+
+<form asp-action="Create" method="post">
+    <div class="input-group mb-3">
+        <input asp-for="Name" class="form-control" placeholder="role name" />
+
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Add New Role</button>
+        </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
