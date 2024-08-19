@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RecyclableMaterials.Areas.Dashboard.Models.ProductModel>
+﻿@model IEnumerable<ProductModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -40,9 +40,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
+
             <td>
                     @Html.DisplayFor(modelItem => item.Location)
             </td>
+
             <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
             </td>
@@ -50,9 +52,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.ImagePath)
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>

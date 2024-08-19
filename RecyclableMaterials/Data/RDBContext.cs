@@ -14,11 +14,6 @@ namespace RecyclableMaterials.Data
         public RDBContext(DbContextOptions<RDBContext> options) : base(options) { }
 
 
-        //
-        public DbSet<MaterialModel> Materials { get; set; }
-
-        //
-
 
         public DbSet<CategoryModel> Categories { get; set; }
 

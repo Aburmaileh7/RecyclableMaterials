@@ -6,48 +6,86 @@
 
 
 
+<div style="margin-left:40px ;margin-right:40px" >
 
-<hr />
-<div class="container mt-5">
-    <h2 style ="margin-bottom:20px">Register</h2>
+                        
+<div class="request-a-pickup__tab-content">
+
     <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Register">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
+        <div class="col-xl-12">
+            <div class="request-a-pickup-top__inner">
+                    <h2 class="request-a-pickup-top__title">Register User</h2>
 
                 </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="ConfirmPassword" class="control-label"></label>
-                    <input asp-for="ConfirmPassword" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="UserName" class="control-label"></label>
-                    <input asp-for="UserName" class="form-control" />
-                </div>
-                <br />
-                <div class="form-group">
-                    <input type="submit" value="Create" />
-
-                    <a asp-action="Login" class="btn btn-danger">I Have Account</a>
-                </div>
-            </form>
-        </div>
+            </div>
     </div>
+    <div class="request-a-pickup__tab-content-form-box " >
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="request-a-pickup__tab-content-form-left">
+                        <form asp-action="Register" asp-controller="Account" method="post" class="request-a-pickup__tab-content-form">
+                                <div asp-validation-summary="All" class="text-danger" class="row">
+                                                       
+                                                      
+                                    <div class="col-xl-12">
+                                        <div class="request-a-pickup__tab-content-input-box">
 
+                                          <input asp-for="Name" class="form-control" placeholder="Name" />
+                                                              
+                                        </div>
+                                    </div> 
+                                    <div class="col-xl-12">
+                                        <div class="request-a-pickup__tab-content-input-box">
+
+                                          <input asp-for="Email" class="form-control" placeholder="Email" />
+                                                              
+                                        </div>
+                                    </div> 
+                                    <div class="col-xl-12">
+                                        <div class="request-a-pickup__tab-content-input-box">
+
+                                          <input asp-for="UserName" class="form-control" placeholder="User Name" />
+                                                              
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                            <div class="request-a-pickup__tab-content-input-box">
+                                                                
+                                              <input asp-for="Password" class="form-control" placeholder="Password" />
+
+                                            </div>
+
+                                    </div>
+                                    <div class="col-xl-12">
+                                            <div class="request-a-pickup__tab-content-input-box">
+
+                                              <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+
+                                            </div>
+
+                                    </div>
+                                    <br />
+                                                       
+                                        <div class="request-a-pickup__tab-content-btn-box">
+
+                                            <input type="submit" value="Create" class="thm-btn request-a-pickup__tab-content-btn" />
+  
+                                            <a asp-action="Login" class="thm-btn request-a-pickup__tab-content-btn">I Have Account</a>
+                                                               
+                                        </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>               
+                        
 </div>
 
+</div>
+<!--Request A Pickup End-->
 
+ 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

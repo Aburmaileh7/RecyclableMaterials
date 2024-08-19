@@ -107,6 +107,7 @@ namespace RecyclableMaterials.Controllers
                 var viewModel = new ManageUserViewModel
                 {
                     UserName = currentUserName.UserName,
+
                     //FirstName = currentUserName.FirstName,
                     //LastName = currentUserName.LastName,
                     PhoneNumber = currentUserName.PhoneNumber

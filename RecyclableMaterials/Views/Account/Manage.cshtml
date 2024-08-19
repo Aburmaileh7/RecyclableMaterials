@@ -4,42 +4,63 @@
     ViewData["Title"] = "Manage";
 }
 
-<h1>Manage</h1>
+
+<div style="margin-left:40px ;margin-right:40px">
 
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Manage" asp-controller="Account" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" readonly/>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-            </div> 
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-            </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+    <div class="request-a-pickup__tab-content">
 
-                <a asp-action="Index" asp-controller="Home">Back to Home</a>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="request-a-pickup-top__inner">
+                    <h2 class="request-a-pickup-top__title">Manage User</h2>
+
+                </div>
             </div>
-        </form>
+        </div>
+        <div class="request-a-pickup__tab-content-form-box ">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="request-a-pickup__tab-content-form-left">
+                        <form asp-action="Manage" asp-controller="Account" method="post" class="request-a-pickup__tab-content-form">
+                            <div asp-validation-summary="All" class="text-danger" class="row">
+
+
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box">
+
+                                        <input asp-for="UserName" class="form-control" readonly  />
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box">
+
+                                        <input asp-for="PhoneNumber" class="form-control" />
+
+                                    </div>
+
+                                </div>
+                                <br />
+
+                                <div class="request-a-pickup__tab-content-btn-box">
+
+                                    <input type="submit" value="Save" class="thm-btn request-a-pickup__tab-content-btn" />
+
+                                    <a asp-action="Index" asp-controller="Home" class="thm-btn request-a-pickup__tab-content-btn">Back to Home</a>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </div>
-
-
-
+<!--Request A Pickup End-->
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using RecyclableMaterials.Areas.Dashboard.Models;
 
-namespace RecyclableMaterials.Areas.Dashboard.Models
+namespace RecyclableMaterials.Models
 {
-
     [Table("Products", Schema = "dbo")]
+
     public class ProductModel
     {
         [Key]
@@ -13,18 +14,19 @@ namespace RecyclableMaterials.Areas.Dashboard.Models
         public int Id { get; set; }
 
 
-
-        [Display(Name = "Product Name")]
+        [Display(Name = "Name Material")]
         [Column(TypeName = "nvarchar(20)")]
         [Required]
         [StringLength(20)]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Product Discription")]
+        [Display(Name = "Material Discription")]
         [Column(TypeName = "nvarchar(200)")]
         public string Discription { get; set; }
 
+        [Display(Name = "Material Price")]
+        [Column(TypeName = "nvarchar(200)")]
         public decimal? Price { get; set; }
 
         [Required]
@@ -33,7 +35,7 @@ namespace RecyclableMaterials.Areas.Dashboard.Models
         public string? ImagePath { get; set; }
 
         [Required]
-        [Display(Name = "Product Location")]
+        [Display(Name = "Location Material")]
         [Column(TypeName = "nvarchar(200)")]
         public string Location { get; set; }
 
@@ -42,9 +44,5 @@ namespace RecyclableMaterials.Areas.Dashboard.Models
 
 
         public virtual CategoryModel Category { get; set; }
-
-        //public int OwnerId { get; set; }
-        //public User Owner { get; set; }
-
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecyclableMaterials.Data;
 
@@ -11,9 +12,11 @@ using RecyclableMaterials.Data;
 namespace RecyclableMaterials.Migrations
 {
     [DbContext(typeof(RDBContext))]
-    partial class RDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240817123056_add location and q")]
+    partial class addlocationandq
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -296,7 +299,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LoginViewModel", (string)null);
+                    b.ToTable("LoginViewModel");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.ViewModels.RegiserViewModel", b =>
@@ -333,7 +336,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RegiserViewModel", (string)null);
+                    b.ToTable("RegiserViewModel");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.ViewModels.RoleFormViewModel", b =>
@@ -351,7 +354,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleFormViewModel", (string)null);
+                    b.ToTable("RoleFormViewModel");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.ViewModels.UserViewModel", b =>
@@ -373,7 +376,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserViewModel", (string)null);
+                    b.ToTable("UserViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

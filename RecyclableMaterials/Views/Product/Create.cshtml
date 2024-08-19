@@ -1,0 +1,118 @@
+﻿@model ProductModel
+
+@{
+    ViewBag.ActionName = Model == null ? "Create" : "Edit";
+}
+
+
+
+
+
+<div style="margin-left:40px ;margin-right:40px ;margin-bottom:40px">
+
+
+    <div class="request-a-pickup__tab-content">
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="request-a-pickup-top__inner">
+                    <h2 class="request-a-pickup-top__title">@ViewBag.ActionName</h2>
+
+                </div>
+            </div>
+        </div>
+        <div class="request-a-pickup__tab-content-form-box ">
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="request-a-pickup__tab-content-form-left">
+                        <form asp-action="@ViewBag.ActionName" asp-controller="Product" method="post" class="request-a-pickup__tab-content-form">
+                            <div asp-validation-summary="All" class="text-danger" class="row">
+
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box">
+                                        <div class="dropdown bootstrap-select">
+                                            <select asp-for="CategoryID" class="form-control selectpicker" asp-items="@(new SelectList(ViewBag.CatList,"id","Name"))">
+
+                                                <option value="">- select a Category -</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box">
+
+                                        <input asp-for="Name" class="form-control" placeholder="Name" />
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box">
+                                        <input asp-for="Price" class="form-control" placeholder="Price" />
+                                     
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box">
+
+                                        <input asp-for="Quantity" class="form-control" placeholder="Quantity" />
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box">
+
+                                        <input asp-for="Location" class="form-control" placeholder="Location" />
+
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box">
+
+                                        <input asp-for="ImagePath" type="file" name="Image" class="form-control" placeholder="Upload Image" />
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xl-12">
+                                    <div class="request-a-pickup__tab-content-input-box request-a-pickup__tab-content-message-box">
+                                        
+                                        <textarea asp-for="Discription" class="form-control" rows="3" placeholder="Discription" name="message"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+
+                                <div class="request-a-pickup__tab-content-btn-box">
+
+                                    <input type="submit" value="Save" class="thm-btn request-a-pickup__tab-content-btn" />
+
+                                    <a asp-action="Index" class="thm-btn request-a-pickup__tab-content-btn">Back</a>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+
+
+
+
