@@ -51,7 +51,7 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
                                         select new ProductModel
                                         {
 
-                                            Id = pro.Id,
+                                            ProductId = pro.ProductId,
                                             Name = pro.Name,
                                             Location = pro.Location,
                                             Quantity = pro.Quantity,
@@ -60,7 +60,7 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
                                             Price = pro.Price,
                                             CategoryID = pro.CategoryID,
                                             Category = cat
-                                        }).FirstOrDefault(x => x.Id == id);
+                                        }).FirstOrDefault(x => x.ProductId == id);
             return View(ProductCategoryModel);
         }
 
@@ -110,7 +110,7 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.CatList = _dbContext.Categories;
-            var productmodel = _dbContext.products.FirstOrDefault(x => x.Id == id);
+            var productmodel = _dbContext.products.FirstOrDefault(x => x.ProductId == id);
             return View("Create", productmodel);
         }
 
@@ -125,7 +125,7 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
                 {
                     string oldImagePath = string.Empty;
                     string oldFilePath = string.Empty;
-                    var product = _dbContext.products.FirstOrDefault(x => x.Id == id);
+                    var product = _dbContext.products.FirstOrDefault(x => x.ProductId == id);
 
                     if (Image != null)
                     {
@@ -180,7 +180,7 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
 
         private ProductModel GetProduct(int id)
         {
-            var model = _dbContext.products.Where(x => x.Id == id).FirstOrDefault();
+            var model = _dbContext.products.Where(x => x.ProductId == id).FirstOrDefault();
             if (model != null)
             {
                 return model;

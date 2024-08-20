@@ -63,14 +63,14 @@
             </td>
             <td>
 
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
-                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id">
+                <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-primary">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-info">Details</a>
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.ProductId">
                         <i class="fas fa-trash-alt delete-icon"></i>
 
                     </a>
 
-                    <div class="modal" id="exampleModal-@item.Id">
+                    <div class="modal" id="exampleModal-@item.ProductId">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -83,7 +83,7 @@
                                     <p>Are you Sure Delete Item @item.Name ?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                                    <form asp-action="Delete" asp-route-id="@item.ProductId" method="post">
                                         @Html.AntiForgeryToken()
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>

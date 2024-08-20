@@ -22,7 +22,7 @@ namespace RecyclableMaterials.Controllers
         {
             var users = await _userManager.Users.Select(x => new UserViewModel
             {
-                Id = x.Id,
+                UserId = x.Id,
                 UserNmae = x.UserName,
                 Email = x.Email,
                 Roles = _userManager.GetRolesAsync(x).Result

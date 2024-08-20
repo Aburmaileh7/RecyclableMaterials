@@ -11,7 +11,7 @@ namespace RecyclableMaterials.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Product Id")]
-        public int Id { get; set; }
+        public int ProductId { get; set; }
 
 
         [Display(Name = "Name Material")]
