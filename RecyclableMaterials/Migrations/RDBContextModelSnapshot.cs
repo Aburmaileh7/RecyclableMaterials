@@ -238,7 +238,7 @@ namespace RecyclableMaterials.Migrations
                     b.ToTable("Category", "dbo");
                 });
 
-            modelBuilder.Entity("RecyclableMaterials.Areas.Dashboard.Models.ProductModel", b =>
+            modelBuilder.Entity("RecyclableMaterials.Models.ProductModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -265,8 +265,8 @@ namespace RecyclableMaterials.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -296,7 +296,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LoginViewModel", (string)null);
+                    b.ToTable("LoginViewModel");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.ViewModels.RegiserViewModel", b =>
@@ -333,7 +333,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RegiserViewModel", (string)null);
+                    b.ToTable("RegiserViewModel");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.ViewModels.RoleFormViewModel", b =>
@@ -351,7 +351,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleFormViewModel", (string)null);
+                    b.ToTable("RoleFormViewModel");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.ViewModels.UserViewModel", b =>
@@ -373,7 +373,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserViewModel", (string)null);
+                    b.ToTable("UserViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -427,7 +427,7 @@ namespace RecyclableMaterials.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RecyclableMaterials.Areas.Dashboard.Models.ProductModel", b =>
+            modelBuilder.Entity("RecyclableMaterials.Models.ProductModel", b =>
                 {
                     b.HasOne("RecyclableMaterials.Areas.Dashboard.Models.CategoryModel", "Category")
                         .WithMany()

@@ -1,22 +1,25 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using RecyclableMaterials.Areas.Dashboard.Models;
+using RecyclableMaterials.Data;
+using RecyclableMaterials.Migrations;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RecyclableMaterials.Data;
 using RecyclableMaterials.Models;
 using System;
 
-namespace RecyclableMaterials.Controllers
+namespace FinalBootCamp.Areas.Dashboard.Controllers
 {
-    [Authorize]
+    [Authorize()]
     public class ProductController : Controller
     {
-        private  IWebHostEnvironment _webHostEnvironment;
-        private  RDBContext _dbContext;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly RDBContext _dbContext;
 
         public ProductController(RDBContext dbContext, IWebHostEnvironment webHostEnvironment)
         {
-            _dbContext = dbContext;
-            _webHostEnvironment = webHostEnvironment;
+            this._dbContext = dbContext;
+            this._webHostEnvironment = webHostEnvironment;
         }
 
 
@@ -24,14 +27,20 @@ namespace RecyclableMaterials.Controllers
 
 
         // GET: ProductController
-        [HttpGet]
         public ActionResult Index()
         {
-            var models = _dbContext.products.Include(x => x.Category).OrderBy(x => x.Name).ToList();
+            var models = _dbContext.products.Include(x => x.Category)
+                                                .OrderBy(x => x.Name).ToList();
 
 
             return View(models);
-           
+        }
+        public ActionResult test()
+        {
+
+
+
+            return View();
         }
 
         // GET: ProductController/Details/5
@@ -59,11 +68,13 @@ namespace RecyclableMaterials.Controllers
         public IActionResult Create()
         {
             ViewBag.CatList = _dbContext.Categories.ToList();
-
+            // ViewBag.CategoryList = _dbContext.Categories;
             return View();
         }
 
         // POST: ProductController/Create
+
+
         [HttpPost]
         public ActionResult Create(ProductModel model, IFormFile image)
         {
@@ -75,7 +86,6 @@ namespace RecyclableMaterials.Controllers
                     {
                         string folder = "Images/ProductsImages";
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
-
                         string filePath = Path.Combine(_webHostEnvironment.WebRootPath, folder, fileName);
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
@@ -135,9 +145,9 @@ namespace RecyclableMaterials.Controllers
 
 
                     product.Name = model.Name;
-                    product.Price = model.Price;
-                    product.Location = model.Location;
                     product.Quantity = model.Quantity;
+                    product.Location = model.Location;
+                    product.Price = model.Price;
                     product.CategoryID = model.CategoryID;
                     product.Discription = model.Discription;
 
@@ -212,4 +222,3 @@ namespace RecyclableMaterials.Controllers
         }
     }
 }
-
