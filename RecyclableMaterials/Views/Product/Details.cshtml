@@ -65,6 +65,15 @@
                     <p>@comment.User.UserName: @comment.Text</p>
             }
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bid)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var rating in Model.Bid)
+            {
+                        <p>@bid.User.UserName: @bid.Amount</p>
+            }
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Category)
         </dt>
