@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecyclableMaterials.Data;
 using RecyclableMaterials.Models;
@@ -8,15 +9,19 @@ namespace RecyclableMaterials.Controllers
     public class CommentController : Controller
     {
         private readonly RDBContext _dbContext;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CommentController(RDBContext dBContext)
+        public CommentController(RDBContext dBContext, UserManager<IdentityUser> userManager)
         {
-            this._dbContext=dBContext;
+           _dbContext=dBContext;
+           _userManager=userManager;
         }
 
         [HttpPost]
-        public async Task< IActionResult> Create(int productId , string text)
+        public async Task< IActionResult> AddComment(int productId , string text)
         {
+            var userId = _userManager.GetUserId(User);
+
             if (string.IsNullOrEmpty(text))
             {
                 return BadRequest("Comment cannot be empty");
@@ -26,10 +31,10 @@ namespace RecyclableMaterials.Controllers
                 ProductId=productId,
                 Text=text,
                 CreateAt=DateTime.Now,
-                //UserId=Userid //////////////////////////
+                UserId = userId
             };
 
-            _dbContext.Add(comment);
+            _dbContext.Comments.Add(comment);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("Details", "Product", new { id = productId });
            

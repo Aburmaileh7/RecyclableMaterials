@@ -1,4 +1,5 @@
-﻿using RecyclableMaterials.ViewModels;
+﻿using Microsoft.AspNetCore.Identity;
+using RecyclableMaterials.ViewModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace RecyclableMaterials.Models
@@ -11,8 +12,8 @@ namespace RecyclableMaterials.Models
 
         public ProductModel product { get; set; }
 
-        public int UserId { get; set; }
-        public UserViewModel user { get; set; }
+        public string UserId { get; set; }
+        public IdentityUser user { get; set; }
 
         [Required]
         public string Text { get; set; }

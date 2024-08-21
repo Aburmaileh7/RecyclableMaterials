@@ -21,6 +21,6 @@ namespace RecyclableMaterials.ViewModels
 
         public string UserName { get; set; }
 
-        public string UserType { get; set; } // Individual or Company
+        public string? UserType { get; set; } // Individual or Company
     }
 }

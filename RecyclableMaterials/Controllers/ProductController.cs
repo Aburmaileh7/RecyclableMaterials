@@ -1,6 +1,5 @@
 ﻿using RecyclableMaterials.Areas.Dashboard.Models;
 using RecyclableMaterials.Data;
-using RecyclableMaterials.Migrations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +9,7 @@ using System;
 
 namespace FinalBootCamp.Areas.Dashboard.Controllers
 {
-    [Authorize()]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -116,7 +115,6 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
 
         // POST: ProductController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, ProductModel model, IFormFile Image)
         {
             try

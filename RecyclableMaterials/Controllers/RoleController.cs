@@ -7,9 +7,9 @@ using System.Data;
 
 namespace RecyclableMaterials.Controllers
 {
-	
-	[Authorize(Roles = "Admin")]
-	public class RoleController : Controller
+
+    [Authorize(Roles = "Admin")]
+    public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
 

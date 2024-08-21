@@ -26,7 +26,7 @@ namespace RecyclableMaterials.Models
         public string Discription { get; set; }
 
         [Display(Name = "Material Price")]
-        [Column(TypeName = "nvarchar(200)")]
+        [Column(TypeName = "decimal(18, 3)")]
         public decimal? Price { get; set; }
 
         [Required]

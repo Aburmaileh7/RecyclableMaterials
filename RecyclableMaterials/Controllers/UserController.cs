@@ -6,8 +6,8 @@ using RecyclableMaterials.ViewModels;
 
 namespace RecyclableMaterials.Controllers
 {
-	[Authorize(Roles = "Admin")]
-	public class UserController : Controller
+    [Authorize(Roles = "Admin")]
+    public class UserController : Controller
     {
         private UserManager<IdentityUser> _userManager;
         private RoleManager<IdentityRole> _RoleManager;
@@ -23,7 +23,7 @@ namespace RecyclableMaterials.Controllers
             var users = await _userManager.Users.Select(x => new UserViewModel
             {
                 UserId = x.Id,
-                UserNmae = x.UserName,
+                UserName = x.UserName,
                 Email = x.Email,
                 Roles = _userManager.GetRolesAsync(x).Result
 

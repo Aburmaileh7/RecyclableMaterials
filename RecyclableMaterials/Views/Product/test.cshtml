@@ -1,4 +1,5 @@
-﻿
+﻿@model ProductModel
+
 
 
 
@@ -9,10 +10,16 @@
             <span class="section-title__tagline"></span>
             <h2 class="section-title__title">Offering Best Pricing</h2>
         </div>
+        <form asp-action="Index" asp-controller="Product" enctype="multipart/form-data" method="post" class="request-a-pickup__tab-content-form">
+           
         <div class="pricing__tab-box tabs-box">
             <ul class="tab-buttons clearfix list-unstyled">
-              
-                    <li data-tab="#bagster" class="tab-btn active-btn"><span>Category --forech</span></li>
+
+                @*     <select asp-for="CategoryID" class="form-control selectpicker" asp-items="@(new SelectList(ViewBag.CatList,"id","Name"))">
+                     <li data-tab="#bagster" class="tab-btn active-btn"><span>@ViewBag.ActionName</span></li>
+                         
+                    </select>
+                     *@
                 
                 @*  <li data-tab="#containers" class="tab-btn"><span>Containers</span></li>
                 <li data-tab="#dumpster" class="tab-btn"><span>Dumpster</span></li> *@
@@ -232,5 +239,6 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
 </section>

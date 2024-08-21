@@ -7,7 +7,7 @@ namespace RecyclableMaterials.ViewModels
         [Key]
         public string UserId { get; set; }
 
-        public string UserNmae { get; set; }
+        public string UserName { get; set; }
 
         public string Email { get; set; }
 
