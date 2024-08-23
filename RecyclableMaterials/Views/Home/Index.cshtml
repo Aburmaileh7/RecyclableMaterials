@@ -1,10 +1,14 @@
-﻿<div class="page-wrapper">
+﻿@model IEnumerable< RecyclableMaterials.Models.ProductModel>
+
+
+<div class="page-wrapper">
     
     
 
     <div class="stricky-header stricked-menu main-menu">
         <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
     </div><!-- /.stricky-header -->
+
     <!--Main Slider Start-->
     <section class="main-slider">
         <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true,
@@ -25,7 +29,7 @@
 
                 <div class="swiper-slide">
                     <div class="image-layer"
-                         style="background-image: url(images/backgrounds/main-slider-1-1.jpg);">
+                         style="background-image: url(images/backgrounds/used/main-slider-1-1.jpg);">
                     </div>
                     <!-- /.image-layer -->
                     <div class="container">
@@ -42,7 +46,7 @@
 
                 <div class="swiper-slide">
                     <div class="image-layer"
-                         style="background-image: url(images/backgrounds/main-slider-1-2.jpg);">
+                         style="background-image: url(images/backgrounds/used/main-slider-1-2.jpg);">
                     </div>
                     <!-- /.image-layer -->
                     <div class="container">
@@ -59,7 +63,7 @@
 
                 <div class="swiper-slide">
                     <div class="image-layer"
-                         style="background-image: url(images/backgrounds/main-slider-1-3.jpg);">
+                         style="background-image: url(images/backgrounds/used/main-slider-1-3.jpg);">
                     </div>
                     <!-- /.image-layer -->
                     <div class="container">
@@ -74,21 +78,46 @@
                     </div>
                 </div>
 
+                <div class="swiper-slide">
+                    <div class="image-layer"
+                         style="background-image: url(images/backgrounds/used/main-slider-1-4.jpg);">
+                    </div>
+                    <!-- /.image-layer -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="main-slider__content">
+                                    <h2>Your Clutter is <br> Our Bread <span>&</span> Butter</h2>
+                                    <a href="request-pickup.html" class="thm-btn">Request a Pickup</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="swiper-slide">
+                    <div class="image-layer"
+                         style="background-image: url(images/backgrounds/used/main-slider-1-5.jpg);">
+                    </div>
+                    <!-- /.image-layer -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="main-slider__content">
+                                    <h2>Your Clutter is <br> Our Bread <span>&</span> Butter</h2>
+                                    <a href="request-pickup.html" class="thm-btn">Request a Pickup</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- If we need navigation buttons -->
-            <div class="main-slider__nav">
-                <div class="swiper-button-prev" id="main-slider__swiper-button-next">
-                    <i class="icon-right-arrow arrow-left"></i>
-                </div>
-                <div class="swiper-button-next" id="main-slider__swiper-button-prev">
-                    <i class="icon-right-arrow"></i>
-                </div>
-            </div>
-
+            
         </div>
     </section>
     <!--Main Slider End-->
+
     <!--Feature One Start-->
     <section class="feature-one">
         <div class="container">
@@ -98,7 +127,7 @@
                         <div class="feature-one__icon">
                             <span class="icon-budget"></span>
                         </div>
-                        <h3 class="feature-one__title "><a href="about.html">You Estimate <br> Load Size</a></h3>
+                        <h3 class="feature-one__title "><a asp-action="Register" asp-controller="Account">Register <br> On Site</a></h3>
                     </li>
                     <li class="feature-one__single wow fadeInUp" data-wow-delay="200ms">
                         <div class="feature-one__icon">
@@ -123,6 +152,7 @@
         </div>
     </section>
     <!--Feature One End-->
+
     <!--Leading Waste Start-->
     <section class="leading-waste">
         <div class="container">
@@ -195,6 +225,100 @@
         </div>
     </section>
     <!--Leading Waste End-->
+
+
+ @*    ///////////////////////////////////////////////////////////// *@
+    <!--News Three Start-->
+    <section class="news-three" style="margin-bottom: 16px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4">
+                    <div class="news-three__left">
+                        <div class="news-three__bg-box">
+                            <div class="news-three__bg"
+                                 style="background-image: url(~/images/backgrounds/news-three-bg.jpg);"></div>
+                        </div>
+                        <div class="section-title text-left">
+                            <span class="section-title__tagline">What’s Happening</span>
+                            <h2 class="section-title__title">Our Latest News & Articles</h2>
+                        </div>
+                        <p class="news-three__text">
+                            Lorem ipsum dolor sit consectetur adipisicing elit sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-8">
+                    <div class="news-three__right">
+                        <div class="news-three__carousel owl-carousel owl-theme thm-owl__carousel" data-owl-options='{
+                             "loop" : true,
+                             "autoplay" : true,
+                             "margin" : 30,
+                             "nav" : true,
+                             "dots" : false,
+                             "smartSpeed" : 500,
+                             "autoplayTimeout" : 10000,
+                             "navText" : ["<span class=\"icon-right-arrow\"></span>","<span class=\"icon-right-arrow\"></span>"],
+                                "responsive": {
+                                    "0": {
+                                        "items": 1
+                                    },
+                                    "768": {
+                                        "items": 1
+                                    },
+                                    "992": {
+                                        "items": 2
+                                    },
+                                    "1200": {
+                                        "items": 2.01
+                                    }
+                                }
+                            }'>
+
+                            @foreach(var item in Model)
+                            {
+                                     <!--one slide-->
+                                    <div class="news-one__single">
+                                        <div class="news-one__img">
+                                                    <img src="@Url.Content("~/" + item.ImagePath)" alt=""   width="370px" height="253px"> @* 370*253 *@
+                                            <div class="news-one__date">
+                                                <p>@item.Quantity Pc</p>
+                                            </div>
+                                            <a href="news-details.html">
+                                                <span class="news-one__plus"></span>
+                                            </a>
+                                        </div>
+                                        <div class="news-one__content">
+                                            <ul class="list-unstyled news-one__meta">
+                                                <li><a href="news-details.html"><i class="far fa-clock"></i> by Admin </a>
+                                                </li>
+                                                <li><span>/</span></li>
+                                                <li><a href="news-details.html"><i class="far fa-comments"></i> 2
+                                                        Comments</a>
+                                                </li>
+                                            </ul>
+                                            <h3 class="news-one__title"><a href="news-details.html">@item.Name</a></h3>
+                                            <div class="news-one__read-more">
+                                                <a asp-action="Details" asp-controller="Product"><i class="fa fa-arrow-right"></i>Read More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--News Three End-->
+@*    ///////////////////////////////////////////////////////////// *@
+
+
+
+
+
+
     <!--Industries One Start-->
     <section class="industries-one">
         <div class="industries-one-bg"
@@ -284,6 +408,7 @@
         </div>
     </section>
     <!--Industries One End-->
+
     <!--We Dedicated Start-->
     <section class="we-dedicated">
         <div class="container">
@@ -338,6 +463,7 @@
         </div>
     </section>
     <!--We Dedicated End-->
+
     <!--Counter One Start-->
     <section class="counter-one">
         <div class="counter-one-bg-box">
@@ -395,40 +521,21 @@
         </div>
     </section>
     <!--Counter One End-->
-    <!--Services One Start-->
+
+    @*// Materials// *@
+
     <section class="services-one">
         <div class="container">
-            <div class="services-one__top">
-                <div class="row">
-                    <div class="col-xl-7 col-lg-7">
-                        <div class="services-one__top-left">
-                            <div class="section-title text-left">
-                                <span class="section-title__tagline">What We’re Offering</span>
-                                <h2 class="section-title__title">
-                                    The Services We’re Providing <br> to Our Customers
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-5 col-lg-5">
-                        <div class="services-one__top-right">
-                            <p class="services-one__top-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. quis nostrud
-                                exercitation ullamco laboris.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="services-one__bottom">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
                         <!--Services One Single-->
                         <div class="services-one__single">
                             <div class="services-one__img-box">
+                                <a asp-action="Myproduct" asp-controller="product">My Materials</a>
                                 <div class="services-one__img">
-                                    <img src="images/services/services-1-1.jpg" alt="">
+                                    <img src="~/images/backgrounds/used/myproduct.jpg" alt="">
                                 </div>
                                 <div class="services-one__icon">
                                     <span class="icon-garbage-1"></span>
@@ -436,23 +543,25 @@
                             </div>
                             <div class="services-one__content-box">
                                 <div class="services-one__content">
-                                    <h3 class="services-one__title"><a href="zero-waste.html">Zero Waste</a></h3>
+                                    <h3 class="services-one__title"><a asp-action="Myproduct" asp-controller="product">My Materials</a></h3>
                                 </div>
                                 <div class="services-one__hover">
                                     <h3 class="services-one__hover-title">
-                                        <a href="zero-waste.html">Zero Waste</a>
+                                        <a asp-action="Myproduct" asp-controller="product">My Materials</a>
                                     </h3>
                                     <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="200ms" style="visibility: visible; animation-delay: 200ms; animation-name: fadeInUp;">
                         <!--Services One Single-->
                         <div class="services-one__single">
                             <div class="services-one__img-box">
+                                <a asp-action="Index" asp-controller="product">Materials</a>
+
                                 <div class="services-one__img">
-                                    <img src="images/services/services-1-2.jpg" alt="">
+                                    <img src="~/images/backgrounds/used/Galary.jpg" alt="">
                                 </div>
                                 <div class="services-one__icon">
                                     <span class="icon-dumpster"></span>
@@ -461,62 +570,26 @@
                             <div class="services-one__content-box">
                                 <div class="services-one__content">
                                     <h3 class="services-one__title">
-                                        <a href="dumpster-rental.html">
-                                            Dumpster
-                                            Rental
-                                        </a>
+                                        <a asp-action="Index" asp-controller="product">Materials</a>
                                     </h3>
                                 </div>
                                 <div class="services-one__hover">
                                     <h3 class="services-one__hover-title">
-                                        <a href="dumpster-rental.html">
-                                            Dumpster
-                                            Rental
-                                        </a>
+                                        <a asp-action="Index" asp-controller="product">Materials</a>
                                     </h3>
                                     <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="400ms" style="visibility: visible; animation-delay: 400ms; animation-name: fadeInUp;">
                         <!--Services One Single-->
                         <div class="services-one__single">
                             <div class="services-one__img-box">
+                                <a asp-action="Create" asp-controller="product">Create Materials</a>
                                 <div class="services-one__img">
-                                    <img src="images/services/services-1-3.jpg" alt="">
-                                </div>
-                                <div class="services-one__icon">
-                                    <span class="icon-portable-toilets"></span>
-                                </div>
-                            </div>
-                            <div class="services-one__content-box">
-                                <div class="services-one__content">
-                                    <h3 class="services-one__title">
-                                        <a href="portable-toilet.html">
-                                            Portable
-                                            Toilet
-                                        </a>
-                                    </h3>
-                                </div>
-                                <div class="services-one__hover">
-                                    <h3 class="services-one__hover-title">
-                                        <a href="portable-toilet.html">
-                                            Portable
-                                            Toilet
-                                        </a>
-                                    </h3>
-                                    <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                        <!--Services One Single-->
-                        <div class="services-one__single">
-                            <div class="services-one__img-box">
-                                <div class="services-one__img">
-                                    <img src="images/services/services-1-4.jpg" alt="">
+                                    <img src="~/images/backgrounds/used/CreateMat.jpg" alt="">
                                 </div>
                                 <div class="services-one__icon">
                                     <span class="icon-triangular-arrows-sign-for-recycle"></span>
@@ -525,16 +598,11 @@
                             <div class="services-one__content-box">
                                 <div class="services-one__content">
                                     <h3 class="services-one__title">
-                                        <a href="recylcing-services.html">
-                                            Recycling
-                                            Service
-                                        </a>
+                                        <a asp-action="Create" asp-controller="product">Create Materials</a>
                                     </h3>
                                 </div>
                                 <div class="services-one__hover">
-                                    <h3 class="services-one__hover-title">
-                                        <a href="recylcing-services.html">Recycling Service</a>
-                                    </h3>
+                                    <h3 class="services-one__hover-title"> <a asp-action="Create" asp-controller="product"> Create Materials</a></h3>
                                     <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
                                 </div>
                             </div>
@@ -544,7 +612,10 @@
             </div>
         </div>
     </section>
-    <!--Services One End-->
+
+    @*// Materials End// *@
+
+
     <!--Have Waste Start-->
     <section class="have-waste">
         <div class="container">
@@ -565,6 +636,8 @@
         </div>
     </section>
     <!--Have Waste End-->
+
+
     <!--Project One Start-->
     <section class="project-one">
         <div class="project-one-bg-box">
@@ -650,71 +723,8 @@
         </div>
     </section>
     <!--Project One End-->
-    <!--Brand One Start-->
-    <section class="brand-one">
-        <div class="container">
-            <div class="thm-swiper__slider swiper-container" data-swiper-options='{"spaceBetween": 100, "slidesPerView": 5, "autoplay": { "delay": 5000 }, "breakpoints": {
-                    "0": {
-                        "spaceBetween": 30,
-                        "slidesPerView": 2
-                    },
-                    "375": {
-                        "spaceBetween": 30,
-                        "slidesPerView": 2
-                    },
-                    "575": {
-                        "spaceBetween": 30,
-                        "slidesPerView": 3
-                    },
-                    "767": {
-                        "spaceBetween": 50,
-                        "slidesPerView": 4
-                    },
-                    "991": {
-                        "spaceBetween": 50,
-                        "slidesPerView": 5
-                    },
-                    "1199": {
-                        "spaceBetween": 100,
-                        "slidesPerView": 5
-                    }
-                }}'>
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-1.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-2.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-3.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-4.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-5.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-1.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-2.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-3.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-4.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                    <div class="swiper-slide">
-                        <img src="images/brand/brand-1-5.png" alt="">
-                    </div><!-- /.swiper-slide -->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--Brand One End-->
+
+  
     <!--Testimonial One Start-->
     <section class="testimonial-one">
         <div class="testimonial-one-bg"
@@ -880,6 +890,7 @@
         </div>
     </section>
     <!--Testimonial One End-->
+
     <!--News One Start-->
     <section class="news-one">
         <div class="container">

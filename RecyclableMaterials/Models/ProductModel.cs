@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using RecyclableMaterials.Areas.Dashboard.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace RecyclableMaterials.Models
 {
@@ -22,7 +23,8 @@ namespace RecyclableMaterials.Models
 
         [Required]
         [Display(Name = "Material Discription")]
-        [Column(TypeName = "nvarchar(200)")]
+        [Column(TypeName = "nvarchar(500)")]
+        [StringLength(500)]
         public string Discription { get; set; }
 
         [Display(Name = "Material Price")]
@@ -41,8 +43,11 @@ namespace RecyclableMaterials.Models
 
         [Required]
         public int CategoryID { get; set; }
+        public  CategoryModel Category { get; set; }
+
+        public string? UserId { get; set; }
+        public IdentityUser user { get; set; }
 
 
-        public virtual CategoryModel Category { get; set; }
     }
 }

@@ -6,19 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecyclableMaterials.Models;
 using System;
+using Microsoft.AspNetCore.Identity;
 
-namespace FinalBootCamp.Areas.Dashboard.Controllers
+namespace RecyclableMaterials.Controllers
 {
     [Authorize]
     public class ProductController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly RDBContext _dbContext;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ProductController(RDBContext dbContext, IWebHostEnvironment webHostEnvironment)
+
+        public ProductController(RDBContext dbContext, IWebHostEnvironment webHostEnvironment
+            , UserManager<IdentityUser> userManager)
         {
             this._dbContext = dbContext;
             this._webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
 
 
@@ -26,6 +31,12 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
 
 
         // GET: ProductController
+        public ActionResult HomeIndex()
+        {
+    
+            return View();
+        }
+
         public ActionResult Index()
         {
             var models = _dbContext.products.Include(x => x.Category)
@@ -34,12 +45,12 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
 
             return View(models);
         }
-        public ActionResult test()
+        public ActionResult Myproduct()
         {
+            var models = _dbContext.products.Include(x => x.Category)
+                                                .OrderBy(x => x.Name).ToList();
 
-
-
-            return View();
+            return View(models);
         }
 
         // GET: ProductController/Details/5
@@ -49,6 +60,7 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
                                         join cat in _dbContext.Categories on pro.CategoryID equals cat.id
                                         select new ProductModel
                                         {
+
 
                                             ProductId = pro.ProductId,
                                             Name = pro.Name,
@@ -79,6 +91,7 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
         {
             try
             {
+                var userId = _userManager.GetUserId(User);
                 if (model != null)
                 {
                     if (image != null)
@@ -92,6 +105,7 @@ namespace FinalBootCamp.Areas.Dashboard.Controllers
                         }
                         model.ImagePath = Path.Combine(folder, fileName);
 
+                        model.UserId = userId;
                         _dbContext.products.Add(model);
                         _dbContext.SaveChanges();
                         return RedirectToAction(nameof(Index));

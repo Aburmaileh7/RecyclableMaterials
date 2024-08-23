@@ -1,0 +1,110 @@
+﻿@model IEnumerable< RecyclableMaterials.Models.ProductModel>
+
+@{
+    ViewData["Title"] = "HomeIndex";
+}
+
+<section class="page-header">
+    <div class="page-header-bg" style="background-image: url(images/backgrounds/used/bcg1.jpg);">
+    </div>
+    <div class="container">
+        <div class="page-header__inner">
+            <h2>Displayed Materials</h2>
+            <ul class="thm-breadcrumb list-unstyled">
+                <li>Materials</li>
+                <li>My Materials</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="services-one">
+    <div class="container">
+      
+        <div class="services-one__bottom">
+            <div class="row">
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
+                    <!--Services One Single-->
+                    <div class="services-one__single">
+                        <div class="services-one__img-box">
+                            <a asp-action="Myproduct" asp-controller="product">My Materials</a>
+                            <div class="services-one__img">
+                                <img src="~/images/backgrounds/used/myproduct.jpg" alt="">
+                            </div>
+                            <div class="services-one__icon">
+                                <span class="icon-garbage-1"></span>
+                            </div>
+                        </div>
+                        <div class="services-one__content-box">
+                            <div class="services-one__content">
+                                <h3 class="services-one__title"><a asp-action="Myproduct" asp-controller="product">My Materials</a></h3>
+                            </div>
+                            <div class="services-one__hover">
+                                <h3 class="services-one__hover-title">
+                                    <a asp-action="Myproduct" asp-controller="product">My Materials</a>
+                                </h3>
+                                <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="200ms" style="visibility: visible; animation-delay: 200ms; animation-name: fadeInUp;">
+                    <!--Services One Single-->
+                    <div class="services-one__single">
+                        <div class="services-one__img-box">
+                            <a asp-action="Index" asp-controller="product">Materials</a>
+
+                            <div class="services-one__img">
+                                <img src="~/images/backgrounds/used/Galary.jpg" alt="">
+                            </div>
+                            <div class="services-one__icon">
+                                <span class="icon-dumpster"></span>
+                            </div>
+                        </div>
+                        <div class="services-one__content-box">
+                            <div class="services-one__content">
+                                <h3 class="services-one__title">
+                                   <a asp-action="Index" asp-controller="product">Materials</a>
+                                </h3>
+                            </div>
+                            <div class="services-one__hover">
+                                <h3 class="services-one__hover-title">
+                                    <a asp-action="Index" asp-controller="product">Materials</a>
+                                </h3>
+                                <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="400ms" style="visibility: visible; animation-delay: 400ms; animation-name: fadeInUp;">
+                    <!--Services One Single-->
+                    <div class="services-one__single">
+                        <div class="services-one__img-box">
+                            <a asp-action="Create" asp-controller="product">Create Materials</a>
+                            <div class="services-one__img">
+                                <img src="~/images/backgrounds/used/CreateMat.jpg" alt="">
+                            </div>
+                            <div class="services-one__icon">
+                                <span class="icon-triangular-arrows-sign-for-recycle"></span>
+                            </div>
+                        </div>
+                        <div class="services-one__content-box">
+                            <div class="services-one__content">
+                                <h3 class="services-one__title">
+                                    <a asp-action="Create" asp-controller="product">Create Materials</a>
+                                </h3>
+                            </div>
+                            <div class="services-one__hover">
+                                <h3 class="services-one__hover-title"> <a asp-action="Create" asp-controller="product"> Create Materials</a></h3>
+                                <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

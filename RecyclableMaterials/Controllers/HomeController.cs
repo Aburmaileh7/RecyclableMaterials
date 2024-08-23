@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RecyclableMaterials.Data;
 using RecyclableMaterials.Models;
 using System.Diagnostics;
 
@@ -7,15 +10,22 @@ namespace RecyclableMaterials.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly RDBContext _dbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+      
+        public HomeController(ILogger<HomeController> logger, RDBContext dbContext)
         {
+            _dbContext = dbContext;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var models = _dbContext.products.Include(x => x.Category)
+                                                 .OrderBy(x => x.Name).ToList();
+
+
+            return View(models);
         }
 
         public IActionResult Privacy()

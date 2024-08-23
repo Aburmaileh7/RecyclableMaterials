@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecyclableMaterials.Data;
 
@@ -11,9 +12,11 @@ using RecyclableMaterials.Data;
 namespace RecyclableMaterials.Migrations
 {
     [DbContext(typeof(RDBContext))]
-    partial class RDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240822113230_dis500")]
+    partial class dis500
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -368,14 +371,9 @@ namespace RecyclableMaterials.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Products", "dbo");
                 });
@@ -618,13 +616,7 @@ namespace RecyclableMaterials.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "user")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Category");
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.Models.RatingModel", b =>
