@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using RecyclableMaterials.Areas.Dashboard.Models;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace RecyclableMaterials.Models
 {
     [Table("Products", Schema = "dbo")]
@@ -47,6 +48,9 @@ namespace RecyclableMaterials.Models
 
         public string? UserId { get; set; }
         public IdentityUser user { get; set; }
+
+        public List<CommentModel>? Comments { get; set; } = new List<CommentModel>();
+        public List<RatingModel>? Ratings { get; set; } = new List<RatingModel>();
 
 
     }

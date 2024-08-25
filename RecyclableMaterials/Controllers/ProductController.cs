@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using RecyclableMaterials.Models;
 using System;
 using Microsoft.AspNetCore.Identity;
+using RecyclableMaterials.ViewModels;
 
 namespace RecyclableMaterials.Controllers
 {
@@ -74,6 +75,33 @@ namespace RecyclableMaterials.Controllers
                                         }).FirstOrDefault(x => x.ProductId == id);
             return View(ProductCategoryModel);
         }
+
+            //public async Task<IActionResult> Details(int id)
+            //{
+            //    var product = await _dbContext.products
+            //        .Include(m => m.Category)
+            //        .Include(m => m.Comments)
+            //            .ThenInclude(c => c.user) 
+            //        .Include(m => m.Ratings)
+            //        .FirstOrDefaultAsync(m => m.ProductId == id);
+
+            //    if (product == null)
+            //    {
+            //        return NotFound();
+            //    }
+
+
+            //    var averageRating = product.Ratings.Any() ? product.Ratings.Average(r => r.Stars) : 0;
+
+            //    var viewModel = new ProductDetailsViewModel
+            //    {
+            //        Product = product,
+            //        AverageRating = averageRating
+            //    };
+
+            //    return View(viewModel);
+            //}
+
 
         // GET: ProductController/Create
         public IActionResult Create()
