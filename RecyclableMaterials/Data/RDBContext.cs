@@ -7,7 +7,7 @@ using RecyclableMaterials.ViewModels;
 
 namespace RecyclableMaterials.Data
 {
-    public class RDBContext :IdentityDbContext
+    public class RDBContext :IdentityDbContext<AppUserModel>
     {
 
 
@@ -34,7 +34,7 @@ namespace RecyclableMaterials.Data
             builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins", "sec");
 
             builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles", "sec");
-            builder.Entity<IdentityUser>().ToTable("Users", "sec");
+            builder.Entity<AppUserModel>().ToTable("Users", "sec");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserToken", "sec");
         }
        

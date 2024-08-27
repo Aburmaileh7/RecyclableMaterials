@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using RecyclableMaterials.Models;
 using RecyclableMaterials.ViewModels;
 
 namespace RecyclableMaterials.Controllers
@@ -9,15 +10,16 @@ namespace RecyclableMaterials.Controllers
         private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _singInManager;
         private RoleManager<IdentityRole> _roleManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public AccountController(UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager, IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _singInManager = signInManager;
             _roleManager = roleManager;
-            
+            _webHostEnvironment = webHostEnvironment;
         }
 
         #region Register
@@ -31,12 +33,48 @@ namespace RecyclableMaterials.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegiserViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
-                IdentityUser user = new IdentityUser
+
+                string profilePictureUrl = null;
+
+                if (model.ProfilePicture != null && model.ProfilePicture.Length > 0)
                 {
-                    UserName = model.UserName,
-                    Email = model.Email
+                    string folder = Path.Combine("Images", "ProfilePictures");
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ProfilePicture.FileName);
+                    string filePath = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+
+                    
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+
+                    string fullPath = Path.Combine(filePath, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        await model.ProfilePicture.CopyToAsync(stream);
+                    }
+
+                    profilePictureUrl = Path.Combine(folder, fileName); 
+                }
+                else
+                {
+            
+                    profilePictureUrl = "/Images/ProfilePictures/avatar-1.png";
+                }
+
+
+                var user = new AppUserModel
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    ProfilePictureUrl = profilePictureUrl,
+                    DateOfBirth = model.DateOfBirth,
+                    PhoneNumber = model.PhoneNumber
 
                 };
 
