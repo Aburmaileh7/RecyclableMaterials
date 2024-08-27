@@ -17,11 +17,11 @@ namespace RecyclableMaterials.Controllers
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly RDBContext _dbContext;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<AppUserModel> _userManager;
 
 
         public ProductController(RDBContext dbContext, IWebHostEnvironment webHostEnvironment
-            , UserManager<IdentityUser> userManager)
+            , UserManager<AppUserModel> userManager)
         {
             this._dbContext = dbContext;
             this._webHostEnvironment = webHostEnvironment;

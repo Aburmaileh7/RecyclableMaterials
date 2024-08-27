@@ -17,7 +17,7 @@ namespace RecyclableMaterials.Models
      
         public string? UserId { get; set; } 
 
-        public IdentityUser User { get; set; }
+        public AppUserModel User { get; set; }
 
         public int ProductId { get; set; }
         public  ProductModel Product { get; set; }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RecyclableMaterials.Models;
 using RecyclableMaterials.ViewModels;
 
 namespace RecyclableMaterials.Controllers
@@ -9,10 +10,10 @@ namespace RecyclableMaterials.Controllers
     [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<AppUserModel> _userManager;
         private RoleManager<IdentityRole> _RoleManager;
 
-        public UserController(UserManager<IdentityUser> userManager,
+        public UserController(UserManager<AppUserModel> userManager,
                 RoleManager<IdentityRole> roleManager)
         {
             _RoleManager = roleManager;

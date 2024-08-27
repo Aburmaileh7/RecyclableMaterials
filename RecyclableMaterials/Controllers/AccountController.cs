@@ -7,13 +7,13 @@ namespace RecyclableMaterials.Controllers
 {
     public class AccountController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
-        private SignInManager<IdentityUser> _singInManager;
+        private UserManager<AppUserModel> _userManager;
+        private SignInManager<AppUserModel> _singInManager;
         private RoleManager<IdentityRole> _roleManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+        public AccountController(UserManager<AppUserModel> userManager,
+            SignInManager<AppUserModel> signInManager,
             RoleManager<IdentityRole> roleManager, IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;

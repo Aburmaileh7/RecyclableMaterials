@@ -9,9 +9,9 @@ namespace RecyclableMaterials.Controllers
     public class CommentController : Controller
     {
         private readonly RDBContext _dbContext;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<AppUserModel> _userManager;
 
-        public CommentController(RDBContext dBContext, UserManager<IdentityUser> userManager)
+        public CommentController(RDBContext dBContext, UserManager<AppUserModel> userManager)
         {
            _dbContext=dBContext;
            _userManager=userManager;
