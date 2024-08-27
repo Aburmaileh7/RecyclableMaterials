@@ -2,42 +2,91 @@
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Areas/Dashboard/Views/Shared/_DashbordLayout.cshtml";
+
+    Layout = "~/Areas/Dashboard/Views/Shared/_DashbordLayout2.cshtml";
+
 }
 
-<h1>Index</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Roles)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-               @string.Join(" | ",item.Roles.ToList())
-            </td>
-            <td>
-                <a asp-action="Manage" asp-route-id="@item.UserId">Manage</a> 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="main-content">
+
+    <div class="page-content">
+
+
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header container mb-10">
+                            <h1>Role Manager</h1>
+                        </div>
+                        <div class="card-body">
+
+                            <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                <div class="row dt-row">
+                                    <div class="col-sm-12">
+                                        <table id="datatable" class="table table-hover table-bordered table-striped dt-responsive nowrap dataTable no-footer dtr-inline" style="text-align:center; border-collapse: collapse; border-spacing: 0px; width: 100%;" aria-describedby="datatable_info">
+                                            <thead>
+                                                  <tr>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.UserName)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Email)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Roles)
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               @foreach (var item in Model) {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.UserName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Email)
+                                                        </td>
+                                                        <td>
+                                                           @string.Join(" | ",item.Roles.ToList())
+                                                        </td>
+                                                        <td>
+                                                           <a asp-action="Manage" asp-route-id="@item.UserId" class="btn btn-primary">Manage</a>
+                                                        </td>
+                                                    </tr>
+                                                 }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © Clivax.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Crafted  <i class="mdi mdi-heart text-danger"></i> by AbuIrmaileh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</div>

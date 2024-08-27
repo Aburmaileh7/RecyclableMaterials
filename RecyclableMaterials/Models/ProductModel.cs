@@ -49,8 +49,8 @@ namespace RecyclableMaterials.Models
         public string? UserId { get; set; }
         public IdentityUser user { get; set; }
 
-        public List<CommentModel>? Comments { get; set; } = new List<CommentModel>();
-        public List<RatingModel>? Ratings { get; set; } = new List<RatingModel>();
+        public List<CommentModel> Comments { get; set; } = new List<CommentModel>();
+        public List<RatingModel> Ratings { get; set; } = new List<RatingModel>();
 
 
     }

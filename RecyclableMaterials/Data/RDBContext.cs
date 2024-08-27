@@ -14,7 +14,6 @@ namespace RecyclableMaterials.Data
         public RDBContext(DbContextOptions<RDBContext> options) : base(options) { }
 
         public DbSet<BidModel> Bids { get; set; }
-        public DbSet<NotificationModel> Notifications { get; set; }
 
         public DbSet<RatingModel> Ratings { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
@@ -38,16 +37,6 @@ namespace RecyclableMaterials.Data
             builder.Entity<IdentityUser>().ToTable("Users", "sec");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserToken", "sec");
         }
-        public DbSet<RecyclableMaterials.ViewModels.RegiserViewModel> RegiserViewModel { get; set; } = default!;
-        public DbSet<RecyclableMaterials.ViewModels.LoginViewModel> LoginViewModel { get; set; } = default!;
-        public DbSet<RecyclableMaterials.ViewModels.RoleFormViewModel> RoleFormViewModel { get; set; } = default!;
-        public DbSet<RecyclableMaterials.ViewModels.UserViewModel> UserViewModel { get; set; } = default!;
-        //public DbSet<RecyclableMaterials.ViewModels.RegeisterViewModel> RegeisterViewModel { get; set; } = default!;
-        //public DbSet<RecyclableMaterials.ViewModels.LoginViewModel> LoginViewModel { get; set; } = default!;
-        //public DbSet<RecyclableMaterials.ViewModels.DepartmentViewModel> DepartmentViewModel { get; set; } = default!;
-        //public DbSet<RecyclableMaterials.ViewModels.ManageUserViewModel> ManageUserViewModel { get; set; } = default!;
-        //public DbSet<RecyclableMaterials.ViewModels.UserViewModel> UserViewModel { get; set; } = default!;
-        //public DbSet<RecyclableMaterials.ViewModels.UserRolesViewModel> UserRolesViewModel { get; set; } = default!;
-
+       
     }
 }

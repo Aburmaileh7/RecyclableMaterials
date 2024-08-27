@@ -3,11 +3,11 @@
 
 
 <form asp-action="Create" method="post">
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" style="height:50px">
         <input asp-for="Name" class="form-control" placeholder="role name" />
 
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">Add New Role</button>
+        <div class="input-group-append" >
+            <button style ="height:50px" type="submit" class="btn btn-primary">Add New Role</button>
         </div>
     </div>
     <div asp-validation-summary="All" class="text-danger"></div>

@@ -2,15 +2,16 @@
 
 @{
     ViewData["Title"] = "ManageUser";
-    Layout = "~/Areas/Dashboard/Views/Shared/_DashbordLayout.cshtml";
+    Layout = "~/Areas/Dashboard/Views/Shared/_DashbordLayout2.cshtml";
+
 }
 
-<h1>Manage User</h1>
+@* <h1>Manage User</h1>
 
 
 <form asp-action="Manage" method="post">
-    <div class="card mt-4">
-        <div class="card-header">
+    <div class="card ">
+        <div class="card-header container mb-10">
             <h2>@Model.Username</h2>
 
             Add/Remove Role
@@ -35,11 +36,66 @@
     </div>
 </form>
 
+ *@
 
 
+<div class="main-content">
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+    <div class="page-content">
+
+
+        <h1>Manage User</h1>
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                  <form asp-action="Manage" method="post">
+                        <div class="card ">
+                            <div class="card-header container mb-10">
+                                <h2>User Name @Model.Username</h2><br />
+                                <h4>Add/Remove Role</h4>
+                                
+                            </div>
+                            <div class="card-body">
+                                <input type="hidden" asp-for="UserId" />
+
+                                @for (int i = 0; i < Model.Roles.Count; i++)
+                                {
+                                    <div class="form-check m-1">
+                                        <input type="hidden" asp-for="@Model.Roles[i].RoleName" />
+                                        <input asp-for="@Model.Roles[i].IsSelected" class="form-check-input" />
+                                        <label asp-for="@Model.Roles[i].IsSelected" class="form-check-label">
+                                            @Model.Roles[i].RoleName
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                            <div class="card-footer ">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © Clivax.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Crafted  <i class="mdi mdi-heart text-danger"></i> by AbuIrmaileh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</div>

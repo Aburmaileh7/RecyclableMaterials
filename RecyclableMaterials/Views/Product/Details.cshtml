@@ -1,0 +1,165 @@
+﻿@using RecyclableMaterials.ViewModels
+@model ProductDetailsViewModel
+
+
+<section class="page-header">
+    <div class="page-header-bg" style="background-image: url(images/backgrounds/used/bcg1.jpg)">
+    </div>
+    <div class="container">
+        <div class="page-header__inner">
+            <h2>Material Details</h2>
+            <ul class="thm-breadcrumb list-unstyled">
+                <li><a href="index.html">Home</a></li>
+                <li>Details</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<div>
+    <h2>@Model.Product.Name</h2>
+    <p>Category: @Model.Product.Category.Name</p>
+    <p>Description: @Model.Product.Discription</p>
+    <p>Average Rating: @Model.AverageRating.ToString("0.0")</p>
+</div>
+
+<hr />
+
+<h3>Ratings</h3>
+@if (Model.Product.Ratings.Any())
+{
+    <ul>
+        @foreach (var rating in Model.Product.Ratings)
+        {
+            <li>@rating.Stars Stars - @rating.CreateAt.ToShortDateString()</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No ratings available.</p>
+}
+
+<hr />
+
+<h3>Comments</h3>
+@if (Model.Product.Comments.Any())
+{
+    <ul>
+        @foreach (var comment in Model.Product.Comments)
+        {
+            <li>
+                <strong>@comment.user.UserName:</strong>
+                <p>@comment.Text</p>
+                <small>@comment.CreateAt.ToShortDateString()</small>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No comments available.</p>
+}
+
+<hr />
+
+<h3>Add a Comment</h3>
+<form asp-action="AddComment" asp-controller="Product" method="post">
+    <input type="hidden" name="ProductId" value="@Model.Product.ProductId" />
+    <textarea name="text"></textarea>
+    <button type="submit">Add Comment</button>
+</form>
+
+<hr />
+
+
+
+<h2>@Model.Product.Name</h2>
+
+<p>Average Rating: @Model.AverageRating</p>
+
+<h3>Ratings:</h3>
+@if (Model.Product.Ratings != null && Model.Product.Ratings.Any())
+{
+    <ul>
+        @foreach (var rating in Model.Product.Ratings)
+        {
+            <li>@rating.User.UserName rated @rating.Stars stars on @rating.CreateAt</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No ratings yet.</p>
+}
+
+<h3>Add Your Rating:</h3>
+<form asp-action="AddRating" method="post" asp-route-productId="@Model.Product.ProductId">
+    <input type="hidden"  value="@Model.Product.ProductId" />
+    <select name="stars" required>
+        <option value="1">1 star</option>
+        <option value="2">2 stars</option>
+        <option value="3">3 stars</option>
+        <option value="4">4 stars</option>
+        <option value="5">5 stars</option>
+    </select>
+    <input  type="submit">Submit Rating/>
+</form>
+
+
+
+
+
+
+
+
+
+<section class="team-details">
+    <div class="container">
+        <div class="team-details__top">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="team-details__top-left">
+                        <div class="team-details__top-img">
+                            <img src="@Url.Content("~/" + Model.Product.ImagePath)" alt="" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="team-details__top-right">
+                        <div class="team-details__top-content">
+                            <p class="team-details__top-title">Category: @Model.Product.Category.Name</p>
+                            <h3 class="team-details__top-name">@Model.Product.Name</h3>
+                            
+                            <p class="team-details__top-text-1">
+                                I help my clients stand out and they help me
+                                grow.
+                            </p>
+                            <p class="team-details__top-text-2">
+                                Description: @Model.Product.Discription
+                            </p>
+                            
+                            <div >
+                                <div class="we-dedicated__progress">
+                                   
+                                    <div class="we-dedicated__progress-single">
+                                        <h4 class="we-dedicated__progress-title">Recycling</h4>
+                                        <div class="bar">
+                                            <div class="bar-inner count-bar" data-percent="46%">
+                                                <div class="count-text">46%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</section>
+

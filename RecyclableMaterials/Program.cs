@@ -19,7 +19,7 @@ var ConnectionString = configuration.GetConnectionString("RConnectionString");
 builder.Services.AddDbContext<RDBContext>(Options => Options.UseSqlServer(ConnectionString));
 
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()    ////////\\\\\\\\\\
     .AddEntityFrameworkStores<RDBContext>();
 
 

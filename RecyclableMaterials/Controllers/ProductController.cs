@@ -8,6 +8,7 @@ using RecyclableMaterials.Models;
 using System;
 using Microsoft.AspNetCore.Identity;
 using RecyclableMaterials.ViewModels;
+using System.Security.Claims;
 
 namespace RecyclableMaterials.Controllers
 {
@@ -34,7 +35,7 @@ namespace RecyclableMaterials.Controllers
         // GET: ProductController
         public ActionResult HomeIndex()
         {
-    
+
             return View();
         }
 
@@ -54,53 +55,87 @@ namespace RecyclableMaterials.Controllers
             return View(models);
         }
 
-        // GET: ProductController/Details/5
-        public ActionResult Details(int id)
+     
+
+        public async Task<IActionResult> Details(int id)
         {
-            var ProductCategoryModel = (from pro in _dbContext.products
-                                        join cat in _dbContext.Categories on pro.CategoryID equals cat.id
-                                        select new ProductModel
-                                        {
+            var product = await _dbContext.products
+                .Include(m => m.Category)
+                .Include(m => m.Comments)
+                    .ThenInclude(c => c.user)
+                .Include(m => m.Ratings)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
 
 
-                                            ProductId = pro.ProductId,
-                                            Name = pro.Name,
-                                            Location = pro.Location,
-                                            Quantity = pro.Quantity,
-                                            Discription = pro.Discription,
-                                            ImagePath = pro.ImagePath,
-                                            Price = pro.Price,
-                                            CategoryID = pro.CategoryID,
-                                            Category = cat
-                                        }).FirstOrDefault(x => x.ProductId == id);
-            return View(ProductCategoryModel);
+            var averageRating = product.Ratings.Any() ? product.Ratings.Average(r => r.Stars) : 0;
+
+            var viewModel = new ProductDetailsViewModel
+            {
+                Product = product,
+                AverageRating = averageRating
+            };
+
+            return View(viewModel);
         }
 
-            //public async Task<IActionResult> Details(int id)
-            //{
-            //    var product = await _dbContext.products
-            //        .Include(m => m.Category)
-            //        .Include(m => m.Comments)
-            //            .ThenInclude(c => c.user) 
-            //        .Include(m => m.Ratings)
-            //        .FirstOrDefaultAsync(m => m.ProductId == id);
 
-            //    if (product == null)
-            //    {
-            //        return NotFound();
-            //    }
+        [HttpPost]
+        public async Task<IActionResult> AddComment(int productId, string text)
+        {
+            var userId = _userManager.GetUserId(User);
+            var comment = new CommentModel
+            {
+                UserId = userId,
+                ProductId = productId,
+                Text = text,
+                CreateAt = DateTime.Now
+            };
+
+            _dbContext.Comments.Add(comment);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = productId });
+        }
 
 
-            //    var averageRating = product.Ratings.Any() ? product.Ratings.Average(r => r.Stars) : 0;
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddRating(int productId, int stars)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account"); 
+            }
 
-            //    var viewModel = new ProductDetailsViewModel
-            //    {
-            //        Product = product,
-            //        AverageRating = averageRating
-            //    };
+            var userId = _userManager.GetUserId(User);
 
-            //    return View(viewModel);
-            //}
+
+            var product = await _dbContext.products.Where(p => p.ProductId == productId).FirstOrDefaultAsync();
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+        
+            var rating = new RatingModel
+            {
+                ProductId = productId,
+                Stars = stars,
+                UserId = userId
+            };
+
+            _dbContext.Ratings.Add(rating);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Details", new { id = productId });
+        }
+
+
 
 
         // GET: ProductController/Create

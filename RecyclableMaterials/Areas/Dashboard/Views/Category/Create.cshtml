@@ -1,25 +1,47 @@
 ﻿@model RecyclableMaterials.Areas.Dashboard.Models.CategoryModel
 
-
+@{
+    Layout = "~/Areas/Dashboard/Views/Shared/_DashbordLayout2.cshtml";
+}
 
 <h4>@ViewBag.ActionName</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+
+
+
+<div class=" main-content">
+    <div class="page-content">
+<div class="card" style="max-width:1000px; padding:100px; text-align:center;">
+    
         <form asp-action="@ViewBag.ActionName">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div asp-validation-summary="ModelOnly" class=" text-danger"></div>
+            <div class="card-title form-group " style="margin:30px">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="class="card-body" form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-dark">Back to List</a>
             </div>
         </form>
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © Clivax.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Crafted  <i class="mdi mdi-heart text-danger"></i> by AbuIrmaileh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
     </div>
 </div>
-
-
-

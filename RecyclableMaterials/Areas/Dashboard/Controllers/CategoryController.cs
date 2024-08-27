@@ -25,12 +25,8 @@ namespace RecyclableMaterials.Areas.Dashboard.Controllers
             return View(CategoryList);
         }
 
-        // GET: CategoryController/Details/5
-        public ActionResult Details(int id)
-        {
-            var model = _dbContext.Categories.FirstOrDefault(x => x.id == id);
-            return View(model);
-        }
+       
+      
 
         // GET: CategoryController/Create
         public ActionResult Create()
@@ -51,6 +47,9 @@ namespace RecyclableMaterials.Areas.Dashboard.Controllers
             }
             return View();
         }
+
+
+
 
         // GET: CategoryController/Edit/5
         public ActionResult Edit(int id)

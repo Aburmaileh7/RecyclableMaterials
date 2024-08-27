@@ -3,98 +3,128 @@
 @{
 
     ViewData["Title"] = "Categories";
+    Layout = "~/Areas/Dashboard/Views/Shared/_DashbordLayout2.cshtml";
 }
 
-<div class="page-content page-container" id="page-content">
 
 
 
-    <div class="row container d-flex justify-content-center mt-0">
-        <div class="container mb-4">
-            <a asp-action="Create" asp-controller="Category" class="btn btn-primary">Create New</a>
-        </div>
-        <div class="col-lg-12 grid-margin stretch-card " style="margin-right:auto;margin-left:auto">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">All Categories</h5>
-                    <hr />
-                    <p class="card-description">
+<div class="main-content">
 
-                    </p>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.id)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Name)
-                                    </th>
-                                    <th>
-                                        Actions
-                                    </th>
+    <div class="page-content">
 
+       
 
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.id)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </td>
-
-                                        <td>
-                                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.id">
-                                                <i class="fas fa-trash-alt delete-icon"></i>
-
-                                            </a>
-
-                                            <div class="modal" id="exampleModal-@item.id">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Modal title</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true"></span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Are you Sure Delete Item @item.Name ?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <form asp-action="Delete" asp-route-id="@item.id" method="post">
-                                                                @Html.AntiForgeryToken()
-                                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                                            </form>
-
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <a asp-action="Edit" asp-route-id="@item.id" type="button" class="btn btn-primary">
-                                                <i class="fas fa-edit edit-icon"></i>
-                                            </a>
-
-                                        </td>
-                                    </tr>
-                                }
-
-
-                            </tbody>
-                        </table>
+        <div class="container-fluid">
+            
+        <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0">Categories</h4>
                     </div>
                 </div>
             </div>
+        <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header container mb-10">
+                           <a asp-action="Create" asp-controller="Category" class="btn btn-primary">Create New</a>
+                        </div>
+                        <div class="card-body">
+
+                            <div id="datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">                           
+                                <div class="row dt-row">
+                                    <div class="col-sm-12">
+                                        <table id="datatable" class="table table-hover table-bordered table-striped dt-responsive nowrap dataTable no-footer dtr-inline" style="text-align:center; border-collapse: collapse; border-spacing: 0px; width: 100%;" aria-describedby="datatable_info">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.id)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Name)
+                                                    </th>
+                                                    <th>
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.id)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Name)
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.id">
+                                                                <i class="fas fa-trash-alt delete-icon"></i>
+                                                            </a>
+
+                                                            <div class="modal" id="exampleModal-@item.id">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Modal title</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true"></span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>Are you Sure Delete Item @item.Name ?</p>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <form asp-action="Delete" asp-route-id="@item.id" method="post">
+                                                                                @Html.AntiForgeryToken()
+                                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                                            </form>
+
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <a asp-action="Edit" asp-route-id="@item.id" type="button" class="btn btn-primary">
+                                                                <i class="fas fa-edit edit-icon"></i>
+                                                            </a>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                        
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>           
+            </div>
         </div>
+    
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © Clivax.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Crafted  <i class="mdi mdi-heart text-danger"></i> by AbuIrmaileh</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
     </div>
 
