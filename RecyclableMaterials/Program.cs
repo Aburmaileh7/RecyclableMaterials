@@ -20,13 +20,18 @@ var ConnectionString = configuration.GetConnectionString("RConnectionString");
 builder.Services.AddDbContext<RDBContext>(Options => Options.UseSqlServer(ConnectionString));
 
 
-builder.Services.AddIdentity<AppUserModel, IdentityRole>()    ////////\\\\\\\\\\
+builder.Services.AddIdentity<AppUserModel, IdentityRole>()   
     .AddEntityFrameworkStores<RDBContext>();
 
 
 
+// ????? SignalR ??? ???????
+builder.Services.AddSignalR();
+
 
 var app = builder.Build();
+
+app.MapHub<NotificationHub>("/notificationHub");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

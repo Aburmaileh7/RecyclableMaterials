@@ -1,0 +1,11 @@
+﻿@model IEnumerable<NotificationModel>
+
+<div class="notifications-list">
+    @foreach (var notification in Model)
+    {
+        <div class="notification-item">
+            <p>@notification.Message</p>
+            <small>@notification.CreatedAt.ToString("g")</small>
+        </div>
+    }
+</div>

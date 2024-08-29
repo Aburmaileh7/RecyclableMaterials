@@ -23,8 +23,9 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
 
+  
 
-
+    <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/vendors/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/vendors/animate/animate.min.css" />
     <link rel="stylesheet" href="~/vendors/animate/custom-animate.css" />
@@ -331,17 +332,16 @@
                                             <li><a href="404.html">404 Error</a></li>
                                         </ul>
                                     </li>
+                                    <li><a asp-action="Index" asp-area="Dashboard" asp-controller="Home">Dashboard</a></li>
                                     <li class="dropdown">
-                                        <a href="#">News</a>
-                                        <ul>
-                                            <li><a href="news.html">News</a></li>
-                                            <li><a href="news-carousel.html">News Carousel</a></li>
-                                            <li><a href="news-sidebar.html">News Sidebar Right</a></li>
-                                            <li><a href="news-sidebar-left.html">News Sidebar Left</a></li>
-                                            <li><a href="news-details.html">News Details</a></li>
-                                        </ul>
+                                        <div class="notification-container">
+                                            <a href="#" id="notification-bell">
+                                                <i class="fa fa-bell"></i>
+                                                <span id="notification-dot" class="notification-dot"></span>
+                                            </a>
+                                        </div>
                                     </li>
-                                    <li><a asp-action="Index" asp-area="Dashboard" asp-controller="Home">Admin?</a></li>
+                                   
                                 </ul>
                             </div>
                         </nav>
@@ -555,7 +555,7 @@
 
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
 
-   
+    <script src="~/js/site.js"></script>
     <script src="~/vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="~/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/vendors/jarallax/jarallax.min.js"></script>
@@ -579,8 +579,35 @@
     <script src="~/vendors/jquery-ui/jquery-ui.js"></script>
     <script src="~/vendors/timepicker/timePicker.js"></script>
 
+@* 
+        <!-- signalR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.7/signalr.min.js"></script>
+
+    <script type="text/javascript">
+        // إنشاء اتصال جديد باستخدام Hub
+        var connection = new signalR.HubConnectionBuilder().withUrl("/notificationHub").build();
+
+        // استقبال الإشعار من Hub
+        connection.on("ReceiveNotification", function (message) {
+            // عرض الإشعار للمستخدم
+            alert(message);
+        });
+
+        // بدء الاتصال
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        // دالة لإرسال إشعار (للاختبار فقط)
+        function sendNotification(userId, message) {
+            connection.invoke("SendNotification", userId, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+        }
+    </script> *@
 
 
+<!-- #endregion -->
 
     <!-- template js -->
     <script src="~/js/wostin.js"></script>

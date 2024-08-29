@@ -33,19 +33,25 @@ namespace RecyclableMaterials.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegiserViewModel model)
         {
-            
             if (ModelState.IsValid)
             {
-
                 string profilePictureUrl = null;
 
                 if (model.ProfilePicture != null && model.ProfilePicture.Length > 0)
                 {
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                    var extension = Path.GetExtension(model.ProfilePicture.FileName);
+
+                    if (!allowedExtensions.Contains(extension.ToLower()))
+                    {
+                        ModelState.AddModelError("", "Only image files (.jpg, .jpeg, .png, .gif) are allowed.");
+                        return View(model);
+                    }
+
                     string folder = Path.Combine("Images", "ProfilePictures");
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ProfilePicture.FileName);
+                    string fileName = Guid.NewGuid().ToString() + extension;
                     string filePath = Path.Combine(_webHostEnvironment.WebRootPath, folder);
 
-                    
                     if (!Directory.Exists(filePath))
                     {
                         Directory.CreateDirectory(filePath);
@@ -57,14 +63,12 @@ namespace RecyclableMaterials.Controllers
                         await model.ProfilePicture.CopyToAsync(stream);
                     }
 
-                    profilePictureUrl = Path.Combine(folder, fileName); 
+                    profilePictureUrl = Path.Combine(folder, fileName);
                 }
                 else
                 {
-            
                     profilePictureUrl = "/Images/ProfilePictures/avatar-1.png";
                 }
-
 
                 var user = new AppUserModel
                 {
@@ -75,22 +79,24 @@ namespace RecyclableMaterials.Controllers
                     ProfilePictureUrl = profilePictureUrl,
                     DateOfBirth = model.DateOfBirth,
                     PhoneNumber = model.PhoneNumber
-
                 };
 
-                var respon = await _userManager.CreateAsync(user, model.Password);
+                var response = await _userManager.CreateAsync(user, model.Password);
 
-                if (respon.Succeeded)
+                if (response.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, "User");
                     return RedirectToAction("Login", "Account");
                 }
-                foreach (var err in respon.Errors)
+
+                foreach (var err in response.Errors)
                 {
                     ModelState.AddModelError(err.Code, err.Description);
                 }
+
                 return View(model);
             }
+
             return View(model);
         }
 
@@ -128,7 +134,7 @@ namespace RecyclableMaterials.Controllers
         public async Task<IActionResult> Logout()
         {
             await _singInManager.SignOutAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -139,15 +145,25 @@ namespace RecyclableMaterials.Controllers
         public async Task<IActionResult> Manage()
         {
             var currentUserName = await _userManager.GetUserAsync(User);
-            
-            if (currentUserName!= null )
+
+            if (currentUserName != null)
             {
+                string profilePictureUrl = currentUserName.ProfilePictureUrl;
+
+                if (string.IsNullOrEmpty(profilePictureUrl))
+                {
+                    profilePictureUrl = "/Images/ProfilePictures/avatar-1.png";
+                }
+
+
                 var viewModel = new ManageUserViewModel
                 {
                     UserName = currentUserName.UserName,
 
-                    //FirstName = currentUserName.FirstName,
-                    //LastName = currentUserName.LastName,
+                    FirstName = currentUserName.FirstName,
+                    LastName = currentUserName.LastName,
+                    DateOfBirth = currentUserName.DateOfBirth,
+                    ProfilePictureUrl = profilePictureUrl,
                     PhoneNumber = currentUserName.PhoneNumber
 
 
@@ -157,29 +173,84 @@ namespace RecyclableMaterials.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Manage(ManageUserViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var currentUser = await _userManager.GetUserAsync(User);
-                if(currentUser!= null )
+                if (currentUser != null)
                 {
+
                     currentUser.PhoneNumber = model.PhoneNumber;
-                    //currentUser.FirstName = model.FirstName;
-                    //currentUser.LastName = model.LastName;
-                    await _userManager.UpdateAsync(currentUser);
+                    currentUser.FirstName = model.FirstName;
+                    currentUser.LastName = model.LastName;
+                    currentUser.DateOfBirth = model.DateOfBirth;
+
                    
+                    if (model.ProfilePicture != null && model.ProfilePicture.Length > 0)
+                    {
+                        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                        var extension = Path.GetExtension(model.ProfilePicture.FileName);
+
+                        if (!allowedExtensions.Contains(extension.ToLower()))
+                        {
+                            ModelState.AddModelError("", "Only image files (.jpg, .jpeg, .png, .gif) are allowed.");
+                            return View(model);
+                        }
+
+                        string folder = Path.Combine("Images", "ProfilePictures");
+                        string fileName = Guid.NewGuid().ToString() + extension;
+                        string filePath = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+
+                        if (!Directory.Exists(filePath))
+                        {
+                            Directory.CreateDirectory(filePath);
+                        }
+
+                        string fullPath = Path.Combine(filePath, fileName);
+
+
+                        if (!string.IsNullOrEmpty(currentUser.ProfilePictureUrl) && !currentUser.ProfilePictureUrl.Contains("avatar-1.png"))
+                        {
+                            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, currentUser.ProfilePictureUrl);
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
+                        }
+
+
+                        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            await model.ProfilePicture.CopyToAsync(stream);
+                        }
+
+                        currentUser.ProfilePictureUrl = Path.Combine(folder, fileName);
+                    }
+
+
+                    var result = await _userManager.UpdateAsync(currentUser);
+                    if (result.Succeeded)
+                    {
+                        TempData["SuccessMessage"] = "Profile updated successfully.";
+                        return RedirectToAction("Manage");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                    }
                 }
             }
-            return View("Index", "Home");
+
+            return View(model);
         }
 
-        
-
-        #endregion
-
-
+            #endregion
 
         [HttpGet]
         public IActionResult AccessDenied()
@@ -187,4 +258,5 @@ namespace RecyclableMaterials.Controllers
             return RedirectToAction("Login");
         }
     }
-}
+} 
+

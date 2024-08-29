@@ -32,7 +32,7 @@ namespace RecyclableMaterials.ViewModels
 
 
         [Display(Name = "Profile Picture URL")]
-        public IFormFile ProfilePicture { get; set; }
+        public IFormFile? ProfilePicture { get; set; }
       
 
 
@@ -44,7 +44,7 @@ namespace RecyclableMaterials.ViewModels
         [Required]
         [Phone]
         [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
 
     }

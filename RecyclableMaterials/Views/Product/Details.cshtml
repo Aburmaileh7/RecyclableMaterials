@@ -67,7 +67,7 @@ else
 <h3>Add a Comment</h3>
 <form asp-action="AddComment" asp-controller="Product" method="post">
     <input type="hidden" name="ProductId" value="@Model.Product.ProductId" />
-    <textarea name="text"></textarea>
+    <textarea name="text" required></textarea>
     <button type="submit">Add Comment</button>
 </form>
 
@@ -163,3 +163,33 @@ else
     </div>
 </section>
 
+
+
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // تحديث التعليقات على الصفحة أو عرض رسالة تأكيد
+                    },
+                    error: function(xhr, status, error) {
+                        // عرض رسالة خطأ
+                    }
+                });
+            });
+        });
+    </script>
+
+    
+
+
+}

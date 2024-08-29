@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RecyclableMaterials.ViewModels;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecyclableMaterials.Models
 {
     public class CommentModel
     {
-        public int Id { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int CommentId { get; set; }
 
         public int ProductId { get; set; }
 
@@ -15,7 +18,7 @@ namespace RecyclableMaterials.Models
         public string UserId { get; set; }
         public AppUserModel user { get; set; }
 
-        [Required]
+       
         public string Text { get; set; }
 
         public DateTime CreateAt { get; set; }
