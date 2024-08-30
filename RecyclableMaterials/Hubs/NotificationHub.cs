@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
 
-public class NotificationHub : Hub
+namespace RecyclableMaterials.Hubs
 {
-    public async Task SendNotification(string userId, string message)
+    public class NotificationHub :Hub
     {
-        // إرسال الإشعار إلى مستخدم محدد
-        await Clients.User(userId).SendAsync("ReceiveNotification", message);
+        public async Task SendNotification(string userId, string message)
+        {
+            await Clients.User(userId).SendAsync("ReceiveNotification", message);
+        }
     }
 }

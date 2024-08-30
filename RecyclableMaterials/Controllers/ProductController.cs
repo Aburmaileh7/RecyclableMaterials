@@ -9,6 +9,8 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using RecyclableMaterials.ViewModels;
 using System.Security.Claims;
+using Microsoft.AspNetCore.SignalR;
+using RecyclableMaterials.Hubs;
 
 namespace RecyclableMaterials.Controllers
 {
@@ -18,14 +20,16 @@ namespace RecyclableMaterials.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly RDBContext _dbContext;
         private readonly UserManager<AppUserModel> _userManager;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
 
-        public ProductController(RDBContext dbContext, IWebHostEnvironment webHostEnvironment
+        public ProductController(RDBContext dbContext, IWebHostEnvironment webHostEnvironment, IHubContext<NotificationHub> hubContext
             , UserManager<AppUserModel> userManager)
         {
             this._dbContext = dbContext;
             this._webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
+            _hubContext = hubContext;
         }
 
 
@@ -84,23 +88,44 @@ namespace RecyclableMaterials.Controllers
         }
 
 
+        //[HttpPost]
+        //public async Task<IActionResult> AddComment(int productId, string text)
+        //{
+        //    var userId = _userManager.GetUserId(User);
+
+        //    var comment = new CommentModel
+        //    {
+        //        UserId = userId,
+        //        ProductId = productId,
+        //        Text = text,
+        //        CreateAt = DateTime.Now
+        //    };
+
+        //    _dbContext.Comments.Add(comment);
+        //    await _dbContext.SaveChangesAsync();
+
+        //    return RedirectToAction("Details", new { id = productId });
+        //}
+
+
         [HttpPost]
         public async Task<IActionResult> AddComment(int productId, string text)
         {
-            var userId = _userManager.GetUserId(User);
-            var comment = new CommentModel
-            {
-                UserId = userId,
-                ProductId = productId,
-                Text = text,
-                CreateAt = DateTime.Now
-            };
+            var userId = _userManager.GetUserId(User); // الحصول على معرف المستخدم الذي يقوم بالتعليق
+            var product = await _dbContext.products.Include(p => p.user).FirstOrDefaultAsync(p => p.ProductId == productId);
 
+            if (product == null) return NotFound();
+
+            var comment = new CommentModel { ProductId = productId, Text = text, UserId = userId };
             _dbContext.Comments.Add(comment);
             await _dbContext.SaveChangesAsync();
 
-            return RedirectToAction("Details", new { id = productId });
+            // إرسال إشعار لصاحب المنتج
+            await _hubContext.Clients.User(product.user.Id).SendAsync("ReceiveNotification", "New Comment: " + product.Name);
+
+            return RedirectToAction("ProductDetails", new { id = productId });
         }
+
 
 
         [HttpPost]

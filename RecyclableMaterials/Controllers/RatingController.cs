@@ -40,24 +40,6 @@ namespace RecyclableMaterials.Controllers
             // إضافة التقييم إلى قاعدة البيانات
             _dbContext.Ratings.Add(rating);
 
-            // الحصول على المنتج المرتبط
-            var product = await _dbContext.products.Include(p => p.user) // إذا كان لديك علاقة بين المنتج والمستخدم
-                .FirstOrDefaultAsync(p => p.ProductId == productId);
-
-            if (product != null && product.UserId != userId)
-            {
-                var notification = new NotificationModel
-                {
-                    UserId = product.UserId,                    
-                    Message = $"New Rating  added to Material '{product.Name}' by {User.Identity.Name}",
-                    CreatedAt = DateTime.Now,
-                    IsRead = false,
-                    Type = "Rating",
-                    IconUrl = "/images/rating-icon.png" // رابط الشعار
-                };
-
-                _dbContext.Notifications.Add(notification);
-            }
 
             // حفظ التغييرات في قاعدة البيانات
             await _dbContext.SaveChangesAsync();

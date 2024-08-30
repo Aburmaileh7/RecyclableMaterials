@@ -13,9 +13,8 @@ namespace RecyclableMaterials.Data
 
         public RDBContext(DbContextOptions<RDBContext> options) : base(options) { }
 
-        public DbSet<BidModel> Bids { get; set; }
+      
 
-        public DbSet<NotificationModel> Notifications { get; set; }
         public DbSet<RatingModel> Ratings { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
 

@@ -23,7 +23,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
 
-  
 
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/vendors/bootstrap/css/bootstrap.min.css" />
@@ -50,6 +49,16 @@
     <!-- template styles -->
     <link rel="stylesheet" href="~/css/wostin.css" />
     <link rel="stylesheet" href="~/css/wostin-responsive.css" />
+
+
+
+    <!-- #region name -->
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script> <!-- مكتبة SignalR -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+<!-- #endregion -->
 </head>
 <body>
     <div class="page-wrapper">
@@ -334,14 +343,14 @@
                                     </li>
                                     <li><a asp-action="Index" asp-area="Dashboard" asp-controller="Home">Dashboard</a></li>
                                     <li class="dropdown">
-                                        <div class="notification-container">
-                                            <a href="#" id="notification-bell">
-                                                <i class="fa fa-bell"></i>
-                                                <span id="notification-dot" class="notification-dot"></span>
-                                            </a>
+                                        <div id="notificationBell" class="bell-icon" onclick="toggleNotifications()">
+                                            <span class="dot" id="notificationDot" style="display:none;"></span> <!-- النقطة الحمراء للإشارة إلى إشعار جديد -->
                                         </div>
+                                        <ul id="notificationsContainer" class="notifications-dropdown" style="display:none;">
+                                            <!-- سيتم إضافة الإشعارات هنا بواسطة JavaScript -->
+                                        </ul>
+                                        
                                     </li>
-                                   
                                 </ul>
                             </div>
                         </nav>
@@ -555,6 +564,9 @@
 
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
 
+
+
+
     <script src="~/js/site.js"></script>
     <script src="~/vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="~/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -579,35 +591,23 @@
     <script src="~/vendors/jquery-ui/jquery-ui.js"></script>
     <script src="~/vendors/timepicker/timePicker.js"></script>
 
-@* 
-        <!-- signalR -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.7/signalr.min.js"></script>
 
-    <script type="text/javascript">
-        // إنشاء اتصال جديد باستخدام Hub
-        var connection = new signalR.HubConnectionBuilder().withUrl("/notificationHub").build();
 
-        // استقبال الإشعار من Hub
-        connection.on("ReceiveNotification", function (message) {
-            // عرض الإشعار للمستخدم
-            alert(message);
-        });
 
-        // بدء الاتصال
-        connection.start().catch(function (err) {
-            return console.error(err.toString());
-        });
+   <!-- #endregion -->
 
-        // دالة لإرسال إشعار (للاختبار فقط)
-        function sendNotification(userId, message) {
-            connection.invoke("SendNotification", userId, message).catch(function (err) {
-                return console.error(err.toString());
-            });
+
+   <!-- #region name -->
+    <script>
+        function toggleNotifications() {
+            var container = document.getElementById("notificationsContainer");
+            container.style.display = container.style.display === "none" ? "block" : "none"; // إظهار أو إخفاء قائمة الإشعارات
+            document.getElementById("notificationDot").style.display = "none"; // إخفاء النقطة الحمراء بعد عرض الإشعارات
         }
-    </script> *@
+    </script>
+   <!-- #endregion -->
 
 
-<!-- #endregion -->
 
     <!-- template js -->
     <script src="~/js/wostin.js"></script>

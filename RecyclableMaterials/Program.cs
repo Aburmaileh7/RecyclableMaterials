@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RecyclableMaterials.Data;
+using RecyclableMaterials.Hubs;
 using RecyclableMaterials.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,9 @@ IConfiguration configuration = new ConfigurationBuilder()
 var ConnectionString = configuration.GetConnectionString("RConnectionString");
 
 
+builder.Services.AddSignalR(); // إضافة خدمة SignalR
+
+
 builder.Services.AddDbContext<RDBContext>(Options => Options.UseSqlServer(ConnectionString));
 
 
@@ -25,13 +29,23 @@ builder.Services.AddIdentity<AppUserModel, IdentityRole>()
 
 
 
-// ????? SignalR ??? ???????
-builder.Services.AddSignalR();
+// إذا كنت تستخدم CORS عبر نطاقات مختلفة
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials()
+               .SetIsOriginAllowed((host) => true); // يمكنك تقييد السماح للأصول هنا إذا لزم الأمر
+    });
+});
+
 
 
 var app = builder.Build();
 
-app.MapHub<NotificationHub>("/notificationHub");
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -46,7 +60,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+app.UseCors(); // استخدم CORS هنا
+
+app.UseAuthentication(); // تأكد من استخدام المصادقة قبل الترخيص
 app.UseAuthorization();
+
+
+app.MapHub<NotificationHub>("/notificationHub"); // تكوين مسار Hub لـ SignalR
+
+
 
 app.MapControllerRoute(
            name: "areas",

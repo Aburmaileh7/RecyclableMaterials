@@ -254,39 +254,6 @@ namespace RecyclableMaterials.Migrations
                     b.ToTable("Users", "sec");
                 });
 
-            modelBuilder.Entity("RecyclableMaterials.Models.BidModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("Bids");
-                });
-
             modelBuilder.Entity("RecyclableMaterials.Models.CommentModel", b =>
                 {
                     b.Property<int>("CommentId")
@@ -316,43 +283,6 @@ namespace RecyclableMaterials.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("RecyclableMaterials.Models.NotificationModel", b =>
-                {
-                    b.Property<int>("NotificationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationId"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("IconUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("NotificationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.Models.ProductModel", b =>
@@ -431,28 +361,6 @@ namespace RecyclableMaterials.Migrations
                     b.ToTable("Ratings");
                 });
 
-            modelBuilder.Entity("RecyclableMaterials.ViewModels.UserViewModel", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Roles")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("UserViewModel");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -504,25 +412,6 @@ namespace RecyclableMaterials.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RecyclableMaterials.Models.BidModel", b =>
-                {
-                    b.HasOne("RecyclableMaterials.Models.ProductModel", "product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RecyclableMaterials.ViewModels.UserViewModel", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-
-                    b.Navigation("product");
-                });
-
             modelBuilder.Entity("RecyclableMaterials.Models.CommentModel", b =>
                 {
                     b.HasOne("RecyclableMaterials.Models.ProductModel", "product")
@@ -540,17 +429,6 @@ namespace RecyclableMaterials.Migrations
                     b.Navigation("product");
 
                     b.Navigation("user");
-                });
-
-            modelBuilder.Entity("RecyclableMaterials.Models.NotificationModel", b =>
-                {
-                    b.HasOne("RecyclableMaterials.Models.AppUserModel", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.Models.ProductModel", b =>
