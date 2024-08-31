@@ -10,12 +10,10 @@ namespace RecyclableMaterials.Data
     public class RDBContext :IdentityDbContext<AppUserModel>
     {
 
-
         public RDBContext(DbContextOptions<RDBContext> options) : base(options) { }
 
-      
-
         public DbSet<RatingModel> Ratings { get; set; }
+        public DbSet<ImageModel> Images { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
 
         public DbSet<CategoryModel> Categories { get; set; }

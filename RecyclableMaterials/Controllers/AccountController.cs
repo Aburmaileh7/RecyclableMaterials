@@ -172,6 +172,38 @@ namespace RecyclableMaterials.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var currentUserName = await _userManager.GetUserAsync(User);
+
+            if (currentUserName != null)
+            {
+                string profilePictureUrl = currentUserName.ProfilePictureUrl;
+
+                if (string.IsNullOrEmpty(profilePictureUrl))
+                {
+                    profilePictureUrl = "/Images/ProfilePictures/avatar-1.png";
+                }
+
+
+                var viewModel = new ManageUserViewModel
+                {
+                    UserName = currentUserName.UserName,
+
+                    FirstName = currentUserName.FirstName,
+                    LastName = currentUserName.LastName,
+                    DateOfBirth = currentUserName.DateOfBirth,
+                    ProfilePictureUrl = profilePictureUrl,
+                    PhoneNumber = currentUserName.PhoneNumber
+
+
+                };
+                return View(viewModel);
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
 
         [HttpPost]

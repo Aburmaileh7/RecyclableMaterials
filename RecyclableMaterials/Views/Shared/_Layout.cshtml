@@ -109,6 +109,10 @@
                                         <a asp-action="Index" asp-controller="Home">Home</a>
 
                                     </li>
+                                    @if(User.IsInRole("Admin"))
+                                    {
+                                        <li><a asp-action="Index" asp-area="Dashboard" asp-controller="Home">Dashboard</a></li>
+                                    }
                                     <li class="dropdown">
                                         <a asp-action="HomeIndex" asp-controller="Product">Materials</a>
                                         <ul>
@@ -341,7 +345,7 @@
                                             <li><a href="404.html">404 Error</a></li>
                                         </ul>
                                     </li>
-                                    <li><a asp-action="Index" asp-area="Dashboard" asp-controller="Home">Dashboard</a></li>
+                                   
                                     <li class="dropdown">
                                         <div id="notificationBell" class="bell-icon" onclick="toggleNotifications()">
                                             <span class="dot" id="notificationDot" style="display:none;"></span> <!-- النقطة الحمراء للإشارة إلى إشعار جديد -->
@@ -489,7 +493,7 @@
                         <div class="col-xl-12">
                             <div class="site-footer__bottom-inner">
                                 <p class="site-footer__bottom-text">
-                                    © Copyright 2022 by <a href="#">Layerdrops.com</a>
+                                    © Copyright 2024 by <a href="#">Abuirmaileh</a>
                                 </p>
                             </div>
                         </div>
@@ -523,11 +527,11 @@
             <ul class="mobile-nav__contact list-unstyled">
                 <li>
                     <i class="fa fa-envelope"></i>
-                    <a href="mailto:needhelp@packageName__.com">needhelp@wostin.com</a>
+                    <a href="Aburmaileh7@gmail.com">Aburmaileh7@gmail.com</a>
                 </li>
                 <li>
                     <i class="fa fa-phone-alt"></i>
-                    <a href="tel:666-888-0000">666 888 0000</a>
+                    <a href="tel:078-569-1984">078 569 1984</a>
                 </li>
             </ul><!-- /.mobile-nav__contact -->
             <div class="mobile-nav__top">

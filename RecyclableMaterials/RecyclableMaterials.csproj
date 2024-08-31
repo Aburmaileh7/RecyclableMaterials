@@ -22,6 +22,7 @@
   <ItemGroup>
     <Folder Include="Areas\Dashboard\Data\" />
     <Folder Include="wwwroot\images\ProfilePictures\" />
+    <Folder Include="wwwroot\uploads\images\" />
   </ItemGroup>
 
   <ItemGroup>

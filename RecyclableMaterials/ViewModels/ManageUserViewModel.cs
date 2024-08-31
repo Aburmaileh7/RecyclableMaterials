@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecyclableMaterials.ViewModels
 {
@@ -22,10 +23,12 @@ namespace RecyclableMaterials.ViewModels
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
+        [Column(TypeName = "nvarchar(10)")]
         [Required]
+        [StringLength(10)]
         [Phone]
         [Display(Name = "Phone Number")]
         public string? PhoneNumber { get; set; }
-        public string ProfilePictureUrl { get; internal set; }
+        public string? ProfilePictureUrl { get; internal set; }
     }
 }

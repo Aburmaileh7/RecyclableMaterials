@@ -25,9 +25,9 @@
             </div>
     </div>
     <div class="request-a-pickup__tab-content-form-box " >
-            <form asp-action="Manage" asp-controller="Account" enctype="multipart/form-data" asp-validation-summary="All" class="row">
+            <form asp-action="Manage" asp-controller="Account" enctype="multipart/form-data"  class="row">
               
-                <div class="col-xl-6">
+                <div asp-validation-summary="All" class="col-xl-6">
                     <div class="request-a-pickup__tab-content-form-left">
                         <div class="request-a-pickup__tab-content-form">
                             <div class="row">
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="request-a-pickup__tab-content-input-box">
-                                        <input asp-for="ProfilePicture" class="form-control"  id="profilePictureInput"  style="  background-color: #f5f0e9; height: 63px; width: 100%; border: none; font-size: 14px; font-weight: 500; padding: 0 30px;  outline: none; padding-top: 20px;" />
+                                        <input asp-for="ProfilePictureUrl" class="form-control" type="file" id="profilePictureInput"  style="  background-color: #f5f0e9; height: 63px; width: 100%; border: none; font-size: 14px; font-weight: 500; padding: 0 30px;  outline: none; padding-top: 20px;" />
                                     </div>
                                 </div>
                                

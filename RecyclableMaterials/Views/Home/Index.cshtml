@@ -119,7 +119,7 @@
     <!--Main Slider End-->
 
     <!--Feature One Start-->
-    <section class="feature-one">
+    <section class="feature-one" style="background-color: var(--wostin-extra);">
         <div class="container">
             <div class="feature-one__inner">
                 <ul class="list-unstyled feature-one__list">
@@ -152,79 +152,98 @@
         </div>
     </section>
     <!--Feature One End-->
+    @*// Materials// *@
 
-    <!--Leading Waste Start-->
-    <section class="leading-waste">
+    <section class="services-one" style="margin-bottom: 90px; margin-top: -90px; background-color: var(--wostin-extra);">
         <div class="container">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="leading-waste__left">
-                        <div class="leading-waste__img-box wow slideInLeft" data-wow-delay="100ms"
-                             data-wow-duration="2500ms">
-                            <div class="leading-waste__img">
-                                <img src="images/resources/leading-waste-img-1.jpg" alt="">
+
+            <div class="services-one__bottom">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
+                        <!--Services One Single-->
+                        <div class="services-one__single">
+                            <div class="services-one__img-box">
+                                <a asp-action="Myproduct" asp-controller="product">My Materials</a>
+                                <div class="services-one__img">
+                                    <img src="~/images/backgrounds/used/myproduct.jpg" alt="">
+                                </div>
+                                <div class="services-one__icon">
+                                    <span class="icon-garbage-1"></span>
+                                </div>
                             </div>
-                            <div class="leading-waste__experience">
-                                <p><span>18+</span> <br> Years of <br> Experience</p>
-                            </div>
-                            <div class="leading-waste__img-shape-1 float-bob-x">
-                                <img src="images/shapes/leading-waste-img-shape-1.png" alt="">
-                            </div>
-                            <div class="leading-waste__big-text">
-                                <p>Wostin</p>
+                            <div class="services-one__content-box">
+                                <div class="services-one__content">
+                                    <h3 class="services-one__title"><a asp-action="Myproduct" asp-controller="product">My Materials</a></h3>
+                                </div>
+                                <div class="services-one__hover">
+                                    <h3 class="services-one__hover-title">
+                                        <a asp-action="Myproduct" asp-controller="product">My Materials</a>
+                                    </h3>
+                                    <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-6">
-                    <div class="leading-waste__right">
-                        <div class="leading-waste-dots">
-                            <img src="images/shapes/leading-waste-dots.png" alt="">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="200ms" style="visibility: visible; animation-delay: 200ms; animation-name: fadeInUp;">
+                        <!--Services One Single-->
+                        <div class="services-one__single">
+                            <div class="services-one__img-box">
+                                <a asp-action="Index" asp-controller="product">Materials</a>
+
+                                <div class="services-one__img">
+                                    <img src="~/images/backgrounds/used/Galary.jpg" alt="">
+                                </div>
+                                <div class="services-one__icon">
+                                    <span class="icon-dumpster"></span>
+                                </div>
+                            </div>
+                            <div class="services-one__content-box">
+                                <div class="services-one__content">
+                                    <h3 class="services-one__title">
+                                        <a asp-action="Index" asp-controller="product">Materials</a>
+                                    </h3>
+                                </div>
+                                <div class="services-one__hover">
+                                    <h3 class="services-one__hover-title">
+                                        <a asp-action="Index" asp-controller="product">Materials</a>
+                                    </h3>
+                                    <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="section-title text-left">
-                            <span class="section-title__tagline">Get to Know About Us</span>
-                            <h2 class="section-title__title">
-                                Leading in Waste disposal
-                                Management Services
-                            </h2>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="400ms" style="visibility: visible; animation-delay: 400ms; animation-name: fadeInUp;">
+                        <!--Services One Single-->
+                        <div class="services-one__single">
+                            <div class="services-one__img-box">
+                                <a asp-action="Create" asp-controller="product">Create Materials</a>
+                                <div class="services-one__img">
+                                    <img src="~/images/backgrounds/used/CreateMat.jpg" alt="">
+                                </div>
+                                <div class="services-one__icon">
+                                    <span class="icon-triangular-arrows-sign-for-recycle"></span>
+                                </div>
+                            </div>
+                            <div class="services-one__content-box">
+                                <div class="services-one__content">
+                                    <h3 class="services-one__title">
+                                        <a asp-action="Create" asp-controller="product">Create Materials</a>
+                                    </h3>
+                                </div>
+                                <div class="services-one__hover">
+                                    <h3 class="services-one__hover-title"> <a asp-action="Create" asp-controller="product"> Create Materials</a></h3>
+                                    <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
+                                </div>
+                            </div>
                         </div>
-                        <p class="leading-waste__text">
-                            We’re in this business <span>Since 1987</span> and we provide
-                            the best services
-                        </p>
-                        <ul class="list-unstyled leading-waste__points">
-                            <li>
-                                <div class="icon">
-                                    <span class="fa fa-check"></span>
-                                </div>
-                                <div class="text">
-                                    <p>Lorem Ipsum is not simply random text</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="icon">
-                                    <span class="fa fa-check"></span>
-                                </div>
-                                <div class="text">
-                                    <p>Making this the first true generator on the Internet</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="icon">
-                                    <span class="fa fa-check"></span>
-                                </div>
-                                <div class="text">
-                                    <p>Various versions have evolved over the years</p>
-                                </div>
-                            </li>
-                        </ul>
-                        <a href="about.html" class="thm-btn">Discover More</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--Leading Waste End-->
+
+    @*// Materials End// *@
 
 
  @*    ///////////////////////////////////////////////////////////// *@
@@ -240,12 +259,9 @@
                         </div>
                         <div class="section-title text-left">
                             <span class="section-title__tagline">What’s Happening</span>
-                            <h2 class="section-title__title">Our Latest News & Articles</h2>
+                            <h2 class="section-title__title">Our Latest Materals</h2>
                         </div>
-                        <p class="news-three__text">
-                            Lorem ipsum dolor sit consectetur adipisicing elit sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
+                        
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-8">
@@ -449,7 +465,7 @@
                              data-wow-duration="2500ms">
                             <img src="images/backgrounds/used/coverVideo.jpg" alt="">
                             <div class="we-dedicated__video-link">
-                                <a href="https://youtu.be/HQTUWK7CM-Y?si=ucEHDVwRQNLUUKch" class="video-popup">
+                                <a href="https://youtu.be/HQTUWK7CM-Y?si=bJhB9cWGa5MQq4e0" class="video-popup">
                                     <div class="we-dedicated__video-icon">
                                         <span class="fa fa-play"></span>
                                         <i class="ripple"></i>
@@ -522,98 +538,7 @@
     </section>
     <!--Counter One End-->
 
-    @*// Materials// *@
-
-    <section class="services-one">
-        <div class="container">
-
-            <div class="services-one__bottom">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
-                        <!--Services One Single-->
-                        <div class="services-one__single">
-                            <div class="services-one__img-box">
-                                <a asp-action="Myproduct" asp-controller="product">My Materials</a>
-                                <div class="services-one__img">
-                                    <img src="~/images/backgrounds/used/myproduct.jpg" alt="">
-                                </div>
-                                <div class="services-one__icon">
-                                    <span class="icon-garbage-1"></span>
-                                </div>
-                            </div>
-                            <div class="services-one__content-box">
-                                <div class="services-one__content">
-                                    <h3 class="services-one__title"><a asp-action="Myproduct" asp-controller="product">My Materials</a></h3>
-                                </div>
-                                <div class="services-one__hover">
-                                    <h3 class="services-one__hover-title">
-                                        <a asp-action="Myproduct" asp-controller="product">My Materials</a>
-                                    </h3>
-                                    <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="200ms" style="visibility: visible; animation-delay: 200ms; animation-name: fadeInUp;">
-                        <!--Services One Single-->
-                        <div class="services-one__single">
-                            <div class="services-one__img-box">
-                                <a asp-action="Index" asp-controller="product">Materials</a>
-
-                                <div class="services-one__img">
-                                    <img src="~/images/backgrounds/used/Galary.jpg" alt="">
-                                </div>
-                                <div class="services-one__icon">
-                                    <span class="icon-dumpster"></span>
-                                </div>
-                            </div>
-                            <div class="services-one__content-box">
-                                <div class="services-one__content">
-                                    <h3 class="services-one__title">
-                                        <a asp-action="Index" asp-controller="product">Materials</a>
-                                    </h3>
-                                </div>
-                                <div class="services-one__hover">
-                                    <h3 class="services-one__hover-title">
-                                        <a asp-action="Index" asp-controller="product">Materials</a>
-                                    </h3>
-                                    <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp animated" data-wow-delay="400ms" style="visibility: visible; animation-delay: 400ms; animation-name: fadeInUp;">
-                        <!--Services One Single-->
-                        <div class="services-one__single">
-                            <div class="services-one__img-box">
-                                <a asp-action="Create" asp-controller="product">Create Materials</a>
-                                <div class="services-one__img">
-                                    <img src="~/images/backgrounds/used/CreateMat.jpg" alt="">
-                                </div>
-                                <div class="services-one__icon">
-                                    <span class="icon-triangular-arrows-sign-for-recycle"></span>
-                                </div>
-                            </div>
-                            <div class="services-one__content-box">
-                                <div class="services-one__content">
-                                    <h3 class="services-one__title">
-                                        <a asp-action="Create" asp-controller="product">Create Materials</a>
-                                    </h3>
-                                </div>
-                                <div class="services-one__hover">
-                                    <h3 class="services-one__hover-title"> <a asp-action="Create" asp-controller="product"> Create Materials</a></h3>
-                                    <p class="services-one__hover-text">Lorem ipsum dolor sit amet, adipelit do.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    @*// Materials End// *@
+   
 
 
     <!--Have Waste Start-->
@@ -891,121 +816,6 @@
     </section>
     <!--Testimonial One End-->
 
-    <!--News One Start-->
-    <section class="news-one">
-        <div class="container">
-            <div class="section-title text-center">
-                <span class="section-title__tagline">What’s Happening</span>
-                <h2 class="section-title__title">Latest News & Articles</h2>
-            </div>
-            <div class="row">
-                <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="100ms">
-                    <!--News One Single-->
-                    <div class="news-one__single">
-                        <div class="news-one__img">
-                            <img src="images/blog/news-1-1.jpg" alt="">
-                            <div class="news-one__date">
-                                <p>20 Dec</p>
-                            </div>
-                            <a href="news-details.html">
-                                <span class="news-one__plus"></span>
-                            </a>
-                        </div>
-                        <div class="news-one__content">
-                            <ul class="list-unstyled news-one__meta">
-                                <li>
-                                    <a href="news-details.html"><i class="far fa-clock"></i> by Admin </a>
-                                </li>
-                                <li><span>/</span></li>
-                                <li>
-                                    <a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                </li>
-                            </ul>
-                            <h3 class="news-one__title">
-                                <a href="news-details.html">
-                                    Waste Management Container or
-                                    Bin for my Home?
-                                </a>
-                            </h3>
-                            <div class="news-one__read-more">
-                                <a href="news-details.html"><i class="fa fa-arrow-right"></i>Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="200ms">
-                    <!--News One Single-->
-                    <div class="news-one__single">
-                        <div class="news-one__img">
-                            <img src="images/blog/news-1-2.jpg" alt="">
-                            <div class="news-one__date">
-                                <p>20 Dec</p>
-                            </div>
-                            <a href="news-details.html">
-                                <span class="news-one__plus"></span>
-                            </a>
-                        </div>
-                        <div class="news-one__content">
-                            <ul class="list-unstyled news-one__meta">
-                                <li>
-                                    <a href="news-details.html"><i class="far fa-clock"></i> by Admin </a>
-                                </li>
-                                <li><span>/</span></li>
-                                <li>
-                                    <a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                </li>
-                            </ul>
-                            <h3 class="news-one__title">
-                                <a href="news-details.html">
-                                    Leverage agile frameworks to
-                                    provide best service
-                                </a>
-                            </h3>
-                            <div class="news-one__read-more">
-                                <a href="news-details.html"><i class="fa fa-arrow-right"></i>Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="300ms">
-                    <!--News One Single-->
-                    <div class="news-one__single">
-                        <div class="news-one__img">
-                            <img src="images/blog/news-1-3.jpg" alt="">
-                            <div class="news-one__date">
-                                <p>20 Dec</p>
-                            </div>
-                            <a href="news-details.html">
-                                <span class="news-one__plus"></span>
-                            </a>
-                        </div>
-                        <div class="news-one__content">
-                            <ul class="list-unstyled news-one__meta">
-                                <li>
-                                    <a href="news-details.html"><i class="far fa-clock"></i> by Admin </a>
-                                </li>
-                                <li><span>/</span></li>
-                                <li>
-                                    <a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                </li>
-                            </ul>
-                            <h3 class="news-one__title">
-                                <a href="news-details.html">
-                                    Bring to the table win-win
-                                    survival strategis to identify
-                                </a>
-                            </h3>
-                            <div class="news-one__read-more">
-                                <a href="news-details.html"><i class="fa fa-arrow-right"></i>Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--News One End-->
-   
 
 
 </div><!-- /.page-wrapper -->
