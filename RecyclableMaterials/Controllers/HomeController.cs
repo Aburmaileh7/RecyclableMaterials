@@ -27,6 +27,21 @@ namespace RecyclableMaterials.Controllers
 
             return View(models);
         }
+        
+        public IActionResult Restaurants()
+        {
+            return View();
+        }
+        public IActionResult Medical()
+        {
+            return View();
+        }
+        public IActionResult Stores()
+        {
+            return View();
+        }
+
+
 
         public IActionResult Privacy()
         {

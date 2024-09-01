@@ -1,12 +1,14 @@
-﻿@model IEnumerable< RecyclableMaterials.Models.ProductModel>
+﻿@model IEnumerable<RecyclableMaterials.Models.ProductModel>
 
 @{
     ViewData["Title"] = "Index";
+   
 }
+
 
 @* //Cover background// *@
 <section class="page-header"> 
-    <div class="page-header-bg" style="background-image: url(images/backgrounds/used/bcg1.jpg);">
+    <div class="page-header-bg" style="background-image: url(/images/backgrounds/used/bcg1.jpg);">
         
     </div>
     <div class="container">
@@ -72,7 +74,7 @@
                                                 <ul class="list-unstyled pricing__tab-content-list">
                                                     <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
                                                     <li>Location: <span>@item.Location</span></li>
-                                                    <li style="max-width:430px">
+                                                    <li style="max-width:400px">
                                                         Discription:<span style="font-size:15px">@item.Discription</span>
                                                     </li>
                                                 </ul>
@@ -81,7 +83,8 @@
                                         <div class="pricing__tab-content-right">
                                             <div class="pricing__tab-content-order">
                                                 <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
-                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Order Now</a>
+                                                
+                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
                                             </div>
                                         </div>
                                     </div>
@@ -125,7 +128,7 @@
                                                 <ul class="list-unstyled pricing__tab-content-list">
                                                     <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
                                                     <li>Location: <span>@item.Location</span></li>
-                                                    <li style="max-width:430px">
+                                                    <li style="max-width:400px">
                                                         Discription:<span style="font-size:15px">@item.Discription</span>
                                                     </li>
 
@@ -136,7 +139,7 @@
                                         <div class="pricing__tab-content-right">
                                             <div class="pricing__tab-content-order">
                                                 <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
-                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Order Now</a>
+                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +185,7 @@
                                                 <ul class="list-unstyled pricing__tab-content-list">
                                                     <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
                                                     <li>Location: <span>@item.Location</span></li>
-                                                    <li style="max-width:430px">
+                                                    <li style="max-width:400px">
                                                         Discription:<span style="font-size:15px">@item.Discription</span>
                                                     </li>
 
@@ -193,7 +196,7 @@
                                         <div class="pricing__tab-content-right">
                                             <div class="pricing__tab-content-order">
                                                 <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
-                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Order Now</a>
+                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
                                             </div>
                                         </div>
                                     </div>
@@ -240,7 +243,7 @@
                                                 <ul class="list-unstyled pricing__tab-content-list">
                                                     <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
                                                     <li>Location: <span>@item.Location</span></li>
-                                                    <li style="max-width:430px">
+                                                    <li style="max-width:400px">
                                                         Discription:<span style="font-size:15px">@item.Discription</span>
                                                     </li>
 
@@ -251,7 +254,7 @@
                                         <div class="pricing__tab-content-right">
                                             <div class="pricing__tab-content-order">
                                                 <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
-                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Order Now</a>
+                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
                                             </div>
                                         </div>
                                     </div>

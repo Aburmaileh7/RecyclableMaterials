@@ -6,5 +6,7 @@ namespace RecyclableMaterials.ViewModels
     {
         public ProductModel Product { get; set; }
         public double AverageRating { get; set; }
+
+        public int? UserRating { get; set; }
     }
 }

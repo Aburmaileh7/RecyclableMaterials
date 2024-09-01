@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using RecyclableMaterials.Data;
 using RecyclableMaterials.Models;
+using System.Security.Claims;
 
 namespace RecyclableMaterials.Controllers
 {
@@ -17,35 +19,39 @@ namespace RecyclableMaterials.Controllers
             _userManager = userManager;
         }
 
-
         [HttpPost]
         public async Task<IActionResult> AddRating(int productId, int stars)
         {
+           
+
             var userId = _userManager.GetUserId(User);
 
-            if (stars < 1 || stars > 5)
+            var existingRating = await _dbContext.Ratings
+                .FirstOrDefaultAsync(r => r.ProductId == productId && r.UserId == userId);
+
+            if (existingRating != null)
             {
-                return BadRequest("Rating value must be between 1 and 5");
+                existingRating.Stars = stars; // تحديث التقييم إذا كان موجودًا
+            }
+            else
+            {
+                var rating = new RatingModel
+                {
+                    ProductId = productId,
+                    Stars = stars,
+                    UserId = userId
+                };
+                _dbContext.Ratings.Add(rating); // إضافة تقييم جديد إذا لم يكن موجودًا
             }
 
-            // إنشاء تقييم جديد
-            var rating = new RatingModel
-            {
-                ProductId = productId,
-                Stars = stars,
-                CreateAt = DateTime.Now,
-                UserId = userId
-            };
-
-            // إضافة التقييم إلى قاعدة البيانات
-            _dbContext.Ratings.Add(rating);
-
-
-            // حفظ التغييرات في قاعدة البيانات
             await _dbContext.SaveChangesAsync();
 
-            // إعادة التوجيه إلى تفاصيل المنتج
-            return RedirectToAction("Details", "Product", new { id = productId });
+            return Json(new { success = true, message = "THANK YOU" });
         }
+
+        
+
+
+
     }
 }

@@ -1,1 +1,58 @@
 ﻿
+
+.star-rating {
+    direction: rtl; /* لجعل النجوم تبدأ من اليمين إلى اليسار */
+    unicode-bidi: bidi-override;
+    font-size: 2em;
+    display: inline-block;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+}
+
+.star-rating input[type="radio"]:checked ~ label i {
+    color: gold;
+}
+
+.star-rating label:hover i,
+.star-rating label:hover ~ label i {
+    color: gold;
+}
+
+
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rating-stars {
+    display: flex;
+}
+
+.rating-star {
+    font-size: 2rem; /* حجم النجمة */
+    color: #f2b600; /* لون النجمة */
+    margin-right: 5px;
+}
+
+.rating-star-half {
+    color: #f2b600;
+    position: relative;
+}
+
+    .rating-star-half:before {
+        content: "\2605"; /* رمز النجمة */
+        position: absolute;
+        color: #ccc; /* لون الجزء الفارغ من النجمة */
+        left: 0;
+        width: 50%;
+        overflow: hidden;
+    }

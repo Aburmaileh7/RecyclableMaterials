@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RecyclableMaterials.Models;
 using RecyclableMaterials.ViewModels;
@@ -174,6 +175,7 @@ namespace RecyclableMaterials.Controllers
         }
         
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Profile()
         {
             var currentUserName = await _userManager.GetUserAsync(User);

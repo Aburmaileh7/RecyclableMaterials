@@ -43,14 +43,15 @@ namespace RecyclableMaterials.Controllers
             return View();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int productId)
         {
-            var models = _dbContext.products.Include(x => x.Category)
+            var models = _dbContext.products.Include(x => x.Category).Include(x=>x.user)
                                                 .OrderBy(x => x.Name).ToList();
 
 
             return View(models);
         }
+
         public ActionResult Myproduct()
         {
             var models = _dbContext.products.Include(x => x.Category)
@@ -60,6 +61,8 @@ namespace RecyclableMaterials.Controllers
         }
 
      
+
+        
 
         public async Task<IActionResult> Details(int id)
         {
@@ -75,37 +78,27 @@ namespace RecyclableMaterials.Controllers
                 return NotFound();
             }
 
-
+          
             var averageRating = product.Ratings.Any() ? product.Ratings.Average(r => r.Stars) : 0;
 
+          
+            var userId = _userManager.GetUserId(User);
+
+         
+            var userRating = product.Ratings.FirstOrDefault(r => r.UserId == userId)?.Stars;
+
+          
             var viewModel = new ProductDetailsViewModel
             {
                 Product = product,
-                AverageRating = averageRating
+                AverageRating = averageRating,
+                UserRating = userRating
             };
 
             return View(viewModel);
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddComment(int productId, string text)
-        //{
-        //    var userId = _userManager.GetUserId(User);
-
-        //    var comment = new CommentModel
-        //    {
-        //        UserId = userId,
-        //        ProductId = productId,
-        //        Text = text,
-        //        CreateAt = DateTime.Now
-        //    };
-
-        //    _dbContext.Comments.Add(comment);
-        //    await _dbContext.SaveChangesAsync();
-
-        //    return RedirectToAction("Details", new { id = productId });
-        //}
 
 
         [HttpPost]
@@ -120,10 +113,7 @@ namespace RecyclableMaterials.Controllers
             _dbContext.Comments.Add(comment);
             await _dbContext.SaveChangesAsync();
 
-            // إرسال إشعار لصاحب المنتج
-            await _hubContext.Clients.User(product.user.Id).SendAsync("ReceiveNotification", "New Comment: " + product.Name);
-
-            return RedirectToAction("ProductDetails", new { id = productId });
+            return RedirectToAction("Details", new { id = productId });
         }
 
 

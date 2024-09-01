@@ -1,4 +1,34 @@
-﻿"use strict";
+﻿.star-rating {
+    direction: rtl;
+    display: inline-block;
+    font-size: 2rem;
+    unicode-bidi: bidi-override;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    color: #ccc;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 2rem;
+    padding: 0;
+    text-shadow: 1px 1px #bbb;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type="radio"]:checked ~ label {
+    color: #f2b600;
+}
+
+
+
+
+
+"use strict";
 
 // إنشاء الاتصال مع Hub
 var connection = new signalR.HubConnectionBuilder().withUrl("/notificationHub").build();

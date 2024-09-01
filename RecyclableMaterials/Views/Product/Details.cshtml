@@ -2,8 +2,9 @@
 @model ProductDetailsViewModel
 
 
+
 <section class="page-header">
-    <div class="page-header-bg" style="background-image: url(images/backgrounds/used/bcg1.jpg)">
+    <div class="page-header-bg" style="background-image: url(/images/backgrounds/used/bcg1.jpg)">
     </div>
     <div class="container">
         <div class="page-header__inner">
@@ -17,29 +18,7 @@
 </section>
 
 
-<div>
-    <h2>@Model.Product.Name</h2>
-    <p>Category: @Model.Product.Category.Name</p>
-    <p>Description: @Model.Product.Discription</p>
-    <p>Average Rating: @Model.AverageRating.ToString("0.0")</p>
-</div>
 
-<hr />
-
-<h3>Ratings</h3>
-@if (Model.Product.Ratings.Any())
-{
-    <ul>
-        @foreach (var rating in Model.Product.Ratings)
-        {
-            <li>@rating.Stars Stars - @rating.CreateAt.ToShortDateString()</li>
-        }
-    </ul>
-}
-else
-{
-    <p>No ratings available.</p>
-}
 
 <hr />
 
@@ -74,40 +53,57 @@ else
 <hr />
 
 
+<h3>Your Rating:</h3>
+<div class="star-rating">
+    @for (int i = 5; i >= 1; i--)
+    {
+        <input type="radio" id="star@i" name="stars" value="@i" @(Model.UserRating == i ? "checked" : "") />
+        <label for="star@i" title="@i stars">
+            <i class="fas fa-star"></i>
+        </label>
+    }
+</div>
 
-<h2>@Model.Product.Name</h2>
+<div id="rating-message" style="display: none; color: green;">Thank you</div>
 
-<p>Average Rating: @Model.AverageRating</p>
-
-<h3>Ratings:</h3>
-@if (Model.Product.Ratings != null && Model.Product.Ratings.Any())
-{
-    <ul>
-        @foreach (var rating in Model.Product.Ratings)
-        {
-            <li>@rating.User.UserName rated @rating.Stars stars on @rating.CreateAt</li>
-        }
-    </ul>
-}
-else
-{
-    <p>No ratings yet.</p>
-}
-
-<h3>Add Your Rating:</h3>
-<form asp-action="AddRating" method="post" asp-route-productId="@Model.Product.ProductId">
-    <input type="hidden"  value="@Model.Product.ProductId" />
-    <select name="stars" required>
-        <option value="1">1 star</option>
-        <option value="2">2 stars</option>
-        <option value="3">3 stars</option>
-        <option value="4">4 stars</option>
-        <option value="5">5 stars</option>
-    </select>
-    <input  type="submit">Submit Rating/>
+<!-- تضمين AntiForgeryToken -->
+<form id="rating-form">
+    @Html.AntiForgeryToken()
 </form>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.star-rating input[type="radio"]').change(function() {
+            var rating = $(this).val(); // احصل على قيمة التقييم المختارة
+            var productId = '@Model.Product.ProductId'; // احصل على معرف المنتج
+            var antiForgeryToken = $('input[name="__RequestVerificationToken"]').val(); // الحصول على AntiForgeryToken
 
+            $.ajax({
+                url: '@Url.Action("AddRating", "Product")', // عنوان الميثود في الكنترولر
+                type: 'POST',
+                data: {
+                    productId: productId,
+                    stars: rating,
+                    __RequestVerificationToken: antiForgeryToken // إضافة AntiForgeryToken
+                },
+                success: function(response) {
+                    $('#rating-message').show(); // عرض رسالة تأكيد
+                    setTimeout(function() {
+                        $('#rating-message').hide(); // إخفاء الرسالة بعد 3 ثوانٍ
+                    }, 3000);
+                },
+                error: function(xhr, status, error) {
+                    alert('حدث خطأ أثناء تقديم التقييم. يرجى المحاولة مرة أخرى.'); // رسالة في حال حدوث خطأ
+                }
+            });
+        });
+    });
+</script>
+
+
+
+<hr />
 
 
 
@@ -133,27 +129,38 @@ else
                             <p class="team-details__top-title">Category: @Model.Product.Category.Name</p>
                             <h3 class="team-details__top-name">@Model.Product.Name</h3>
                             
+                            
                             <p class="team-details__top-text-1">
                                 I help my clients stand out and they help me
                                 grow.
                             </p>
-                            <p class="team-details__top-text-2">
-                                Description: @Model.Product.Discription
+                            <h3 class="team-details__top-text-2">@Model.Product.user.FirstName</h3>
+                            <h3 class="team-details__top-text-2">@Model.Product.user.Email</h3>
+                            <p class="team-details__top-text-3">
+                               <strong>Description: </strong>  @Model.Product.Discription
                             </p>
                             
                             <div >
-                                <div class="we-dedicated__progress">
-                                   
-                                    <div class="we-dedicated__progress-single">
-                                        <h4 class="we-dedicated__progress-title">Recycling</h4>
-                                        <div class="bar">
-                                            <div class="bar-inner count-bar" data-percent="46%">
-                                                <div class="count-text">46%</div>
-                                            </div>
-                                        </div>
+                                <div class="rating-container">
+                                    <div class="rating-stars">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= Math.Floor(Model.AverageRating))
+                                            {
+                                                <span class="rating-star">&#9733;</span> @* نجمة ممتلئة *@
+                                            }
+                                            else if (i == Math.Ceiling(Model.AverageRating) && Model.AverageRating % 1 != 0)
+                                            {
+                                                <span class="rating-star rating-star-half">&#9733;</span> @* نصف نجمة (اختياري) *@
+                                            }
+                                            else
+                                            {
+                                                <span class="rating-star">&#9734;</span> @* نجمة فارغة *@
+                                            }
+                                        }
                                     </div>
-                                   
                                 </div>
+
                             </div>
                     </div>
                 </div>
@@ -168,9 +175,5 @@ else
 
 @section Scripts
 {
-    
-
-    
-
-
+   
 }

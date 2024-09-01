@@ -15,6 +15,7 @@ namespace RecyclableMaterials.Models
         [Display(Name = "Product Id")]
         public int ProductId { get; set; }
 
+       
 
         [Display(Name = "Name Material")]
         [Column(TypeName = "nvarchar(20)")]
