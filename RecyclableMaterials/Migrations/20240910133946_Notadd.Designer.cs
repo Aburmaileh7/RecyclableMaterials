@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecyclableMaterials.Data;
 
@@ -11,9 +12,11 @@ using RecyclableMaterials.Data;
 namespace RecyclableMaterials.Migrations
 {
     [DbContext(typeof(RDBContext))]
-    partial class RDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240910133946_Notadd")]
+    partial class Notadd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,16 +327,11 @@ namespace RecyclableMaterials.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.HasIndex("UserId");
 
@@ -489,10 +487,6 @@ namespace RecyclableMaterials.Migrations
 
             modelBuilder.Entity("RecyclableMaterials.Models.Notifications", b =>
                 {
-                    b.HasOne("RecyclableMaterials.Models.ProductModel", "product")
-                        .WithMany("Notifications")
-                        .HasForeignKey("ProductId");
-
                     b.HasOne("RecyclableMaterials.Models.AppUserModel", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -500,8 +494,6 @@ namespace RecyclableMaterials.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-
-                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("RecyclableMaterials.Models.ProductModel", b =>
@@ -545,8 +537,6 @@ namespace RecyclableMaterials.Migrations
             modelBuilder.Entity("RecyclableMaterials.Models.ProductModel", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Notifications");
 
                     b.Navigation("Ratings");
                 });

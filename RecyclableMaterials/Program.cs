@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RecyclableMaterials.Data;
-using RecyclableMaterials.Hubs;
+using RecyclableMaterials.Middelwares;
 using RecyclableMaterials.Models;
+using RecyclableMaterials.Services;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,19 +18,27 @@ IConfiguration configuration = new ConfigurationBuilder()
 
 
 
+// إعداد Hangfire مع SQL Server
+
+
 var ConnectionString = configuration.GetConnectionString("RConnectionString");
 
 
-builder.Services.AddSignalR(); // إضافة خدمة SignalR
+
 
 
 builder.Services.AddDbContext<RDBContext>(Options => Options.UseSqlServer(ConnectionString));
 
+builder.Services.AddHangfire(configuration => configuration.UseSqlServerStorage(ConnectionString));////////
+
+builder.Services.AddHangfireServer();////////////
 
 builder.Services.AddIdentity<AppUserModel, IdentityRole>()   
     .AddEntityFrameworkStores<RDBContext>();
 
 
+// تسجيل خدمة الإشعارات
+builder.Services.AddScoped<INotificationService, NotificationService>();//////////
 
 // إذا كنت تستخدم CORS عبر نطاقات مختلفة
 builder.Services.AddCors(options =>
@@ -61,14 +72,13 @@ app.UseStaticFiles();
 app.UseRouting();
 
 
-app.UseCors(); // استخدم CORS هنا
+app.UseCors();
 
-app.UseAuthentication(); // تأكد من استخدام المصادقة قبل الترخيص
+app.UseAuthentication();
 app.UseAuthorization();
 
 
-app.MapHub<NotificationHub>("/notificationHub"); // تكوين مسار Hub لـ SignalR
-
+app.UseHangfireDashboard();/////////////////
 
 
 app.MapControllerRoute(
@@ -79,5 +89,7 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseCustomMiddleware();
 
 app.Run();

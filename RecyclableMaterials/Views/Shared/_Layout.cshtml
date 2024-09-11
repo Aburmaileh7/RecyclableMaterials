@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+
+
+@inject UserManager<AppUserModel> UserManager
+@inject SignInManager<AppUserModel> SignInManager
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
    
@@ -45,6 +53,7 @@
     <link rel="stylesheet" href="~/vendors/vegas/vegas.min.css" />
     <link rel="stylesheet" href="~/vendors/jquery-ui/jquery-ui.css" />
     <link rel="stylesheet" href="~/vendors/timepicker/timePicker.css" />
+    
 
     <!-- template styles -->
     <link rel="stylesheet" href="~/css/wostin.css" />
@@ -55,7 +64,6 @@
     <!-- #region name -->
     <script src="~/lib/signalr/dist/browser/signalr.js"></script>
     <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script> <!-- مكتبة SignalR -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
 <!-- #endregion -->
@@ -64,11 +72,24 @@
     <div class="page-wrapper">
 
         <header class="main-header clearfix">
-            <div class="main-header__inner clearfix">
+            <div class="main-header__inner clearfix" style=" padding: 0 30px;">
+                
                 <div class="main-header__logo">
+                     @if (SignInManager.IsSignedIn(User))
+                    {
+                        var user = await UserManager.GetUserAsync(User);
+                        if (string.IsNullOrEmpty(user.ProfilePictureUrl))
+                        {
+                            user.ProfilePictureUrl = "Images/ProfilePictures/avatar-1.png";
+                        }
+                        <div class="testimonial-one__client-img" style="margin-right: 20px;max-height: 40px;max-width: 40px;">
+                            <img src="@Url.Content("~/" + user.ProfilePictureUrl)" alt="" style="max-height: 40px;max-width: 40px">
+                        </div>
+                    }
+                    
                     <a asp-action="Index" asp-controller="Home"><img src="~/images/resources/logo-1.png" alt=""></a>
                 </div>
-                <div class="main-menu__menu-box">
+                <div class="main-menu__menu-box" style="width:55%">
                     <div class="main-menu__menu-top">
                         <div class="main-menu__menu-top-left">
                             <p class="main-menu__menu-top-text">Welcome To Waste Disposal & Pickup Services.</p>
@@ -106,15 +127,15 @@
                                 <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                                 <ul class="main-menu__list">
                                     <li class="dropdown">
-                                        <a asp-action="Index" asp-controller="Home">Home</a>
+                                        <a asp-action="Index" asp-controller="Home" style="font-weight: bold;font-size: large;">Home</a>
 
                                     </li>
                                     @if(User.IsInRole("Admin"))
                                     {
-                                        <li><a asp-action="Index" asp-area="Dashboard" asp-controller="Home">Dashboard</a></li>
+                                        <li><a asp-action="Index" asp-area="Dashboard" asp-controller="Home"  style="font-weight: bold;font-size: large;">Dashboard</a></li>
                                     }
                                     <li class="dropdown">
-                                        <a asp-action="HomeIndex" asp-controller="Product">Materials</a>
+                                        <a asp-action="HomeIndex" asp-controller="Product"  style="font-weight: bold;font-size: large;">Materials</a>
                                         <ul>
                                             <li><a asp-action="Index" asp-controller="Product">Materials Gallery</a></li>
                                             <li><a asp-action="Myproduct" asp-controller="Product">Manage My Materials</a></li>
@@ -122,11 +143,11 @@
                                         </ul>
                                     </li>
                                      <li class="dropdown">
-                                        <a asp-action="profile" asp-controller="Account">Profile</a>
+                                        <a asp-action="profile" asp-controller="Account"  style="font-weight: bold;font-size: large;">Profile</a>
 
                                     </li>
                                     <li class="dropdown megamenu">
-                                        <a href="services.html">Our Services</a>
+                                        <a href="services.html"  style="font-weight: bold;font-size: large;">Our Services</a>
                                         <ul>
                                             <li>
                                                 <div class="service-tabs">
@@ -323,41 +344,13 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown">
-                                        <a href="#">Industries</a>
-                                        <ul>
-                                            <li><a href="industries.html">Industries</a></li>
-                                            <li><a href="industries-carousel.html">Industries Carousel</a></li>
-                                            <li><a href="industry-details.html">Industry Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#">Pages</a>
-                                        <ul>
-                                            <li><a href="projects.html">Projects</a></li>
-                                            <li><a href="projects-carousel.html">Projects Carousel</a></li>
-                                            <li><a href="project-details.html">Project Details</a></li>
-                                            <li><a href="pricing.html">Pricing</a></li>
-                                            <li><a href="request-pickup.html">Request A Pickup</a></li>
-                                            <li><a href="staff.html">Staff</a></li>
-                                            <li><a href="staff-carousel.html">Staff Carousel</a></li>
-                                            <li><a href="staff-details.html">Staff Details</a></li>
-                                            <li><a href="testimonials.html">Testimonials</a></li>
-                                            <li><a href="testimonials-carousel.html">Testimonials Carousel</a></li>
-                                            <li><a href="gallery.html">Gallery</a></li>
-                                            <li><a href="faq.html">FAQs</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                        </ul>
-                                    </li>
-                                   
-                                    <li class="dropdown">
-                                        <div id="notificationBell" class="bell-icon" onclick="toggleNotifications()">
-                                            <span class="dot" id="notificationDot" style="display:none;"></span> <!-- النقطة الحمراء للإشارة إلى إشعار جديد -->
-                                        </div>
-                                        <ul id="notificationsContainer" class="notifications-dropdown" style="display:none;">
-                                            <!-- سيتم إضافة الإشعارات هنا بواسطة JavaScript -->
-                                        </ul>
-                                        
+                                    <li class="dropdown" >
+                                        @if (SignInManager.IsSignedIn(User))
+                                        {
+                                            <i class="fa fa-bell" id="notification-bell" style="font-size:25px"></i>
+                                            <span id="notification-count" class="badge badge-warning text-dark" style="position: absolute;background-color: #ecdd5e;border-radius: 50%; margin-left: -10px; font-size: 9px;color: black; -webkit-text-stroke: thick;"></span>
+                                            @await Component.InvokeAsync("Notifications")
+                                        }
                                     </li>
                                 </ul>
                             </div>
@@ -368,7 +361,8 @@
 
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <a asp-Action="Manage" asp-Controller="Account" style="padding:4px 18px 7px;margin:8px" class=" thm-btn">Hello @User.Identity?.Name</a>
+                        var user = await UserManager.GetUserAsync(User);
+                        <a asp-Action="Manage" asp-Controller="Account" style="padding:4px 18px 7px;margin:8px" class=" thm-btn">Hello @user.FirstName</a>
                         <a asp-action="Logout" asp-Controller="Account" style="padding:4px 18px 7px" class=" thm-btn cta-one__btn"> Logout </a>
                     }
                     else
@@ -606,13 +600,31 @@
 
 
    <!-- #region name -->
-    <script>
-        function toggleNotifications() {
-            var container = document.getElementById("notificationsContainer");
-            container.style.display = container.style.display === "none" ? "block" : "none"; // إظهار أو إخفاء قائمة الإشعارات
-            document.getElementById("notificationDot").style.display = "none"; // إخفاء النقطة الحمراء بعد عرض الإشعارات
+   <script>
+    $(document).ready(function () {
+        function loadUnreadNotificationsCount() {
+            $.ajax({
+                url: '@Url.Action("GetUnreadNotificationsCount", "Notifications")',
+                type: 'GET',
+                success: function (data) {
+                    if (data > 0) {
+                        $('#notification-count').text(data).show();
+                    } else {
+                        $('#notification-count').hide(); // إخفاء الدائرة إذا لم يكن هناك إشعارات
+                    }
+                }
+            });
         }
-    </script>
+
+        // استدعاء العدد فور تحميل الصفحة
+        loadUnreadNotificationsCount();
+
+        // يمكنك استدعاء الدالة كل فترة معينة لتحديث العدد
+        setInterval(loadUnreadNotificationsCount, 60000); // تحديث كل دقيقة
+    });
+</script>
+
+
    <!-- #endregion -->
 
 

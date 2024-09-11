@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Notifications>
+
+<h2>Your Notifications</h2>
+<ul>
+    @foreach (var notification in Model)
+    {
+            <li class="@(notification.IsRead ? "read" : "unread")">
+            @notification.Message - @notification.DateCreated.ToString("g")
+            @if (!notification.IsRead)
+            {
+                        <a href="@Url.Action("MarkAsRead", new { id = notification.Id })">Mark as read</a>
+            }
+            </li>
+    }
+</ul>

@@ -23,4 +23,6 @@ namespace RecyclableMaterials.Models
 
         public DateTime CreateAt { get; set; }
     }
+    /////////////////////////////////////////////////
+    
 }

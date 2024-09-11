@@ -47,12 +47,12 @@ namespace RecyclableMaterials.Models
         public int CategoryID { get; set; }
         public  CategoryModel Category { get; set; }
 
-        public string? UserId { get; set; }
+        public string UserId { get; set; }
         public AppUserModel user { get; set; }
 
         public List<CommentModel> Comments { get; set; } = new List<CommentModel>();
         public List<RatingModel> Ratings { get; set; } = new List<RatingModel>();
 
-
+        public ICollection<Notifications> Notifications { get; set; }
     }
 }

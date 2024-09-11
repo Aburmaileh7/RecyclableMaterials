@@ -17,100 +17,6 @@
     </div>
 </section>
 
-
-
-
-<hr />
-
-<h3>Comments</h3>
-@if (Model.Product.Comments.Any())
-{
-    <ul>
-        @foreach (var comment in Model.Product.Comments)
-        {
-            <li>
-                <strong>@comment.user.UserName:</strong>
-                <p>@comment.Text</p>
-                <small>@comment.CreateAt.ToShortDateString()</small>
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>No comments available.</p>
-}
-
-<hr />
-
-<h3>Add a Comment</h3>
-<form asp-action="AddComment" asp-controller="Product" method="post">
-    <input type="hidden" name="ProductId" value="@Model.Product.ProductId" />
-    <textarea name="text" required></textarea>
-    <button type="submit">Add Comment</button>
-</form>
-
-<hr />
-
-
-<h3>Your Rating:</h3>
-<div class="star-rating">
-    @for (int i = 5; i >= 1; i--)
-    {
-        <input type="radio" id="star@i" name="stars" value="@i" @(Model.UserRating == i ? "checked" : "") />
-        <label for="star@i" title="@i stars">
-            <i class="fas fa-star"></i>
-        </label>
-    }
-</div>
-
-<div id="rating-message" style="display: none; color: green;">Thank you</div>
-
-<!-- تضمين AntiForgeryToken -->
-<form id="rating-form">
-    @Html.AntiForgeryToken()
-</form>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.star-rating input[type="radio"]').change(function() {
-            var rating = $(this).val(); // احصل على قيمة التقييم المختارة
-            var productId = '@Model.Product.ProductId'; // احصل على معرف المنتج
-            var antiForgeryToken = $('input[name="__RequestVerificationToken"]').val(); // الحصول على AntiForgeryToken
-
-            $.ajax({
-                url: '@Url.Action("AddRating", "Product")', // عنوان الميثود في الكنترولر
-                type: 'POST',
-                data: {
-                    productId: productId,
-                    stars: rating,
-                    __RequestVerificationToken: antiForgeryToken // إضافة AntiForgeryToken
-                },
-                success: function(response) {
-                    $('#rating-message').show(); // عرض رسالة تأكيد
-                    setTimeout(function() {
-                        $('#rating-message').hide(); // إخفاء الرسالة بعد 3 ثوانٍ
-                    }, 3000);
-                },
-                error: function(xhr, status, error) {
-                    alert('حدث خطأ أثناء تقديم التقييم. يرجى المحاولة مرة أخرى.'); // رسالة في حال حدوث خطأ
-                }
-            });
-        });
-    });
-</script>
-
-
-
-<hr />
-
-
-
-
-
-
-
 <section class="team-details">
     <div class="container">
         <div class="team-details__top">
@@ -118,31 +24,26 @@ else
                 <div class="col-xl-6 col-lg-6">
                     <div class="team-details__top-left">
                         <div class="team-details__top-img">
-                            <img src="@Url.Content("~/" + Model.Product.ImagePath)" alt="" />
-
+                            <img src="@Url.Content("~/" + Model.Product.ImagePath)" alt="" style="border: solid 9px #f5f0e9;" />
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="team-details__top-right">
                         <div class="team-details__top-content">
-                            <p class="team-details__top-title">Category: @Model.Product.Category.Name</p>
-                            <h3 class="team-details__top-name">@Model.Product.Name</h3>
+                            <p class="team-details__top-title"><strong>Category: </strong> @Model.Product.Category.Name</p>
+                            <p class="team-details__top-name">@Model.Product.Name</p>5
                             
                             
-                            <p class="team-details__top-text-1">
-                                I help my clients stand out and they help me
-                                grow.
-                            </p>
-                            <h3 class="team-details__top-text-2">@Model.Product.user.FirstName</h3>
-                            <h3 class="team-details__top-text-2">@Model.Product.user.Email</h3>
-                            <p class="team-details__top-text-3">
-                               <strong>Description: </strong>  @Model.Product.Discription
-                            </p>
+                            <p class="team-details__top-text-1"> <strong>Owner: </strong>@Model.Product.user.FirstName  @Model.Product.user.LastName</p>
+                              
+                           
+                            <p class="team-details__top-text-2" style="padding-bottom: 10px; padding-top: 0px;"><strong>Phone Number: </strong>@Model.Product.user.PhoneNumber</p>
+                            <p class="team-details__top-text-2" style="padding-bottom: 10px; padding-top: 0px;"><strong>Email: </strong>@Model.Product.user.Email</p>
                             
                             <div >
                                 <div class="rating-container">
-                                    <div class="rating-stars">
+                                    <div class="rating-stars"style="margin-bottom: 30px" ><strong> Average Rating:</strong>
                                         @for (int i = 1; i <= 5; i++)
                                         {
                                             if (i <= Math.Floor(Model.AverageRating))
@@ -162,6 +63,10 @@ else
                                 </div>
 
                             </div>
+                            <p class="team-details__top-text-3" style="padding-bottom: 10px; padding-top: 0px;">
+                               <strong>Description: </strong>  @Model.Product.Discription
+                            </p>
+                            
                     </div>
                 </div>
             </div>
@@ -171,9 +76,174 @@ else
 </section>
 
 
+<section class="testimonial-one">
+    <div class="testimonial-one-bg" style="background-image: url(/images/backgrounds/used/testimonial-one-bg.jpg);"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5">
+                <div class="testimonial-one__left">
+                    <div class="section-title text-left">
+                        <span class="section-title__tagline">Our Customers Feedbacks</span>
+                        <h3 class="section-title__title">What Our Customers Are Talking ABout Our Services</h3>
+                    </div>
+                    <hr />
+                    <form asp-action="AddComment" asp-controller="Product" method="post">
+                        <input type="hidden" name="ProductId" value="@Model.Product.ProductId" placeholder="Add Comment" />
+                        <textarea name="text" style="height: 164px;width: 100%;background-color: var(--wostin-extra);padding: 25px 30px 30px;font-size: 14px;font-weight: 500;color: var(--wostin-gray);outline: none;" required></textarea><br />
+                        <button class=" thm-btn" type="submit">Add Comment</button>
+                    </form>
+                   
+
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-7">
+                <div class="testimonial-one__right">
+                    <!--Testimonial One People-->
+                    <div class="testimonial-one__people">
+                        <img src="~/images/backgrounds/used/testimonial-one-people1-1.webp" alt="">
+                    </div>
+                    <div class="testimonial-one__people testimonial-one__people-2">
+                        <img src="~/images/backgrounds/used/testimonial-one-people1-2.webp" alt="">
+                    </div>
+                    <div class="testimonial-one__people testimonial-one__people-3">
+                        <img src="~/images/backgrounds/used/testimonial-one-people1-3.webp" alt="">
+                    </div>
+                    <div class="testimonial-one__people testimonial-one__people-4">
+                        <img src="~/images/backgrounds/used/testimonial-one-people1-4.webp" alt="">
+                    </div>
+                    <div class="testimonial-one__people testimonial-one__people-5">
+                        <img src="~/images/backgrounds/used/testimonial-one-people1-5.webp" alt="">
+                    </div>
+                    <div class="testimonial-one__people testimonial-one__people-6">
+                        <img src="~/images/backgrounds/used/testimonial-one-people1-6.webp" alt="">
+                    </div>
+
+                        <div class="owl-carousel owl-theme thm-owl__carousel testimonial-one__carousel owl-loaded owl-drag" data-owl-options="{
+                                &quot;loop&quot;: true,
+                                &quot;items&quot;: 1,
+                                &quot;autoplay&quot;: true,
+                                &quot;margin&quot;: 30,
+                                &quot;nav&quot;: false,
+                                &quot;dots&quot;: false,
+                                &quot;smartSpeed&quot;: 500,
+                                &quot;autoplayTimeout&quot;: 10000,
+                                &quot;navText&quot;: [&quot;<span class=\&quot;fa fa-angle-left\&quot;></span>&quot;,&quot;<span class=\&quot;fa fa-angle-right\&quot;></span>&quot;],
+                                    &quot;responsive&quot;: {
+                                        &quot;0&quot;: {
+                                            &quot;items&quot;: 1
+                                        },
+                                        &quot;768&quot;: {
+                                            &quot;items&quot;: 1
+                                        },
+                                        &quot;1200&quot;: {
+                                            &quot;items&quot;: 1
+                                        }
+                                    }
+                                }">
+
+                                    <!--Testimonial One Single-->
 
 
-@section Scripts
-{
-   
-}
+                                    <!--Testimonial One Single-->
+
+
+                                    <!--Testimonial One Single-->
+
+
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage" style="transform: translate3d(-2100px, 0px, 0px); transition: 0.5s; width: 4900px;">
+                              
+                                @foreach (var comment in Model.Product.Comments)
+                                {
+                                            <div class="owl-item cloned" style="width: 670px; margin-right: 30px;"><div class="testimonial-one__single">
+                                        <div class="testimonial-one__feedback-box">
+
+                                        </div>
+                                        <p class="testimonial-one__text">@comment.Text</p>
+                                        <div class="testimonial-one__client-info-box">
+                                            <div class="testimonial-one__client-info">
+                                                <div class="testimonial-one__client-img">
+                                                        
+                                                            <img src="@Url.Content("~/" +comment.user.ProfilePictureUrl)" alt="" />
+                                                </div>
+                                                <div class="testimonial-one__client-content">
+                                                    <h4 class="testimonial-one__client-name">@comment.user.FirstName @comment.user.LastName</h4>
+                                                    <p class="testimonial-one__client-title">Customer</p>
+                                                </div>
+                                            </div>
+                                            <div class="testimonial-one__quote">
+                                                <span class="icon-quote"></span>
+                                            </div>
+                                        </div>
+                                    </div></div>
+                                           
+                                }              
+                            </div>
+                           
+                            <div class="owl-nav disabled">
+                                <button type="button" role="presentation" class="owl-prev">
+                                    <span class="fa fa-angle-left"></span>
+                                </button>
+                                <button type="button" role="presentation" class="owl-next">
+                                    <span class="fa fa-angle-right"></span>
+                                </button>
+                            </div>
+                             <div class="star-rating" style="width: 100%;border: none;margin-top: 70px;font-weight: 500;color: var(--wostin-gray);background-color: var(--wostin-extra);padding: 25px 30px 30px;text-align: center;border: solid;">
+                                 <h5 style="margin-right:20px">Your Rating</h5>
+                                @for (int i = 5; i >= 1; i--)
+                                {
+                                    <input type="radio" id="star_@i" name="stars" value="@i" @(Model.UserRating == i ? "checked" : "") />
+                                    <label for="star_@i" title="@i stars">
+                                        <i class="fas fa-star"></i>
+                                    </label>
+                                }
+                                <div id="rating-message" style="display: none; color: green;">Thank you</div>
+
+                                <!-- تضمين AntiForgeryToken -->
+                                <form id="rating-form">
+                                    @Html.AntiForgeryToken()
+                                </form>
+
+                            </div>
+                            <div class="owl-dots disabled"></div>
+              
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.star-rating input[type="radio"]').change(function () {
+            var rating = $(this).val(); // احصل على قيمة التقييم المختارة
+            console.log("Rating selected: " + rating); // تسجيل التقييم المختار للتأكد
+            var productId = '@Model.Product.ProductId'; // احصل على معرف المنتج
+            var antiForgeryToken = $('input[name="__RequestVerificationToken"]').val(); // الحصول على AntiForgeryToken
+
+            $.ajax({
+                url: '@Url.Action("AddRating", "Product")', // عنوان الميثود في الكنترولر
+                type: 'POST',
+                data: {
+                    productId: productId,
+                    stars: rating,
+                    __RequestVerificationToken: antiForgeryToken // إضافة AntiForgeryToken
+                },
+                success: function (response) {
+                    $('#rating-message').show(); // عرض رسالة تأكيد
+                    setTimeout(function () {
+                        $('#rating-message').hide(); // إخفاء الرسالة بعد 3 ثوانٍ
+                    }, 3000);
+                },
+                error: function (xhr, status, error) {
+                    alert('حدث خطأ أثناء تقديم التقييم. يرجى المحاولة مرة أخرى.'); // رسالة في حال حدوث خطأ
+                }
+            });
+        });
+    });
+</script>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecyclableMaterials.ViewModels;
+
 using System.Data;
 
 namespace RecyclableMaterials.Controllers
@@ -19,6 +20,7 @@ namespace RecyclableMaterials.Controllers
         }
 
         [HttpGet]
+        //[ActionFilter]
         public async Task<IActionResult> Index()
         {
             var roles = await _roleManager.Roles.ToListAsync();
@@ -26,6 +28,7 @@ namespace RecyclableMaterials.Controllers
         }
 
         [HttpPost]
+        //[ActionFilter]
         public async Task<IActionResult> Create(RoleFormViewModel role)
         {
             if (!ModelState.IsValid)

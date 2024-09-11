@@ -20,6 +20,7 @@ namespace RecyclableMaterials.Data
 
         public DbSet<ProductModel> products { get; set; }
 
+        public DbSet<Notifications> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

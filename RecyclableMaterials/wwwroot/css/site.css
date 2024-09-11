@@ -56,3 +56,15 @@
         width: 50%;
         overflow: hidden;
     }
+
+
+
+#notification-count {
+    position: absolute;
+    background-color: #ecdd5e;
+    border-radius: 50%;
+    margin-left: -10px;
+    font-size: 9px;
+    color: black; /* لون النص داخل الدائرة */
+    -webkit-text-stroke: thick;
+}

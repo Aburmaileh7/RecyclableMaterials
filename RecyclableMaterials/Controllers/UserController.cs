@@ -19,6 +19,8 @@ namespace RecyclableMaterials.Controllers
             _RoleManager = roleManager;
             _userManager = userManager;
         }
+
+        //[ActionFilter]
         public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.Select(x => new UserViewModel
@@ -32,6 +34,7 @@ namespace RecyclableMaterials.Controllers
             return View(users);
         }
 
+        //[ActionFilter]
         public async Task<IActionResult> Manage(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -55,6 +58,7 @@ namespace RecyclableMaterials.Controllers
         }
 
         [HttpPost]
+        //[ActionFilter]
         public async Task<IActionResult> Manage(UserRolesViewModel model)
         {
             var user = await _userManager.FindByIdAsync(model.UserId);

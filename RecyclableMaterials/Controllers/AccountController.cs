@@ -26,12 +26,14 @@ namespace RecyclableMaterials.Controllers
         #region Register
 
         [HttpGet]
+        //[ActionFilter]
         public async Task<IActionResult> Register()
         {
             return View();
         }
 
         [HttpPost]
+        //[ActionFilter]
         public async Task<IActionResult> Register(RegiserViewModel model)
         {
             if (ModelState.IsValid)
@@ -107,12 +109,14 @@ namespace RecyclableMaterials.Controllers
         #region login
 
         [HttpGet]
+        //[ActionFilter]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        //[ActionFilter]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -143,6 +147,7 @@ namespace RecyclableMaterials.Controllers
 
         #region Manage
         [HttpGet]
+        //[ActionFilter]
         public async Task<IActionResult> Manage()
         {
             var currentUserName = await _userManager.GetUserAsync(User);
@@ -176,6 +181,7 @@ namespace RecyclableMaterials.Controllers
         
         [HttpGet]
         [Authorize]
+        //[ActionFilter]
         public async Task<IActionResult> Profile()
         {
             var currentUserName = await _userManager.GetUserAsync(User);
@@ -197,8 +203,9 @@ namespace RecyclableMaterials.Controllers
                     FirstName = currentUserName.FirstName,
                     LastName = currentUserName.LastName,
                     DateOfBirth = currentUserName.DateOfBirth,
-                    ProfilePictureUrl = profilePictureUrl,
-                    PhoneNumber = currentUserName.PhoneNumber
+                    ProfilePictureUrl = currentUserName.ProfilePictureUrl,
+                    PhoneNumber = currentUserName.PhoneNumber,
+                    
 
 
                 };
@@ -209,6 +216,7 @@ namespace RecyclableMaterials.Controllers
 
 
         [HttpPost]
+        //[ActionFilter]
         public async Task<IActionResult> Manage(ManageUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -221,6 +229,7 @@ namespace RecyclableMaterials.Controllers
                     currentUser.FirstName = model.FirstName;
                     currentUser.LastName = model.LastName;
                     currentUser.DateOfBirth = model.DateOfBirth;
+                  
 
                    
                     if (model.ProfilePicture != null && model.ProfilePicture.Length > 0)
@@ -287,6 +296,7 @@ namespace RecyclableMaterials.Controllers
             #endregion
 
         [HttpGet]
+        //[ActionFilter]
         public IActionResult AccessDenied()
         {
             return RedirectToAction("Login");

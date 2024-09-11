@@ -64,132 +64,11 @@
             <!-- Start menu -->
             <div class="d-flex justify-content-between menu-sm px-3 ms-auto">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="dropdown d-none d-lg-block">
-                        <button type="button" class="btn btn-primary btn-sm fs-14 d-inline" data-bs-toggle="dropdown">
-                            Apps
-                            <i class="mdi mdi-chevron-down align-middle"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-start dropdown-menu-animated">
-                            <a href="#" class="dropdown-item">
-                                <div class="dropdown-icon"><i class="fa fa-boxes"></i></div>
-                                <span class="dropdown-content">Inventory Manager</span>
-                                <div class="dropdown-addon"><span class="badge badge-warning rounded-pill">20</span></div>
-                            </a>
-                            <div class="dropdown-submenu">
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-icon"><i class="fa fa-project-diagram"></i></div>
-                                    <span class="dropdown-content">Project manager</span>
-                                    <div class="dropdown-addon"><i class="mdi mdi-chevron-right align-middle"></i></div>
-                                </a>
-                                <div class="dropdown-submenu-menu dropdown-submenu-end">
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Create project</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Delete project</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Ongoing project</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Completed project</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Urgent project</span></a>
-                                </div>
-                            </div>
-                            <div class="dropdown-submenu">
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-icon"><i class="fa fa-tasks"></i></div>
-                                    <span class="dropdown-content">Task manager</span>
-                                    <div class="dropdown-addon"><i class="mdi mdi-chevron-right align-middle"></i></div>
-                                </a>
-                                <div class="dropdown-submenu-menu dropdown-submenu-end">
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Show task</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Assign task</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Assign member</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Completed task</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="dropdown-bullet"></i> <span class="dropdown-content">Urgent task</span></a>
-                                </div>
-                            </div>
-                            <a href="#" class="dropdown-item">
-                                <div class="dropdown-icon"><i class="fa fa-dollar-sign"></i></div>
-                                <span class="dropdown-content">Invoice</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="apps-contact.html" class="dropdown-item">
-                                <div class="dropdown-icon"><i class="fa fa-user-cog"></i></div>
-                                <span class="dropdown-content">My Account</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="dropdown d-none d-lg-block">
-                        <button type="button" class="btn btn-primary btn-sm fs-14" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-                            Features
-                            <i class="mdi mdi-chevron-down align-middle"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-start dropdown-menu-lg-widest dropdown-menu-widest dropdown-menu-animated bg-primary-subtle overflow-hidden">
-                            <div class="dropdown-row justify-content-center">
-                                <div class="p-2 menu-image">
-                                    <img src="~/dashboard2/images/mega-menu.png" alt="mega-menu image" class="img-fluid" style="height: 200px;">
-                                </div>
-                                <div class="dropdown-col">
-                                    <h2 class="">Welcome back!</h2>
-                                    <p class="text-muted mb-0">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, commodi hic qui aspernatur doloremque quos tempora placeat culpa illum, voluptatibus delectus provident cumque
-                                        aliquid enim, laborum aliquam. Quod, perferendis unde.
-                                    </p>
-                                    <div class="mt-3">
-                                        <a href="auth-login.html" class="btn btn-dark btn-wider">Login</a>
-                                    </div>
-                                </div>
-                                <div class="dropdown-col border-start border-primary border-opacity-50">
-                                    <h4 class="dropdown-header">Features</h4>
-                                    <div class="grid-nav grid-nav-action">
-                                        <div class="grid-nav-row">
-                                            <a href="index.html" class="grid-nav-item">
-                                                <div class="grid-nav-icon"><i class="far fa-window-restore"></i></div>
-                                                <span class="grid-nav-content">Dashboard</span>
-                                            </a>
-                                            <a href="apps-kanban.html" class="grid-nav-item">
-                                                <div class="grid-nav-icon"><i class="far fa-clipboard"></i></div>
-                                                <span class="grid-nav-content">TODO List</span>
-                                            </a>
-                                            <a href="#" class="grid-nav-item">
-                                                <div class="grid-nav-icon"><i class="far fa-question-circle"></i></div>
-                                                <span class="grid-nav-content">Help Center</span>
-                                            </a>
-                                        </div>
-                                        <div class="grid-nav-row">
-                                            <a href="#" class="grid-nav-item">
-                                                <div class="grid-nav-icon"><i class="far fa-images"></i></div>
-                                                <span class="grid-nav-content">Gallery</span>
-                                            </a>
-                                            <a href="#" class="grid-nav-item">
-                                                <div class="grid-nav-icon"><i class="far fa-chart-bar"></i></div>
-                                                <span class="grid-nav-content">Scrumboard</span>
-                                            </a>
-                                            <a href="#" class="grid-nav-item">
-                                                <div class="grid-nav-icon"><i class="far fa-bookmark"></i></div>
-                                                <span class="grid-nav-content">Docs</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="dropdown-col border-start border-primary border-opacity-50">
-                                    <h4 class="dropdown-header">Tools</h4>
-                                    <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle align-middle dropdown-bullet me-2"></i> <span class="dropdown-content">Components</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle align-middle dropdown-bullet me-2"></i> <span class="dropdown-content">Form Wizard</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle align-middle dropdown-bullet me-2"></i> <span class="dropdown-content">Documentation</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle align-middle dropdown-bullet me-2"></i> <span class="dropdown-content">Knowledge Base</span> </a>
-                                    <a href="#" class="dropdown-item"><i class="mdi mdi-checkbox-blank-circle align-middle dropdown-bullet me-2"></i> <span class="dropdown-content">Inventory Manager</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div class="d-flex align-items-center gap-2">
-                    <!--Start App Search-->
-                    <form class="app-search d-none d-lg-block">
-                        <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="fab fa-sistrix fs-17 align-middle"></span>
-                        </div>
-                    </form>
-                    <!--End App Search-->
+                  
 
                     <!-- Start Notification -->
                     <div class="dropdown d-inline-block">
@@ -317,13 +196,7 @@
                     </div>
                     <!-- End Notification -->
 
-                    <!-- Start Activities -->
-                    <div class="d-inline-block activities">
-                        <button type="button" class="btn btn-sm top-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-rightsidabar">
-                            <i class="fas fa-table align-middle"></i>
-                        </button>
-                    </div>
-                    <!-- End Activities -->
+              
 
                     <!-- Start Profile -->
                     <div class="dropdown d-inline-block">
@@ -529,102 +402,7 @@
                         </ul>
                     </li>
 
-                    <li class="menu-title">Form</li>
-
-                    <li><a href="form-base.html"><i class="fa fa-dice"></i> <span>Base</span></a></li>
-
-                    <li>
-                        <a href="#!" class="has-arrow"><i class="fa fa-fill-drip"></i> <span>Advanced</span></a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="form-autosize.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Autosize</a></li>
-                            <li><a href="form-bs-maxlength.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Bootstrap maxlength</a></li>
-                            <li><a href="form-clipboard.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Clipboard</a></li>
-                            <li><a href="form-datepicker.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Date picker</a></li>
-                            <li><a href="form-datetimepicker.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Date time picker</a></li>
-                            <li><a href="form-rangepicker.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Range picker</a></li>
-                            <li><a href="form-inputmask.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Input mask</a></li>
-                            <li><a href="form-select2.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Select2</a></li>
-                            <li><a href="form-rangeslider.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Slider</a></li>
-                            <li><a href="form-touchspin.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Touchspin</a></li>
-                            <li><a href="form-typeahead.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Typeahead</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#!" class="has-arrow"><i class="fa fa-pencil-ruler"></i> <span>Editors</span></a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="form-basic-editors.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Basic</a></li>
-                            <li><a href="form-bubble-editors.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Bubble</a></li>
-                            <li><a href="form-complex-editors.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Complex</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="form-input-group.html"><i class="fa fa-th-list"></i> <span>Group</span></a></li>
-                    <li><a href="form-layout.html"><i class="fa fa-ruler-combined"></i> <span>Layout</span></a></li>
-                    <li><a href="form-validation.html"><i class="fa fa-check"></i> <span>Validation</span></a></li>
-
-                    <li class="menu-title">Pages</li>
-
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow ">
-                            <i class="fa fa-unlock-alt"></i>
-                            <span>Authentication</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="auth-login.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Login</a></li>
-                            <li><a href="auth-register.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Register</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow ">
-                            <i class="fa fa-unlink"></i>
-                            <span>Error</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="pages-404.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Error 404</a></li>
-                            <li><a href="pages-500.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i> Error 500</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="pages-starter.html"><i class="fas fa-pager"></i> <span>Starter Page</span></a>
-                    </li>
-
-                    <li>
-                        <a href="pages-pricing.html"><i class="fas fa-dollar-sign"></i> <span>Pricing</span></a>
-                    </li>
-
-                    <li>
-                        <a href="pages-faqs.html"><i class="fas fa-question"></i> <span>FAQs</span></a>
-                    </li>
-
-                    <li>
-                        <a href="pages-comingsoon.html"><i class="fas fa-tape"></i> <span>Coming Soon</span></a>
-                    </li>
-
-                    <li class="menu-title">Apps</li>
-
-                    <li>
-                        <a href="apps-chat.html" class="">
-                            <i class="fas fa-comment"></i>
-                            <span>Chat</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="apps-kanban.html" class="">
-                            <i class="fas fa-grip-horizontal"></i>
-                            <span>Kanban Board</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="apps-contact.html" class="">
-                            <i class="fas fa-id-badge"></i>
-                            <span>Contacts</span>
-                        </a>
-                    </li>
+                   
                 </ul>
             </div>
             <!-- Sidebar -->
@@ -643,19 +421,6 @@
   
 <!-- end layout-wrapper -->
 
-
-<div class="custom-setting bg-primary pe-0 d-flex flex-column rounded-start">
-    <button type="button" class="btn btn-wide border-0 text-white fs-20 avatar-sm rounded-end-0" id="light-dark-mode">
-        <i class="mdi mdi-brightness-7 align-middle"></i>
-        <i class="mdi mdi-white-balance-sunny align-middle"></i>
-    </button>
-    <button type="button" class="btn btn-wide border-0 text-white fs-20 avatar-sm" data-toggle="fullscreen">
-        <i class="mdi mdi-arrow-expand-all align-middle"></i>
-    </button>
-    <button type="button" class="btn btn-wide border-0 text-white fs-16 avatar-sm" id="layout-dir-btn">
-        <span>RTL</span>
-    </button>
-</div>
 
 
 <!-- Rightbar Sidebar -->

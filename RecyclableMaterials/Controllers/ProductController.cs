@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using RecyclableMaterials.ViewModels;
 using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
-using RecyclableMaterials.Hubs;
+using RecyclableMaterials.Services;
+
 
 namespace RecyclableMaterials.Controllers
 {
@@ -20,29 +21,34 @@ namespace RecyclableMaterials.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly RDBContext _dbContext;
         private readonly UserManager<AppUserModel> _userManager;
-        private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly INotificationService _notificationService;
 
 
-        public ProductController(RDBContext dbContext, IWebHostEnvironment webHostEnvironment, IHubContext<NotificationHub> hubContext
-            , UserManager<AppUserModel> userManager)
+
+        public ProductController(RDBContext dbContext, IWebHostEnvironment webHostEnvironment
+            , UserManager<AppUserModel> userManager, INotificationService notificationService)
         {
             this._dbContext = dbContext;
             this._webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
-            _hubContext = hubContext;
+            _notificationService = notificationService;
+
         }
 
 
 
 
-
+        #region BaseAction
         // GET: ProductController
+        //[ActionFilter]
         public ActionResult HomeIndex()
         {
 
             return View();
         }
 
+
+        //[ActionFilter]
         public ActionResult Index(int productId)
         {
             var models = _dbContext.products.Include(x => x.Category).Include(x=>x.user)
@@ -52,6 +58,7 @@ namespace RecyclableMaterials.Controllers
             return View(models);
         }
 
+        //[ActionFilter]
         public ActionResult Myproduct()
         {
             var models = _dbContext.products.Include(x => x.Category)
@@ -60,104 +67,13 @@ namespace RecyclableMaterials.Controllers
             return View(models);
         }
 
-     
-
-        
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var product = await _dbContext.products
-                .Include(m => m.Category)
-                .Include(m => m.Comments)
-                    .ThenInclude(c => c.user)
-                .Include(m => m.Ratings)
-                .FirstOrDefaultAsync(m => m.ProductId == id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-          
-            var averageRating = product.Ratings.Any() ? product.Ratings.Average(r => r.Stars) : 0;
-
-          
-            var userId = _userManager.GetUserId(User);
-
-         
-            var userRating = product.Ratings.FirstOrDefault(r => r.UserId == userId)?.Stars;
-
-          
-            var viewModel = new ProductDetailsViewModel
-            {
-                Product = product,
-                AverageRating = averageRating,
-                UserRating = userRating
-            };
-
-            return View(viewModel);
-        }
-
-
-
-
-        [HttpPost]
-        public async Task<IActionResult> AddComment(int productId, string text)
-        {
-            var userId = _userManager.GetUserId(User); // الحصول على معرف المستخدم الذي يقوم بالتعليق
-            var product = await _dbContext.products.Include(p => p.user).FirstOrDefaultAsync(p => p.ProductId == productId);
-
-            if (product == null) return NotFound();
-
-            var comment = new CommentModel { ProductId = productId, Text = text, UserId = userId };
-            _dbContext.Comments.Add(comment);
-            await _dbContext.SaveChangesAsync();
-
-            return RedirectToAction("Details", new { id = productId });
-        }
-
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddRating(int productId, int stars)
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Login", "Account"); 
-            }
-
-            var userId = _userManager.GetUserId(User);
-
-
-            var product = await _dbContext.products.Where(p => p.ProductId == productId).FirstOrDefaultAsync();
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-        
-            var rating = new RatingModel
-            {
-                ProductId = productId,
-                Stars = stars,
-                UserId = userId
-            };
-
-            _dbContext.Ratings.Add(rating);
-            await _dbContext.SaveChangesAsync();
-
-            return RedirectToAction("Details", new { id = productId });
-        }
-
-
 
 
         // GET: ProductController/Create
+        //[ActionFilter]
         public IActionResult Create()
         {
             ViewBag.CatList = _dbContext.Categories.ToList();
-            // ViewBag.CategoryList = _dbContext.Categories;
             return View();
         }
 
@@ -165,6 +81,7 @@ namespace RecyclableMaterials.Controllers
 
 
         [HttpPost]
+        //[ActionFilter]
         public ActionResult Create(ProductModel model, IFormFile image)
         {
             try
@@ -198,6 +115,7 @@ namespace RecyclableMaterials.Controllers
         }
 
         // GET: ProductController/Edit/5
+        //[ActionFilter]
         public ActionResult Edit(int id)
         {
             ViewBag.CatList = _dbContext.Categories;
@@ -207,6 +125,7 @@ namespace RecyclableMaterials.Controllers
 
         // POST: ProductController/Edit/5
         [HttpPost]
+        //[ActionFilter]
         public async Task<ActionResult> Edit(int id, ProductModel model, IFormFile Image)
         {
             try
@@ -282,6 +201,7 @@ namespace RecyclableMaterials.Controllers
         }
 
         // GET: ProductController/Delete/5
+        //[ActionFilter]
         public ActionResult Delete(int id)
         {
             var model = GetProduct(id);
@@ -291,6 +211,7 @@ namespace RecyclableMaterials.Controllers
         // POST: ProductController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[ActionFilter]
         public ActionResult Delete(int id, ProductModel product)
         {
             try
@@ -310,5 +231,125 @@ namespace RecyclableMaterials.Controllers
                 return View();
             }
         }
+
+        //[ActionFilter]
+        public async Task<IActionResult> Details(int id)
+        {
+            var product = await _dbContext.products
+                .Include(m => m.Category)
+                .Include(m => m.Comments)
+                    .ThenInclude(c => c.user)
+                .Include(m => m.Ratings)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+
+            
+
+          
+            var averageRating = product.Ratings.Any() ? product.Ratings.Average(r => r.Stars) : 0;
+
+          
+            var userId = _userManager.GetUserId(User);
+
+         
+            var userRating = product.Ratings.FirstOrDefault(r => r.UserId == userId)?.Stars;
+
+          
+            var viewModel = new ProductDetailsViewModel
+            {
+                Product = product,
+                AverageRating = averageRating,
+                UserRating = userRating
+            };
+
+            return View(viewModel);
+        }
+        #endregion
+
+        //[ActionFilter]
+        public async Task<IActionResult> AddComment(int productId, string text)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            if (string.IsNullOrEmpty(text))
+            {
+                return BadRequest("Comment cannot be empty");
+            }
+
+            var comment = new CommentModel
+            {
+
+                ProductId = productId,
+                Text = text,
+                CreateAt = DateTime.Now,
+                UserId = userId
+            };
+
+            _dbContext.Comments.Add(comment);
+            await _dbContext.SaveChangesAsync();
+
+            // جلب صاحب المنتج لإرسال إشعار له
+            var product = await _dbContext.products.Include(p => p.user).FirstOrDefaultAsync(p => p.ProductId == productId);
+            if (product != null)
+            {
+                var ownerUserId = product.UserId;
+
+                if (ownerUserId != userId)
+                {
+                    var notificationMessage = $" '{product.Name}' get new comment.";
+                    _notificationService.SendNotification(ownerUserId, notificationMessage);
+                }
+            }
+
+            return RedirectToAction("Details", "Product", new { id = productId });
+        }
+
+
+
+        [HttpPost]
+        //[ActionFilter]
+        public async Task<IActionResult> AddRating(int productId, int stars)
+        {
+
+
+            var userId = _userManager.GetUserId(User);
+
+            var existingRating = await _dbContext.Ratings
+                .FirstOrDefaultAsync(r => r.ProductId == productId && r.UserId == userId);
+
+            if (existingRating != null)
+            {
+                existingRating.Stars = stars; // تحديث التقييم إذا كان موجودًا
+            }
+            else
+            {
+                var rating = new RatingModel
+                {
+                    ProductId = productId,
+                    Stars = stars,
+                    UserId = userId
+                };
+                _dbContext.Ratings.Add(rating); // إضافة تقييم جديد إذا لم يكن موجودًا
+            }
+
+            await _dbContext.SaveChangesAsync();
+
+
+            // جلب صاحب المنتج لإرسال إشعار له
+            var product = await _dbContext.products.Include(p => p.user).FirstOrDefaultAsync(p => p.ProductId == productId);
+            if (product != null)
+            {
+                var ownerUserId = product.UserId;
+
+                if (ownerUserId != userId)
+                {
+                    var notificationMessage = $"'{product.Name}' get new rating.";
+                    _notificationService.SendNotification(ownerUserId, notificationMessage);
+                }
+            }
+
+            return Json(new { success = true, message = "THANK YOU" });
+        }
+
+
     }
 }

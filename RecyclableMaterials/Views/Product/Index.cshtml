@@ -15,7 +15,7 @@
         <div class="page-header__inner">
             <h2>Displayed Materials</h2>
             <ul class="thm-breadcrumb list-unstyled">
-                <li>Prodcut</li>
+                <li asp-action="Index" asp-controler="Home">Prodcut</li>
                 <li>Gallery</li>
             </ul>
         </div>
@@ -29,8 +29,8 @@
 <section class="pricing">
     <div class="container">
         <div class="section-title text-center">
-            <span class="section-title__tagline"></span>
-            <h2 class="section-title__title">Category Materials</h2>
+            
+            <h2 class="section-title__title"></h2>
         </div>
 
         <div class="pricing__tab-box tabs-box">
@@ -70,13 +70,13 @@
 
                                             </div>
                                             <div width: 400px; style="margin-left:20px">
-                                                <h3 style="font-size:50px;margin-bottom:20px" class="pricing__tab-content-title">@item.Name</h3>
+                                                <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
                                                 <ul class="list-unstyled pricing__tab-content-list">
+                                                    <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
                                                     <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
                                                     <li>Location: <span>@item.Location</span></li>
-                                                    <li style="max-width:400px">
-                                                        Discription:<span style="font-size:15px">@item.Discription</span>
-                                                    </li>
+                                                    
+                                                    
                                                 </ul>
                                             </div>
                                         </div>
@@ -124,13 +124,12 @@
 
                                             </div>
                                             <div width: 400px; style="margin-left:20px">
-                                                <h3 style="font-size:50px;margin-bottom:20px" class="pricing__tab-content-title">@item.Name</h3>
+                                                <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
                                                 <ul class="list-unstyled pricing__tab-content-list">
+                                                     <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
                                                     <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
                                                     <li>Location: <span>@item.Location</span></li>
-                                                    <li style="max-width:400px">
-                                                        Discription:<span style="font-size:15px">@item.Discription</span>
-                                                    </li>
+                                                    
 
 
                                                 </ul>
@@ -169,8 +168,8 @@
                                                 @{
                                                     if (item.ImagePath != null)
                                                     {
-                                                        <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px
-                                ">
+                                                        <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px">
+                                
                                                     }
                                                     else
                                                     {
@@ -181,13 +180,12 @@
 
                                             </div>
                                             <div width: 400px; style="margin-left:20px">
-                                                <h3 style="font-size:50px;margin-bottom:20px" class="pricing__tab-content-title">@item.Name</h3>
+                                                <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
                                                 <ul class="list-unstyled pricing__tab-content-list">
+                                                     <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
                                                     <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
                                                     <li>Location: <span>@item.Location</span></li>
-                                                    <li style="max-width:400px">
-                                                        Discription:<span style="font-size:15px">@item.Discription</span>
-                                                    </li>
+                                                    
 
 
                                                 </ul>
@@ -217,57 +215,47 @@
                             {
                                 if (item.Category.Name == "Other")
                                 {
-                                    @*  /  *@ <div class="pricing__tab-content-single">
-
-
+                                    @*  /  *@  <div class="pricing__tab-content-single">
                                         <div class="pricing__tab-content-left">
                                             <div>
-
-
                                                 @{
                                                     if (item.ImagePath != null)
                                                     {
-                                                        <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px
-                                ">
+                                                        <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px">
+
                                                     }
                                                     else
                                                     {
                                                         <img src="~/images/icon/bagster-1-1.png" alt="">
-                                                    }//defult photo
+                                                    }
+                                                    //defult photo
 
-                                                }
-
+                                                 }
                                             </div>
                                             <div width: 400px; style="margin-left:20px">
-                                                <h3 style="font-size:50px;margin-bottom:20px" class="pricing__tab-content-title">@item.Name</h3>
+                                                <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
                                                 <ul class="list-unstyled pricing__tab-content-list">
+                                                    <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
                                                     <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
                                                     <li>Location: <span>@item.Location</span></li>
-                                                    <li style="max-width:400px">
-                                                        Discription:<span style="font-size:15px">@item.Discription</span>
-                                                    </li>
-
-
+                                                    
                                                 </ul>
                                             </div>
-                                        </div>
+                                       </div>
                                         <div class="pricing__tab-content-right">
                                             <div class="pricing__tab-content-order">
                                                 <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
                                                 <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
                                             </div>
                                         </div>
-                                    </div>
+                                 </div>
                                 }
-
                             }
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
