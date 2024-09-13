@@ -32,7 +32,7 @@
                     <div class="team-details__top-right">
                         <div class="team-details__top-content">
                             <p class="team-details__top-title"><strong>Category: </strong> @Model.Product.Category.Name</p>
-                            <p class="team-details__top-name">@Model.Product.Name</p>5
+                            <p class="team-details__top-name">@Model.Product.Name</p>
                             
                             
                             <p class="team-details__top-text-1"> <strong>Owner: </strong>@Model.Product.user.FirstName  @Model.Product.user.LastName</p>
@@ -43,22 +43,24 @@
                             
                             <div >
                                 <div class="rating-container">
-                                    <div class="rating-stars"style="margin-bottom: 30px" ><strong> Average Rating:</strong>
-                                        @for (int i = 1; i <= 5; i++)
-                                        {
-                                            if (i <= Math.Floor(Model.AverageRating))
+                                    <div class="rating-stars"style="margin-bottom: 30px" >
+                                      
+                                            <strong> Average Rating:</strong>
+                                            @for (int i = 1; i <= 5; i++)
                                             {
-                                                <span class="rating-star">&#9733;</span> @* نجمة ممتلئة *@
+                                                if (i <= Math.Floor(Model.AverageRating))
+                                                {
+                                                    <span class="rating-star">&#9733;</span>  @*  نجمة ممتلئة  *@
+                                                }
+                                                else if (i == Math.Ceiling(Model.AverageRating) && Model.AverageRating % 1 != 0)
+                                                {
+                                                    <span class="rating-star rating-star-half">&#9733;</span> @* نصف نجمة (اختياري) *@
+                                                }
+                                                else
+                                                {
+                                                    <span class="rating-star">&#9734;</span> @* نجمة فارغة *@
+                                                }
                                             }
-                                            else if (i == Math.Ceiling(Model.AverageRating) && Model.AverageRating % 1 != 0)
-                                            {
-                                                <span class="rating-star rating-star-half">&#9733;</span> @* نصف نجمة (اختياري) *@
-                                            }
-                                            else
-                                            {
-                                                <span class="rating-star">&#9734;</span> @* نجمة فارغة *@
-                                            }
-                                        }
                                     </div>
                                 </div>
 
@@ -152,7 +154,7 @@
 
                         <div class="owl-stage-outer">
                             <div class="owl-stage" style="transform: translate3d(-2100px, 0px, 0px); transition: 0.5s; width: 4900px;">
-                              
+                                
                                 @foreach (var comment in Model.Product.Comments)
                                 {
                                             <div class="owl-item cloned" style="width: 670px; margin-right: 30px;"><div class="testimonial-one__single">

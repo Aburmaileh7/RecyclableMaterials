@@ -70,7 +70,7 @@ namespace RecyclableMaterials.Controllers
                 }
                 else
                 {
-                    profilePictureUrl = "/Images/ProfilePictures/avatar-1.png";
+                    profilePictureUrl = "Images/ProfilePictures/avatar-1.png";
                 }
 
                 var user = new AppUserModel
@@ -158,7 +158,7 @@ namespace RecyclableMaterials.Controllers
 
                 if (string.IsNullOrEmpty(profilePictureUrl))
                 {
-                    profilePictureUrl = "/Images/ProfilePictures/avatar-1.png";
+                    profilePictureUrl = "Images/ProfilePictures/avatar-1.png";
                 }
 
 
@@ -192,7 +192,7 @@ namespace RecyclableMaterials.Controllers
 
                 if (string.IsNullOrEmpty(profilePictureUrl))
                 {
-                    profilePictureUrl = "/Images/ProfilePictures/avatar-1.png";
+                    profilePictureUrl = "Images/ProfilePictures/avatar-1.png";
                 }
 
 

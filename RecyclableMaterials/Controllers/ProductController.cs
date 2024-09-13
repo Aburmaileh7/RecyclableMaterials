@@ -243,7 +243,7 @@ namespace RecyclableMaterials.Controllers
                 .FirstOrDefaultAsync(m => m.ProductId == id);
 
             
-
+           
           
             var averageRating = product.Ratings.Any() ? product.Ratings.Average(r => r.Stars) : 0;
 

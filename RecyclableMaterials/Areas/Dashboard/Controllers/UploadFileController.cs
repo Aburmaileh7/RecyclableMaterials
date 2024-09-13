@@ -57,7 +57,7 @@ namespace RecyclableMaterials.Areas.Dashboard.Controllers
                 {
                     await file.CopyToAsync(strem);
                 }
-                model.ImagePath = Path.Combine(folder, fileName); 
+                model.ImagePath = Path.Combine("uploads/images", fileName); 
 
 
                 _dbContext.Images.Add(model);

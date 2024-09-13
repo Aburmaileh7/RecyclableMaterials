@@ -30,7 +30,10 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="team-details__top-left">
                         <div class="team-details__top-img">
-                        
+                             @if (string.IsNullOrEmpty(Model.ProfilePictureUrl))
+                        {
+                                Model.ProfilePictureUrl = "Images/ProfilePictures/avatar-1.png";
+                        }
                             <img src="@Url.Content("~/"+ Model.ProfilePictureUrl)" alt="" style="border: solid 9px #f5f0e9;">
                         </div>
                     </div>
