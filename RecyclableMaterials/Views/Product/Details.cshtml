@@ -3,221 +3,330 @@
 
 
 
-<section class="page-header">
-    <div class="page-header-bg" style="background-image: url(/images/backgrounds/used/bcg1.jpg)">
-    </div>
-    <div class="container">
-        <div class="page-header__inner">
-            <h2>Material Details</h2>
-            <ul class="thm-breadcrumb list-unstyled">
-                <li><a href="index.html">Home</a></li>
-                <li>Details</li>
-            </ul>
-        </div>
-    </div>
-</section>
 
-<section class="team-details">
-    <div class="container">
-        <div class="team-details__top">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6">
-                    <div class="team-details__top-left">
-                        <div class="team-details__top-img">
-                            <img src="@Url.Content("~/" + Model.Product.ImagePath)" alt="" style="border: solid 9px #f5f0e9;" />
+<div class="page-wrapper">
+    
+    <div class="stricky-header stricked-menu main-menu">
+        <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+    </div><!-- /.stricky-header -->
+
+    <section class="page-header">
+        <div class="page-header-bg" style="background-image: url(/images/backgrounds/used/bcg1.jpg)">
+        </div>
+        <div class="container">
+            <div class="page-header__inner">
+                <h2>Material Details</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Details</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-details">
+        <div class="container">
+            <div class="team-details__top">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="team-details__top-left">
+                            <div class="team-details__top-img">
+                                <img src="@Url.Content("~/" + Model.Product.ImagePath)" alt="" style="border: solid 9px #f5f0e9;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="team-details__top-right">
+                            <div class="team-details__top-content">
+                                <p class="team-details__top-title"><strong>Category: </strong> @Model.Product.Category.Name</p>
+                                <p class="team-details__top-name">@Model.Product.Name</p>
+                            
+                            
+                                <p class="team-details__top-text-1"> <strong>Owner: </strong>@Model.Product.user.FirstName  @Model.Product.user.LastName</p>
+                              
+                           
+                                <p class="team-details__top-text-2" style="padding-bottom: 10px; padding-top: 0px;"><strong>Phone Number: </strong>@Model.Product.user.PhoneNumber</p>
+                                <p class="team-details__top-text-2" style="padding-bottom: 10px; padding-top: 0px;"><strong>Email: </strong>@Model.Product.user.Email</p>
+                            
+                                <div >
+                                    <div class="rating-container">
+                                        <div class="rating-stars"style="margin-bottom: 30px" >
+                                      
+                                                <strong> Average Rating:</strong>
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= Math.Floor(Model.AverageRating))
+                                                    {
+                                                        <span class="rating-star">&#9733;</span>  @*  نجمة ممتلئة  *@
+                                                    }
+                                                    else if (i == Math.Ceiling(Model.AverageRating) && Model.AverageRating % 1 != 0)
+                                                    {
+                                                        <span class="rating-star rating-star-half">&#9733;</span> @* نصف نجمة (اختياري) *@
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="rating-star">&#9734;</span> @* نجمة فارغة *@
+                                                    }
+                                                }
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <p class="team-details__top-text-3" style="padding-bottom: 10px; padding-top: 0px;">
+                                    <strong>Description: </strong>  @Model.Product.Discription
+                                </p>
+                            
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class="team-details__top-right">
-                        <div class="team-details__top-content">
-                            <p class="team-details__top-title"><strong>Category: </strong> @Model.Product.Category.Name</p>
-                            <p class="team-details__top-name">@Model.Product.Name</p>
-                            
-                            
-                            <p class="team-details__top-text-1"> <strong>Owner: </strong>@Model.Product.user.FirstName  @Model.Product.user.LastName</p>
-                              
-                           
-                            <p class="team-details__top-text-2" style="padding-bottom: 10px; padding-top: 0px;"><strong>Phone Number: </strong>@Model.Product.user.PhoneNumber</p>
-                            <p class="team-details__top-text-2" style="padding-bottom: 10px; padding-top: 0px;"><strong>Email: </strong>@Model.Product.user.Email</p>
-                            
-                            <div >
-                                <div class="rating-container">
-                                    <div class="rating-stars"style="margin-bottom: 30px" >
-                                      
-                                            <strong> Average Rating:</strong>
-                                            @for (int i = 1; i <= 5; i++)
-                                            {
-                                                if (i <= Math.Floor(Model.AverageRating))
-                                                {
-                                                    <span class="rating-star">&#9733;</span>  @*  نجمة ممتلئة  *@
-                                                }
-                                                else if (i == Math.Ceiling(Model.AverageRating) && Model.AverageRating % 1 != 0)
-                                                {
-                                                    <span class="rating-star rating-star-half">&#9733;</span> @* نصف نجمة (اختياري) *@
-                                                }
-                                                else
-                                                {
-                                                    <span class="rating-star">&#9734;</span> @* نجمة فارغة *@
-                                                }
-                                            }
+            </div>
+      
+        </div>
+    </section>
+
+ <!--Testimonial One Start-->
+    <section class="testimonial-one" style="padding-bottom:25px ;padding-top: 40px;">
+        <div class="testimonial-one-bg"
+             style="background-image: url(/images/backgrounds/used/testimonial-one-bg.jpg);"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-5">
+                    <div class="testimonial-one__left">
+                        <div class="section-title text-left" style="margin-top: 22px;">
+                            <span class="section-title__tagline">Our Customers Feedbacks</span>
+                            <h2 class="section-title__title">What Our Customers Are Talking ABout Our Services</h2>
+                            <hr />
+                             <a href="@Url.Action("ViewComment","Product",new {id=Model.Product.ProductId})" class="thm-btn testimonial-one__btn" >View All Feedbacks</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-7">
+                    <div class="testimonial-one__right">
+                        <div class="owl-carousel owl-theme thm-owl__carousel testimonial-one__carousel"
+                             data-owl-options='{
+                             "loop" : true,
+                             "items" : 1,
+                             "autoplay" : true,
+                             "margin" : 30,
+                             "nav" : false,
+                             "dots" : false,
+                             "smartSpeed" : 500,
+                             "autoplayTimeout" : 10000,
+                             "navText" : ["<span class=\"fa fa-angle-left\"></span>","<span class=\"fa fa-angle-right\"></span>"],
+                                "responsive": {
+                                    "0": {
+                                        "items": 1
+                                    },
+                                    "768": {
+                                        "items": 1
+                                    },
+                                    "1200": {
+                                        "items": 1
+                                    }
+                                }
+                            }'>
+
+                                <!--Testimonial One Single-->
+                                <div class="testimonial-one__single">
+                                    <div class="testimonial-one__feedback-box">
+                                        <div class="testimonial-one__feedback">
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                        </div>
+                                        <h3 class="testimonial-one__title">Great job and fair pricing</h3>
+                                    </div>
+                                    <p class="testimonial-one__text"></p>
+                                    <div class="testimonial-one__client-info-box">
+                                        <div class="testimonial-one__client-info">
+                                            <div class="testimonial-one__client-img">
+                                                <img src="~/images/backgrounds/used/testimonial-one-people1-1.webp" alt="" style="height:70px;width: 70px !important;">
+                                            </div>
+                                            <div class="testimonial-one__client-content">
+                                                <h4 class="testimonial-one__client-name">Jessica Brown</h4>
+                                                <p class="testimonial-one__client-title">Customer</p>
+                                            </div>
+                                        </div>
+                                        <div class="testimonial-one__quote">
+                                            <span class="icon-quote"></span>
+                                        </div>
                                     </div>
                                 </div>
 
-                            </div>
-                            <p class="team-details__top-text-3" style="padding-bottom: 10px; padding-top: 0px;">
-                               <strong>Description: </strong>  @Model.Product.Discription
-                            </p>
-                            
-                    </div>
-                </div>
-            </div>
-        </div>
-      
-    </div>
-</section>
-
-
-<section class="testimonial-one">
-    <div class="testimonial-one-bg" style="background-image: url(/images/backgrounds/used/testimonial-one-bg.jpg);"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-5 col-lg-5">
-                <div class="testimonial-one__left">
-                    <div class="section-title text-left">
-                        <span class="section-title__tagline">Our Customers Feedbacks</span>
-                        <h3 class="section-title__title">What Our Customers Are Talking ABout Our Services</h3>
-                    </div>
-                    <hr />
-                    <form asp-action="AddComment" asp-controller="Product" method="post">
-                        <input type="hidden" name="ProductId" value="@Model.Product.ProductId" placeholder="Add Comment" />
-                        <textarea name="text" style="height: 164px;width: 100%;background-color: var(--wostin-extra);padding: 25px 30px 30px;font-size: 14px;font-weight: 500;color: var(--wostin-gray);outline: none;" required></textarea><br />
-                        <button class=" thm-btn" type="submit">Add Comment</button>
-                    </form>
-                   
-
-                </div>
-            </div>
-            <div class="col-xl-7 col-lg-7">
-                <div class="testimonial-one__right">
-                    <!--Testimonial One People-->
-                    <div class="testimonial-one__people">
-                        <img src="~/images/backgrounds/used/testimonial-one-people1-1.webp" alt="">
-                    </div>
-                    <div class="testimonial-one__people testimonial-one__people-2">
-                        <img src="~/images/backgrounds/used/testimonial-one-people1-2.webp" alt="">
-                    </div>
-                    <div class="testimonial-one__people testimonial-one__people-3">
-                        <img src="~/images/backgrounds/used/testimonial-one-people1-3.webp" alt="">
-                    </div>
-                    <div class="testimonial-one__people testimonial-one__people-4">
-                        <img src="~/images/backgrounds/used/testimonial-one-people1-4.webp" alt="">
-                    </div>
-                    <div class="testimonial-one__people testimonial-one__people-5">
-                        <img src="~/images/backgrounds/used/testimonial-one-people1-5.webp" alt="">
-                    </div>
-                    <div class="testimonial-one__people testimonial-one__people-6">
-                        <img src="~/images/backgrounds/used/testimonial-one-people1-6.webp" alt="">
-                    </div>
-
-                        <div class="owl-carousel owl-theme thm-owl__carousel testimonial-one__carousel owl-loaded owl-drag" data-owl-options="{
-                                &quot;loop&quot;: true,
-                                &quot;items&quot;: 1,
-                                &quot;autoplay&quot;: true,
-                                &quot;margin&quot;: 30,
-                                &quot;nav&quot;: false,
-                                &quot;dots&quot;: false,
-                                &quot;smartSpeed&quot;: 500,
-                                &quot;autoplayTimeout&quot;: 10000,
-                                &quot;navText&quot;: [&quot;<span class=\&quot;fa fa-angle-left\&quot;></span>&quot;,&quot;<span class=\&quot;fa fa-angle-right\&quot;></span>&quot;],
-                                    &quot;responsive&quot;: {
-                                        &quot;0&quot;: {
-                                            &quot;items&quot;: 1
-                                        },
-                                        &quot;768&quot;: {
-                                            &quot;items&quot;: 1
-                                        },
-                                        &quot;1200&quot;: {
-                                            &quot;items&quot;: 1
-                                        }
-                                    }
-                                }">
-
-                                    <!--Testimonial One Single-->
-
-
-                                    <!--Testimonial One Single-->
-
-
-                                    <!--Testimonial One Single-->
-
-
-                        <div class="owl-stage-outer">
-                            <div class="owl-stage" style="transform: translate3d(-2100px, 0px, 0px); transition: 0.5s; width: 4900px;">
-                                
-                                @foreach (var comment in Model.Product.Comments)
-                                {
-                                            <div class="owl-item cloned" style="width: 670px; margin-right: 30px;"><div class="testimonial-one__single">
-                                        <div class="testimonial-one__feedback-box">
-
+                                <!--Testimonial One Single-->
+                                <div class="testimonial-one__single">
+                                    <div class="testimonial-one__feedback-box">
+                                        <div class="testimonial-one__feedback">
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
                                         </div>
-                                        <p class="testimonial-one__text">@comment.Text</p>
-                                        <div class="testimonial-one__client-info-box">
-                                            <div class="testimonial-one__client-info">
-                                                <div class="testimonial-one__client-img">
-                                                        
-                                                            <img src="@Url.Content("~/" +comment.user.ProfilePictureUrl)" alt="" />
-                                                </div>
-                                                <div class="testimonial-one__client-content">
-                                                    <h4 class="testimonial-one__client-name">@comment.user.FirstName @comment.user.LastName</h4>
-                                                    <p class="testimonial-one__client-title">Customer</p>
-                                                </div>
+                                        <h3 class="testimonial-one__title">Great job and fair pricing</h3>
+                                    </div>
+                                    <p class="testimonial-one__text"></p>
+                                    <div class="testimonial-one__client-info-box">
+                                        <div class="testimonial-one__client-info">
+                                            <div class="testimonial-one__client-img">
+                                                <img src="~/images/backgrounds/used/testimonial-one-people1-2.webp" alt="" style="height:70px;width: 70px !important;">
                                             </div>
-                                            <div class="testimonial-one__quote">
-                                                <span class="icon-quote"></span>
+                                            <div class="testimonial-one__client-content">
+                                                <h4 class="testimonial-one__client-name">Kevin Smith</h4>
+                                                <p class="testimonial-one__client-title">Customer</p>
                                             </div>
                                         </div>
-                                    </div></div>
-                                           
-                                }              
-                            </div>
-                           
-                            <div class="owl-nav disabled">
-                                <button type="button" role="presentation" class="owl-prev">
-                                    <span class="fa fa-angle-left"></span>
-                                </button>
-                                <button type="button" role="presentation" class="owl-next">
-                                    <span class="fa fa-angle-right"></span>
-                                </button>
-                            </div>
-                             <div class="star-rating" style="width: 100%;border: none;margin-top: 70px;font-weight: 500;color: var(--wostin-gray);background-color: var(--wostin-extra);padding: 25px 30px 30px;text-align: center;border: solid;">
-                                 <h5 style="margin-right:20px">Your Rating</h5>
-                                @for (int i = 5; i >= 1; i--)
-                                {
-                                    <input type="radio" id="star_@i" name="stars" value="@i" @(Model.UserRating == i ? "checked" : "") />
-                                    <label for="star_@i" title="@i stars">
-                                        <i class="fas fa-star"></i>
-                                    </label>
-                                }
-                                <div id="rating-message" style="display: none; color: green;">Thank you</div>
+                                        <div class="testimonial-one__quote">
+                                            <span class="icon-quote"></span>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <!-- تضمين AntiForgeryToken -->
-                                <form id="rating-form">
-                                    @Html.AntiForgeryToken()
-                                </form>
-
-                            </div>
-                            <div class="owl-dots disabled"></div>
-              
+                                <!--Testimonial One Single-->
+                                <div class="testimonial-one__single">
+                                    <div class="testimonial-one__feedback-box">
+                                        <div class="testimonial-one__feedback">
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                        </div>
+                                        <h3 class="testimonial-one__title">Great job and fair pricing</h3>
+                                    </div>
+                                    <p class="testimonial-one__text"></p>
+                                    <div class="testimonial-one__client-info-box">
+                                        <div class="testimonial-one__client-info">
+                                            <div class="testimonial-one__client-img">
+                                                <img src="~/images/backgrounds/used/testimonial-one-people1-3.webp" alt="" style="height:70px;width: 70px !important;">
+                                            </div>
+                                            <div class="testimonial-one__client-content">
+                                                <h4 class="testimonial-one__client-name">Kevin Coper</h4>
+                                                <p class="testimonial-one__client-title">Customer</p>
+                                            </div>
+                                        </div>
+                                        <div class="testimonial-one__quote">
+                                            <span class="icon-quote"></span>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
-                    
+                        
+                       
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    
+    <section class="service-details" style="padding-bottom:70px ;padding-top: 70px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 col-lg-5">
+                    <div class="service-details__left">
+                        <div class="star-rating" style="width: 100%;border: none;margin-top: 20px;margin-bottom: 20px;font-weight: 500;color: var(--wostin-gray);background-color: var(--wostin-extra);padding: 25px 30px 30px;text-align: center;border: solid;">
+                            <h5 class="section-title__title">Your Rating</h5>
+                            @for (int i = 5; i >= 1; i--)
+                            {
+                                <input type="radio" id="star_@i" name="stars" value="@i" @(Model.UserRating == i ? "checked" : "") />
+                                <label for="star_@i" title="@i stars">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                            }
+                            <div id="rating-message" style="display: none; color: green;">Thank you</div>
 
+                            <!-- تضمين AntiForgeryToken -->
+                            <form id="rating-form">
+                                @Html.AntiForgeryToken()
+                            </form>
+
+                        </div>
+
+                        <div class="service-details__banner">
+                            <div class="service-details__banner-content">
+                                <h3 class="service-details__banner-title">
+                                    We Don’t Just Manage Waste. We Provide a
+                                    Solutions.
+                                </h3>
+                                <div class="service-details__banner-shape-1 float-bob-y"><img src="~/images/shapes/service-details-banner-shape-1.png" alt=""></div>
+                            </div>
+                            <div class="services-details__banner-car float-bob-x">
+                                <img src="~/images/backgrounds/used/service-details-banner-car.webp" alt="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-7">
+                    <div class="service-details__right">
+                        <h2 class="section-title__title">Add Comment</h2>
+                        <form asp-action="AddComment" asp-controller="Product" method="post">
+                            <input type="hidden" name="ProductId" value="@Model.Product.ProductId" placeholder="Add Comment" />
+                            <textarea name="text" style="height: 164px;width: 100%;background-color: var(--wostin-extra);padding: 25px 30px 30px;font-size: 14px;font-weight: 500;color: var(--wostin-gray);outline: none;" required></textarea><br />
+                            <button class=" thm-btn" type="submit" style="width: 100%;border: none;">Add Comment</button>
+
+                        </form>
+
+                        <div class="service-details__points">
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <div class="service-details__points-single">
+                                        <div class="service-details__points-icon">
+                                            <span class="icon-garbage"></span>
+                                        </div>
+                                        <div class="service-details__points-content">
+                                            <h4>Proin Tempus</h4>
+                                            <p>There are many of of lorem Ipsum, but the majori have suffered.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="service-details__points-single">
+                                        <div class="service-details__points-icon">
+                                            <span class="icon-garbage-truck"></span>
+                                        </div>
+                                        <div class="service-details__points-content">
+                                            <h4>Proin Tempus</h4>
+                                            <p>There are many of of lorem Ipsum, but the majori have suffered.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+            
+
+      
+   
+    @if (!Model.Product.IsReserved)
+    {
+        <form asp-action="ReserveProduct" asp-controller="Product" method="post">
+            <input type="hidden" name="productId" value="@Model.Product.ProductId" />
+            <button type="submit" class="btn btn-primary">Reserve Product</button>
+        </form>
+    }
+    else
+    {
+        <p>This product is reserved by another user.</p>
+    }
+    @if (Model.Product.IsReserved)
+    {
+        <p>Reserved by: @Model.Product.ReservedByUserId</p>
+    }
+    else
+    {
+        <p>Available for reservation.</p>
+    }
+
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>

@@ -6,260 +6,267 @@
 }
 
 
-@* //Cover background// *@
-<section class="page-header"> 
-    <div class="page-header-bg" style="background-image: url(/images/backgrounds/used/bcg1.jpg);">
+<div class="page-wrapper">
+
+
+
+    <div class="stricky-header stricked-menu main-menu">
+        <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+    </div><!-- /.stricky-header -->
+    @* //Cover background// *@
+    <section class="page-header"> 
+        <div class="page-header-bg" style="background-image: url(/images/backgrounds/used/bcg1.jpg);">
         
-    </div>
-    <div class="container">
-        <div class="page-header__inner">
-            <h2>Displayed Materials</h2>
-            <ul class="thm-breadcrumb list-unstyled">
-                <li asp-action="Index" asp-controler="Home">Prodcut</li>
-                <li>Gallery</li>
-            </ul>
         </div>
-    </div>
-</section>
+        <div class="container">
+            <div class="page-header__inner">
+                <h2>Displayed Materials</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li asp-action="Index" asp-controler="Home">Prodcut</li>
+                    <li>Gallery</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
 
 
-@*//Category Materials// *@
+    @*//Category Materials// *@
 
-<section class="pricing">
-    <div class="container">
-        <div class="section-title text-center">
+    <section class="pricing">
+        <div class="container">
+            <div class="section-title text-center">
             
-            <h2 class="section-title__title"></h2>
-        </div>
+                <h2 class="section-title__title"></h2>
+            </div>
 
-        <div class="pricing__tab-box tabs-box">
-            <ul class="tab-buttons clearfix list-unstyled">
+            <div class="pricing__tab-box tabs-box">
+                <ul class="tab-buttons clearfix list-unstyled">
 
-                <li data-tab="#Plastic" class="tab-btn active-btn"><span>Plastic</span></li>
-                <li data-tab="#Papers" class="tab-btn"><span>Papers</span></li>
-                <li data-tab="#Minerals" class="tab-btn"><span>Minerals</span></li>
-                <li data-tab="#Other" class="tab-btn"><span>Other</span></li>
-            </ul>
-            <div class="tabs-content">
-                <!--tab-->
-                <div class="tab active-tab animated fadeInUp" id="Plastic" style="display: block;">
-                    <div class="tabs-content__inner">
-                        <div class="pricing__tab-content-box">
+                    <li data-tab="#Plastic" class="tab-btn active-btn"><span>Plastic</span></li>
+                    <li data-tab="#Papers" class="tab-btn"><span>Papers</span></li>
+                    <li data-tab="#Minerals" class="tab-btn"><span>Minerals</span></li>
+                    <li data-tab="#Other" class="tab-btn"><span>Other</span></li>
+                </ul>
+                <div class="tabs-content">
+                    <!--tab-->
+                    <div class="tab active-tab animated fadeInUp" id="Plastic" style="display: block;">
+                        <div class="tabs-content__inner">
+                            <div class="pricing__tab-content-box">
 
-                            @foreach (var item in Model)
-                            {
-                                if (item.Category.Name == "Plastic")
+                                @foreach (var item in Model)
                                 {
-                                    @*  /  *@ <div class="pricing__tab-content-single">
+                                    if (item.Category.Name == "Plastic")
+                                    {
+                                        @*  /  *@ <div class="pricing__tab-content-single">
 
 
-                                        <div class="pricing__tab-content-left">
-                                            <div>
-                                                @{
-                                                    if (item.ImagePath != null)
-                                                    {
-                                                        <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px" />
+                                            <div class="pricing__tab-content-left">
+                                                <div>
+                                                    @{
+                                                        if (item.ImagePath != null)
+                                                        {
+                                                            <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px" />
                 
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/images/icon/bagster-1-1.png" alt="">
+                                                        }//defult photo
                                                     }
-                                                    else
-                                                    {
-                                                        <img src="~/images/icon/bagster-1-1.png" alt="">
-                                                    }//defult photo
-                                                }
 
-                                            </div>
-                                            <div width: 400px; style="margin-left:20px">
-                                                <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
-                                                <ul class="list-unstyled pricing__tab-content-list">
-                                                    <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
-                                                    <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
-                                                    <li>Location: <span>@item.Location</span></li>
+                                                </div>
+                                                <div width: 400px; style="margin-left:20px">
+                                                    <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
+                                                    <ul class="list-unstyled pricing__tab-content-list">
+                                                        <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
+                                                        <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
+                                                        <li>Location: <span>@item.Location</span></li>
                                                     
                                                     
-                                                </ul>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="pricing__tab-content-right">
-                                            <div class="pricing__tab-content-order">
-                                                <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
+                                            <div class="pricing__tab-content-right">
+                                                <div class="pricing__tab-content-order">
+                                                    <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
                                                 
-                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
+                                                    <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                 }
-                            }
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--tab-->
-                <div class="tab active-tab" id="Papers" style="display: none;">
-                    <div class="tabs-content__inner">
-                        <div class="pricing__tab-content-box">
+                    <!--tab-->
+                    <div class="tab active-tab" id="Papers" style="display: none;">
+                        <div class="tabs-content__inner">
+                            <div class="pricing__tab-content-box">
 
-                            @foreach (var item in Model)
-                            {
-                                if (item.Category.Name == "Papers")
+                                @foreach (var item in Model)
                                 {
-                                    @*  /  *@ <div class="pricing__tab-content-single">
+                                    if (item.Category.Name == "Papers")
+                                    {
+                                        @*  /  *@ <div class="pricing__tab-content-single">
 
 
-                                        <div class="pricing__tab-content-left">
-                                            <div>
+                                            <div class="pricing__tab-content-left">
+                                                <div>
 
 
-                                                @{
-                                                    if (item.ImagePath != null)
-                                                    {
-                                                        <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px
-                                ">
+                                                    @{
+                                                        if (item.ImagePath != null)
+                                                        {
+                                                            <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px
+                                    ">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/images/icon/bagster-1-1.png" alt="">
+                                                        }//defult photo
+
                                                     }
-                                                    else
-                                                    {
-                                                        <img src="~/images/icon/bagster-1-1.png" alt="">
-                                                    }//defult photo
 
-                                                }
-
-                                            </div>
-                                            <div width: 400px; style="margin-left:20px">
-                                                <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
-                                                <ul class="list-unstyled pricing__tab-content-list">
-                                                     <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
-                                                    <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
-                                                    <li>Location: <span>@item.Location</span></li>
+                                                </div>
+                                                <div width: 400px; style="margin-left:20px">
+                                                    <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
+                                                    <ul class="list-unstyled pricing__tab-content-list">
+                                                         <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
+                                                        <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
+                                                        <li>Location: <span>@item.Location</span></li>
                                                     
 
 
-                                                </ul>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="pricing__tab-content-right">
+                                                <div class="pricing__tab-content-order">
+                                                    <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
+                                                    <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="pricing__tab-content-right">
-                                            <div class="pricing__tab-content-order">
-                                                <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
-                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    }
+
                                 }
 
-                            }
-
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--tab-->
-                <div class="tab active-tab animated fadeInUp" id="Minerals" style="display: none;">
-                    <div class="tabs-content__inner">
-                        <div class="pricing__tab-content-box">
+                    <!--tab-->
+                    <div class="tab active-tab animated fadeInUp" id="Minerals" style="display: none;">
+                        <div class="tabs-content__inner">
+                            <div class="pricing__tab-content-box">
 
-                            @foreach (var item in Model)
-                            {
-                                if (item.Category.Name == "Minerals")
+                                @foreach (var item in Model)
                                 {
-                                    @*  /  *@ <div class="pricing__tab-content-single">
+                                    if (item.Category.Name == "Minerals")
+                                    {
+                                        @*  /  *@ <div class="pricing__tab-content-single">
 
 
-                                        <div class="pricing__tab-content-left">
-                                            <div>
+                                            <div class="pricing__tab-content-left">
+                                                <div>
 
 
-                                                @{
-                                                    if (item.ImagePath != null)
-                                                    {
-                                                        <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px">
+                                                    @{
+                                                        if (item.ImagePath != null)
+                                                        {
+                                                            <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px">
                                 
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/images/icon/bagster-1-1.png" alt="">
+                                                        }//defult photo
+
                                                     }
-                                                    else
-                                                    {
-                                                        <img src="~/images/icon/bagster-1-1.png" alt="">
-                                                    }//defult photo
 
-                                                }
-
-                                            </div>
-                                            <div width: 400px; style="margin-left:20px">
-                                                <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
-                                                <ul class="list-unstyled pricing__tab-content-list">
-                                                     <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
-                                                    <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
-                                                    <li>Location: <span>@item.Location</span></li>
+                                                </div>
+                                                <div width: 400px; style="margin-left:20px">
+                                                    <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
+                                                    <ul class="list-unstyled pricing__tab-content-list">
+                                                         <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
+                                                        <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
+                                                        <li>Location: <span>@item.Location</span></li>
                                                     
 
 
-                                                </ul>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="pricing__tab-content-right">
+                                                <div class="pricing__tab-content-order">
+                                                    <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
+                                                    <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="pricing__tab-content-right">
-                                            <div class="pricing__tab-content-order">
-                                                <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
-                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    }
+
                                 }
 
-                            }
-
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!--tab-->
-                <div class="tab active-tab animated fadeInUp" id="Other" style="display: none;">
-                    <div class="tabs-content__inner">
-                        <div class="pricing__tab-content-box">
+                    <!--tab-->
+                    <div class="tab active-tab animated fadeInUp" id="Other" style="display: none;">
+                        <div class="tabs-content__inner">
+                            <div class="pricing__tab-content-box">
 
-                            @foreach (var item in Model)
-                            {
-                                if (item.Category.Name == "Other")
+                                @foreach (var item in Model)
                                 {
-                                    @*  /  *@  <div class="pricing__tab-content-single">
-                                        <div class="pricing__tab-content-left">
-                                            <div>
-                                                @{
-                                                    if (item.ImagePath != null)
-                                                    {
-                                                        <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px">
+                                    if (item.Category.Name == "Other")
+                                    {
+                                        @*  /  *@  <div class="pricing__tab-content-single">
+                                            <div class="pricing__tab-content-left">
+                                                <div>
+                                                    @{
+                                                        if (item.ImagePath != null)
+                                                        {
+                                                            <img src="@Url.Content("~/" + item.ImagePath)" alt="" width="360px" height="286px" style="margin:25px;margin-left:5px">
 
-                                                    }
-                                                    else
-                                                    {
-                                                        <img src="~/images/icon/bagster-1-1.png" alt="">
-                                                    }
-                                                    //defult photo
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/images/icon/bagster-1-1.png" alt="">
+                                                        }
+                                                        //defult photo
 
-                                                 }
-                                            </div>
-                                            <div width: 400px; style="margin-left:20px">
-                                                <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
-                                                <ul class="list-unstyled pricing__tab-content-list">
-                                                    <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
-                                                    <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
-                                                    <li>Location: <span>@item.Location</span></li>
+                                                     }
+                                                </div>
+                                                <div width: 400px; style="margin-left:20px">
+                                                    <h3 style="font-size:50px;" class="pricing__tab-content-title">@item.Name</h3>
+                                                    <ul class="list-unstyled pricing__tab-content-list">
+                                                        <li>BY: <span>@item.user.FirstName @item.user.LastName</span></li>
+                                                        <li>Quantity: <span>@item.Quantity<span>-Pc</span></span></li>
+                                                        <li>Location: <span>@item.Location</span></li>
                                                     
-                                                </ul>
+                                                    </ul>
+                                                </div>
+                                           </div>
+                                            <div class="pricing__tab-content-right">
+                                                <div class="pricing__tab-content-order">
+                                                    <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
+                                                    <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
+                                                </div>
                                             </div>
-                                       </div>
-                                        <div class="pricing__tab-content-right">
-                                            <div class="pricing__tab-content-order">
-                                                <p class="pricing__tab-content-rate"><span>$</span>@item.Price</p>
-                                                <a asp-action="Details" asp-route-id="@item.ProductId" asp-controller="Product" class="thm-btn pricing__order-btn">Request a Pickup</a>
-                                            </div>
-                                        </div>
-                                 </div>
+                                     </div>
+                                    }
                                 }
-                            }
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-
+</div>
 
 

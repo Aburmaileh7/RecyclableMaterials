@@ -1,0 +1,93 @@
+﻿@using RecyclableMaterials.ViewModels
+@model IEnumerable<CommentProductViewModel>
+
+
+
+<div class="page-wrapper">
+
+
+
+    <div class="stricky-header stricked-menu main-menu">
+        <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+    </div><!-- /.stricky-header -->
+
+    <section class="page-header">
+        <div class="page-header-bg" style="background-image: url(/images/backgrounds/used/bcg1.jpg)">
+        </div>
+        <div class="container">
+            <div class="page-header__inner">
+                <h2>Material Details</h2>
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Details</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="testimonials-page">
+        <div class="container">
+            <div class="row">
+                @if (!Model.Any())
+                {
+                    <p>No Comment for this Material</p>
+                }
+                else
+                {
+                    @foreach (var comment in Model)
+                    {
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <!--Testimonial One Single-->
+                            <div class="testimonial-two__single">
+                                <div class="testimonial-two__feedback-box">
+                                    <h3 class="testimonial-two__title">@comment.CommentText</h3>
+                                </div>
+                                <p class="testimonial-two__text"></p>
+                                <div class="testimonial-two__client-info-box">
+                                    <div class="testimonial-two__client-info">
+                                        <h4 class="testimonial-two__client-name">@comment.FirstName @comment.LastName</h4>
+                                        <p class="testimonial-two__client-title">@comment.UserEmail</p>
+                                    </div>
+                                    <div class="testimonial-two__quote">
+                                        <span class="icon-quote"></span>
+                                    </div>
+                                </div>
+                                <div class="testimonial-two__client-img" >
+
+                                    @if (string.IsNullOrEmpty(comment.ProfilePictureUrl))
+                                    {
+                                        comment.ProfilePictureUrl = "Images/ProfilePictures/avatar-1.png";
+                                    }
+                                    <img src="@Url.Content("~/" + comment.ProfilePictureUrl)" alt="" style=" width: 80px !important">
+                              
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+             
+    
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

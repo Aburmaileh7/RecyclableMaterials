@@ -5595,11 +5595,12 @@ ul {
 }
 
 .testimonial-two__client-img {
-  position: absolute;
-  border-radius: 50%;
-  bottom: -30px;
-  left: 60px;
-  z-index: 2;
+    position: absolute;
+    border-radius: 50%;
+    bottom: -30px;
+    left: 60px;
+    z-index: 2;
+   
 }
 
 .testimonial-two__client-img:before {
@@ -5622,7 +5623,7 @@ ul {
 }
 
 .testimonial-two__client-img img {
-  width: auto !important;
+  width: 80px !important;
   border-radius: 50%;
 }
 

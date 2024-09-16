@@ -11,6 +11,7 @@ using RecyclableMaterials.ViewModels;
 using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
 using RecyclableMaterials.Services;
+using Microsoft.CodeAnalysis;
 
 
 namespace RecyclableMaterials.Controllers
@@ -236,10 +237,7 @@ namespace RecyclableMaterials.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var product = await _dbContext.products
-                .Include(m => m.Category)
-                .Include(m => m.Comments)
-                    .ThenInclude(c => c.user)
-                .Include(m => m.Ratings)
+                .Include(m => m.Category).Include(m => m.Ratings).Include(m => m.user)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
 
             
@@ -265,7 +263,33 @@ namespace RecyclableMaterials.Controllers
         }
         #endregion
 
-        //[ActionFilter]
+        public async Task<IActionResult> ViewComment(int id)
+        {
+            var product = await _dbContext.products
+                .Include(p => p.Comments)
+                    .ThenInclude(c => c.user)
+                .FirstOrDefaultAsync(p => p.ProductId == id);
+
+
+
+            var commentViewModels = product.Comments.Select(c => new CommentProductViewModel
+            {
+                Product = product,
+                CommentText = c.Text,
+                FirstName=c.user.FirstName,
+                LastName=c.user.LastName,
+                UserEmail = c.user.Email,
+                ProfilePictureUrl = c.user.ProfilePictureUrl
+
+            }).ToList();
+
+            
+
+            return View(commentViewModels);
+        }
+
+
+            //[ActionFilter]
         public async Task<IActionResult> AddComment(int productId, string text)
         {
             var userId = _userManager.GetUserId(User);
@@ -300,7 +324,7 @@ namespace RecyclableMaterials.Controllers
                 }
             }
 
-            return RedirectToAction("Details", "Product", new { id = productId });
+            return RedirectToAction("ViewComment", "Product", new { id = productId }); 
         }
 
 
@@ -350,6 +374,29 @@ namespace RecyclableMaterials.Controllers
             return Json(new { success = true, message = "THANK YOU" });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ReserveProduct(int productId)
+        {
+            var userId = _userManager.GetUserId(User); 
+
+            var product = await _dbContext.products.FindAsync(productId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            if (!product.IsReserved)
+            {
+                product.IsReserved = true;
+                product.ReservedByUserId = userId;
+                product.ReservationDate = DateTime.Now;
+
+                await _dbContext.SaveChangesAsync();
+            }
+
+
+            return RedirectToAction("Details", new { id = productId });
+        }
 
     }
 }
