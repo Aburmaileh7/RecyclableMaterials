@@ -38,9 +38,27 @@ namespace RecyclableMaterials.Controllers
             {
                 notification.IsRead = true;
                 await _dbContext.SaveChangesAsync();
+
+                // التحقق من نوع الإشعار
+                if (notification.Type == "Rating")
+                {
+                    return RedirectToAction("Details", "Product", new { id = notification.ProductId });
+                }
+                else if (notification.Type == "Comment")
+                {
+                    return RedirectToAction("ViewComment", "Product", new { id = notification.ProductId });
+                }
+                else if (notification.Type == "Request")
+                {
+                    return RedirectToAction("ManageRequest", "Product");
+                }
+                else
+                {
+                    return RedirectToAction("Details", "Product", new { id = notification.ProductId });
+                }
             }
-            
-            return RedirectToAction("Details", "Product", new { id = notification.ProductId });
+
+            return NotFound();
         }
 
         public async Task<int> GetUnreadNotificationsCount()

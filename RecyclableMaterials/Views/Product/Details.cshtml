@@ -214,8 +214,6 @@
                                     </div>
                                 </div>
                         </div>
-                        
-                       
                     </div>
                 </div>
             </div>
@@ -278,8 +276,29 @@
                                             <span class="icon-garbage"></span>
                                         </div>
                                         <div class="service-details__points-content">
-                                            <h4>Proin Tempus</h4>
-                                            <p>There are many of of lorem Ipsum, but the majori have suffered.</p>
+                                            @if (Model.Product.Reservations == null || !Model.Product.Reservations.Any(r => r.Status == "Approved"))
+                                            {
+                                                <form asp-action="RequestReservation" asp-controller="Product" method="post">
+                                                    <input type="hidden" name="productId" value="@Model.Product.ProductId" />
+                                                    <button type="submit" class="btn btn-primary">Request a Pickup</button>
+                                                </form>
+                                            }
+                                            else if (Model.Product.Reservations.Any(r => r.Status == "Pending"))
+                                            {
+                                                <p>Your reservation request is pending approval.</p>
+                                                <form asp-action="CancelReservation" asp-controller="Product" method="post">
+                                                    <input type="hidden" name="reservationId" value="@Model.Product.Reservations.First(r => r.Status == "Pending").Id" />
+                                                    <button type="submit" class="btn btn-danger">Cancel Request</button>
+                                                </form>
+                                            }
+                                            else if (Model.Product.Reservations.Any(r => r.Status == "Approved"))
+                                            {
+                                                <p>Your reservation has been approved!</p>
+                                            }
+                                            else if (Model.Product.Reservations.Any(r => r.Status == "Rejected"))
+                                            {
+                                                <p>Your reservation request was rejected.</p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -289,8 +308,21 @@
                                             <span class="icon-garbage-truck"></span>
                                         </div>
                                         <div class="service-details__points-content">
-                                            <h4>Proin Tempus</h4>
-                                            <p>There are many of of lorem Ipsum, but the majori have suffered.</p>
+
+                                            @if (Model.Product.Reservations.Any(r => r.Status == "Approved"))
+                                            {
+                                                <p>Your reservation has been approved!</p>
+                                            }
+                                            else if (Model.Product.Reservations.Any(r => r.Status == "Rejected"))
+                                            {
+                                                <p>Your reservation request was rejected.</p>
+                                            }
+                                            else if (Model.Product.Reservations.Any(r => r.Status == "Pending"))
+                                            {
+                                                <p>Your reservation request is pending approval.</p>
+                                            }
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -301,30 +333,6 @@
             </div>
         </div>
     </section>
-        
-            
-
-      
-   
-    @if (!Model.Product.IsReserved)
-    {
-        <form asp-action="ReserveProduct" asp-controller="Product" method="post">
-            <input type="hidden" name="productId" value="@Model.Product.ProductId" />
-            <button type="submit" class="btn btn-primary">Reserve Product</button>
-        </form>
-    }
-    else
-    {
-        <p>This product is reserved by another user.</p>
-    }
-    @if (Model.Product.IsReserved)
-    {
-        <p>Reserved by: @Model.Product.ReservedByUserId</p>
-    }
-    else
-    {
-        <p>Available for reservation.</p>
-    }
 
 </div>
 

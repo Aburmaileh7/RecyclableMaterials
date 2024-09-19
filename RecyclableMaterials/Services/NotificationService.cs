@@ -15,7 +15,7 @@ namespace RecyclableMaterials.Services
             _dbContext = dbContext;
         }
 
-        public void SendNotification(string userId, string message)
+        public void SendNotificationComment(string userId, string message)
         {
             var user = _userManager.FindByIdAsync(userId).Result;
             if (user != null)
@@ -27,6 +27,55 @@ namespace RecyclableMaterials.Services
                     User=user,
                     Message = message,
                     IsRead = false,
+                    Type= "Comment",
+                    DateCreated = DateTime.UtcNow
+                };
+
+                _dbContext.Notifications.Add(notification);
+                _dbContext.SaveChanges();
+
+                // إرسال الإشعار عبر البريد الإلكتروني كمثال آخر
+                Console.WriteLine($"Notification sent to {user.Email}: {message}");
+            }
+        }
+
+        public void SendNotificationRating(string userId, string message)
+        {
+            var user = _userManager.FindByIdAsync(userId).Result;
+            if (user != null)
+            {
+                // تخزين الإشعار في قاعدة البيانات
+                var notification = new Notifications
+                {
+                    UserId = userId,
+                    User = user,
+                    Message = message,
+                    IsRead = false,
+                    Type = "Rating",
+                    DateCreated = DateTime.UtcNow
+                };
+
+                _dbContext.Notifications.Add(notification);
+                _dbContext.SaveChanges();
+
+                // إرسال الإشعار عبر البريد الإلكتروني كمثال آخر
+                Console.WriteLine($"Notification sent to {user.Email}: {message}");
+            }
+        }
+        
+        public void SendNotificationRequest(string userId, string message)
+        {
+            var user = _userManager.FindByIdAsync(userId).Result;
+            if (user != null)
+            {
+                // تخزين الإشعار في قاعدة البيانات
+                var notification = new Notifications
+                {
+                    UserId = userId,
+                    User = user,
+                    Message = message,
+                    IsRead = false,
+                    Type = "Request",
                     DateCreated = DateTime.UtcNow
                 };
 

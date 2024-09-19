@@ -17,6 +17,7 @@ namespace RecyclableMaterials.Data
         public DbSet<CommentModel> Comments { get; set; }
 
         public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<ReservationModel> Reservations { get; set; }
 
         public DbSet<ProductModel> products { get; set; }
 

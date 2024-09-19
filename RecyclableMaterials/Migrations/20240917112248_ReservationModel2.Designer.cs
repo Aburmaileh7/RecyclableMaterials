@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecyclableMaterials.Data;
 
@@ -11,9 +12,11 @@ using RecyclableMaterials.Data;
 namespace RecyclableMaterials.Migrations
 {
     [DbContext(typeof(RDBContext))]
-    partial class RDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240917112248_ReservationModel2")]
+    partial class ReservationModel2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -327,10 +330,6 @@ namespace RecyclableMaterials.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -452,7 +451,7 @@ namespace RecyclableMaterials.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("ReservationModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

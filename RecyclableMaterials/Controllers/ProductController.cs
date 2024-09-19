@@ -7,9 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using RecyclableMaterials.Models;
 using System;
 using Microsoft.AspNetCore.Identity;
-using RecyclableMaterials.ViewModels;
-using System.Security.Claims;
-using Microsoft.AspNetCore.SignalR;
+using RecyclableMaterials.ViewModels; 
 using RecyclableMaterials.Services;
 using Microsoft.CodeAnalysis;
 
@@ -64,6 +62,15 @@ namespace RecyclableMaterials.Controllers
         {
             var models = _dbContext.products.Include(x => x.Category)
                                                 .OrderBy(x => x.Name).ToList();
+
+            var userId = _userManager.GetUserId(User);
+            int myproductCount = _dbContext.products.Where(p => p.UserId == userId).Count();
+            ViewBag.MyProductCount = myproductCount;
+
+            var reservationsCount= _dbContext.Reservations.Include(r =>r.Product)
+                .Where(r => r.UserId == userId && r.Status=="Pending").Count();
+
+            ViewBag.PendingReservations = reservationsCount;
 
             return View(models);
         }
@@ -263,6 +270,7 @@ namespace RecyclableMaterials.Controllers
         }
         #endregion
 
+        #region comments&Ratting
         public async Task<IActionResult> ViewComment(int id)
         {
             var product = await _dbContext.products
@@ -320,7 +328,7 @@ namespace RecyclableMaterials.Controllers
                 if (ownerUserId != userId)
                 {
                     var notificationMessage = $" '{product.Name}' get new comment.";
-                    _notificationService.SendNotification(ownerUserId, notificationMessage);
+                    _notificationService.SendNotificationComment(ownerUserId, notificationMessage);
                 }
             }
 
@@ -367,36 +375,148 @@ namespace RecyclableMaterials.Controllers
                 if (ownerUserId != userId)
                 {
                     var notificationMessage = $"'{product.Name}' get new rating.";
-                    _notificationService.SendNotification(ownerUserId, notificationMessage);
+                    _notificationService.SendNotificationRating(ownerUserId, notificationMessage);
                 }
             }
 
             return Json(new { success = true, message = "THANK YOU" });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ReserveProduct(int productId)
-        {
-            var userId = _userManager.GetUserId(User); 
+        #endregion
 
-            var product = await _dbContext.products.FindAsync(productId);
-            if (product == null)
+
+        #region Request
+
+        public ActionResult ManageRequest()
+        {
+            var reservations = _dbContext.Reservations
+                .Include(r => r.Product).Include(r => r.User)
+                .Where(r => r.Status == "Pending") 
+                .OrderBy(r => r.ReservationDate) 
+                .ToList();
+
+            var userId = _userManager.GetUserId(User);
+            int myproductCount = _dbContext.products.Where(p => p.UserId == userId).Count();
+            ViewBag.MyProductCount = myproductCount;
+
+            var reservationsCount = _dbContext.Reservations.Include(r => r.Product)
+                .Where(r => r.UserId == userId && r.Status == "Pending").Count();
+
+            ViewBag.PendingReservations = reservationsCount;
+
+            return View(reservations);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RequestReservation(int productId)
+        {
+
+            var userId = _userManager.GetUserId(User);
+
+            var reservation = new ReservationModel
+            {
+                ProductId = productId,
+                UserId = userId,
+                Status = "Pending",
+                ReservationDate = DateTime.Now
+            };
+
+            _dbContext.Reservations.Add(reservation);
+            await _dbContext.SaveChangesAsync();
+
+            // جلب صاحب المنتج لإرسال إشعار له
+            var product = await _dbContext.products.Include(p => p.user).FirstOrDefaultAsync(p => p.ProductId == productId);
+            if (product != null)
+            {
+                var ownerUserId = product.UserId;
+
+                if (ownerUserId != userId)
+                {
+                    var notificationMessage = $" '{product.Name}' get new Request.";
+                    _notificationService.SendNotificationRequest(ownerUserId, notificationMessage);
+                }
+            }
+
+            return RedirectToAction("Details", "Product", new { id = productId });
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ApproveReservation(int reservationId)
+        {
+            var reservation = await _dbContext.Reservations
+                .Include(r => r.Product).Include(r => r.User)
+                .FirstOrDefaultAsync(r => r.Id == reservationId);
+
+            if (reservation == null)
             {
                 return NotFound();
             }
 
-            if (!product.IsReserved)
-            {
-                product.IsReserved = true;
-                product.ReservedByUserId = userId;
-                product.ReservationDate = DateTime.Now;
 
-                await _dbContext.SaveChangesAsync();
+            var ownerId = _userManager.GetUserId(User);
+            if (reservation.Product.UserId != ownerId)
+            {
+                return Unauthorized();
             }
 
 
-            return RedirectToAction("Details", new { id = productId });
+            reservation.Status = "Approved";
+            await _dbContext.SaveChangesAsync();
+
+
+            var userId = reservation.UserId;
+            var productName = reservation.Product.Name;
+
+            // إنشاء رسالة الإشعار
+            var notificationMessage = $"Reservation for '{productName}' has been approved.";
+            // إرسال الإشعار
+            _notificationService.SendNotificationRating(userId, notificationMessage);
+
+            return RedirectToAction("ManageRequest");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RejectReservation(int reservationId)
+        {
+            var reservation = await _dbContext.Reservations
+                .Include(r => r.Product).Include(r => r.User)
+                .FirstOrDefaultAsync(r => r.Id == reservationId);
+
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+
+            var ownerId = _userManager.GetUserId(User);
+            if (reservation.Product.UserId != ownerId)
+            {
+                return Unauthorized();
+            }
+
+
+            reservation.Status = "Rejected";
+            await _dbContext.SaveChangesAsync();
+
+
+            var userId = reservation.UserId;
+            var productName = reservation.Product.Name;
+
+            // إنشاء رسالة الإشعار
+            var notificationMessage = $"Reservation for '{productName}' has been rejected.";
+
+            // إرسال الإشعار
+            _notificationService.SendNotificationRating(userId, notificationMessage);
+
+            return RedirectToAction("ManageRequest");
+        }
+
+
+
+
+         #endregion
 
     }
 }

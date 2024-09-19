@@ -232,8 +232,8 @@ namespace RecyclableMaterials.Controllers
                   
 
                    
-                    if (model.ProfilePicture != null && model.ProfilePicture.Length > 0)
-                    {
+                    //if (model.ProfilePicture != null && model.ProfilePicture.Length > 0)
+                    //{
                         var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
                         var extension = Path.GetExtension(model.ProfilePicture.FileName);
 
@@ -288,7 +288,7 @@ namespace RecyclableMaterials.Controllers
                         }
                     }
                 }
-            }
+            
 
             return View(model);
         }

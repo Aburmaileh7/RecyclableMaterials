@@ -50,13 +50,10 @@ namespace RecyclableMaterials.Models
         public string UserId { get; set; }
         public AppUserModel user { get; set; }
 
-        public bool IsReserved { get; set; } //الحجز
-        public string ReservedByUserId { get; set; } 
-        public DateTime? ReservationDate { get; set; }
-
+       
         public ICollection<CommentModel> Comments { get; set; } = new List<CommentModel>();
         public List<RatingModel> Ratings { get; set; } = new List<RatingModel>();
-
+        public virtual ICollection<ReservationModel> Reservations { get; set; }
         public ICollection<Notifications> Notifications { get; set; }
     }
 }

@@ -14,6 +14,8 @@ namespace RecyclableMaterials.Models
 
         public int? ProductId { get; set; }
 
+        public string Type { get; set; }
+
         public ProductModel product { get; set; }
     }
 

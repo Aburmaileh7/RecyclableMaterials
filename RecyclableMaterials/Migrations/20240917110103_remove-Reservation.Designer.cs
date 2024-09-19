@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecyclableMaterials.Data;
 
@@ -11,9 +12,11 @@ using RecyclableMaterials.Data;
 namespace RecyclableMaterials.Migrations
 {
     [DbContext(typeof(RDBContext))]
-    partial class RDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240917110103_remove-Reservation")]
+    partial class removeReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -327,10 +330,6 @@ namespace RecyclableMaterials.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -419,40 +418,6 @@ namespace RecyclableMaterials.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Ratings");
-                });
-
-            modelBuilder.Entity("RecyclableMaterials.Models.ReservationModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ReservationEndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -580,25 +545,6 @@ namespace RecyclableMaterials.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RecyclableMaterials.Models.ReservationModel", b =>
-                {
-                    b.HasOne("RecyclableMaterials.Models.ProductModel", "Product")
-                        .WithMany("Reservations")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RecyclableMaterials.Models.AppUserModel", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("RecyclableMaterials.Models.ProductModel", b =>
                 {
                     b.Navigation("Comments");
@@ -606,8 +552,6 @@ namespace RecyclableMaterials.Migrations
                     b.Navigation("Notifications");
 
                     b.Navigation("Ratings");
-
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }
